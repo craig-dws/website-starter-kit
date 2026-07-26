@@ -133,6 +133,12 @@ this skill.
   carries width and height, and verify the rendered HTML rather than trusting the write. Check
   every URL-sourced image.
 
+- **`html-to-page` silently drops any class that has no CSS rule of its own**, including classes
+  written purely as structural hooks or band wrappers. A hook class with no rule vanishes from the
+  output. Give every class at least one rule, or do not rely on it existing.
+- **`insert-stylesheet` replaces, it does not merge.** Re-inserting a stylesheet restates every
+  rule; restate all breakpoints each time, or earlier ones are lost.
+
 **Cache on the native MCP path:** `html-to-page` regenerates the compiled CSS itself on
 page creation (proven), so no manual cache clear is needed there and the WP-CLI
 `clear_cache` command is not required. Whether it self-regenerates when editing an existing
