@@ -172,7 +172,8 @@ media-only upload ability outside the Universal pack, we can allow just that.)
 
 Build each page and component (header, footer, menus, sections) to the standards in
 `.claude/reference/build-standards.md` (the single source) and its per-page tick-list
-`.claude/reference/build-checklist.md` — they are the plan; apply every item (tokens, interactive
+`.claude/reference/build-checklist.md`, and heed `.claude/reference/limitations.md` (do not retry
+what the tools have proven they cannot do) — they are the plan; apply every item (tokens, interactive
 states and hovers, images and alt, responsive, accessibility), do not treat it as optional or
 wait to be asked. Then build one page, verify it against that Figma frame with a screenshot
 diff, record it in `build-log/pages/`, and stop for my review before the next. Take the

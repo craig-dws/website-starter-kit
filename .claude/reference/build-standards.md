@@ -70,6 +70,8 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
   serialise global-style writes; claim work in `build-log/ACTIVE.md`.
 
 ## See also
+- `limitations.md` — what the tools **cannot** do, and the workaround for each. Consult it before
+  attempting something that may not be supported; do not retry a proven limitation.
 - `build-checklist.md` — per-page enforcement of these standards
 - `alt-text-guidelines.md`, `parallel-builds.md`, `connect.md`
 - the `breakdance-limits` skill — Breakdance constraints and the native-MCP build method
