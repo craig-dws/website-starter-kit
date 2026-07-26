@@ -1,0 +1,84 @@
+{
+  "permissions": {
+    "defaultMode": "plan",
+    "deny": [
+      "Write(wp-config.php)",
+      "Write(wp-settings.php)",
+      "Write(**/wp-config.php)",
+      "Write(**/wp-settings.php)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(wp breakdance import_settings:*)",
+      "Bash(wp breakdance total_reset:*)"
+    ],
+    "allow": [
+      "mcp__figma__get_variable_defs",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_code_connect_map",
+      "mcp__chrome-devtools",
+      "Bash(wp breakdance status:*)",
+      "Bash(wp breakdance clear_cache:*)",
+      "Bash(wp breakdance export_settings:*)",
+      "Bash(wp post-type list:*)",
+      "Bash(wp litespeed-purge:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(node -v)",
+      "Bash(npm -v)",
+      "Bash(python --version)",
+      "Bash(python .claude/tools/optimize-and-upload.py:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-protected-paths.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scan-dangerous-php.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/lint-changed.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/astro-check-changed.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/litespeed-purge.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/breakdance-cache-clear.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/build-log.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}
