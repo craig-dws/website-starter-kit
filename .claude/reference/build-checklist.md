@@ -8,6 +8,9 @@ consciously waived with a recorded reason. Work through it, do not wait to be as
 - Matches the design frame (screenshot diff via the chrome-devtools MCP, headless).
 - Sections sit in the container/grid from the tokens (no edge-to-edge unless the design says so).
 - Responsive at every breakpoint from `get-breakpoints` (no invented `@media` queries).
+- **The header is sticky** on every build: fixed to the top on scroll, above page content
+  (z-index), with the content offset so nothing is hidden beneath it. Check it holds on scroll
+  at every breakpoint, including with the mobile utility bar.
 
 ## Tokens
 - Every colour, type and spacing value references a token (`var(--...)`), never a hardcoded value.
