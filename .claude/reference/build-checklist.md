@@ -36,9 +36,9 @@ change a standard there, this is the per-page tick-list.
 - Descriptive alt on content images, empty alt on decorative; alt verified in the rendered HTML
   (`html-to-page` silently drops alt on URL-sourced images). See `alt-text-guidelines.md`.
 - SVGs inlined as SVG Icon elements, not uploaded.
-- **Referenced from the media library by media id, not a raw URL** (a URL image is not an
-  attachment, so no srcset / WebP / alt / migration). Verify the rendered `<img>` has srcset, not
-  a bare hardcoded URL.
+- **Images reference the uploaded file** (WebP served, alt set). On the Breakdance beta the MCP
+  cannot bind media, so images are URL-referenced; a human binds them in the builder for `srcset` as
+  a batch pass. Never an external (Figma) URL.
 
 ## Accessibility
 - Heading order is sane; colour contrast meets WCAG 2.2 AA.

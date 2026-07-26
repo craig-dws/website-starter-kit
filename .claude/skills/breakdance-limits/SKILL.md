@@ -123,9 +123,12 @@ this skill.
   accumulate and pollute the design system.
 - **`html-to-page` drops alt text and force-lazy-loads URL-sourced images.** An image referenced
   by URL renders with no `alt` attribute even when alt was passed (leaving a linked logo with no
-  accessible name), and gets `loading=lazy`, which is wrong for above-the-fold images. A URL `<img>` is also **not bound to the media library
-  attachment**, so it loses `srcset`, WebP and migration; reference uploaded images by their media
-  id. Set alt
+  accessible name), and gets `loading=lazy`, which is wrong for above-the-fold images. A URL `<img>` also lacks native `srcset`
+  (WebP is still served by WebP Express). Binding to the media id would fix that, but **the native
+  MCP cannot bind media**: `from: media_library` with the only permitted shape `{id, url, alt}`
+  renders the grey "no image" placeholder, and the hydrated shape the renderer needs is rejected by
+  the schema (proven on 3.0.0-beta.1). So MCP images are referenced by URL and a **human binds them
+  in the builder** for `srcset`. Never use an external (Figma) URL, always the uploaded image. Set alt
   (and disable lazy loading for above-the-fold images) with the same element mechanism that
   carries width and height, and verify the rendered HTML rather than trusting the write. Check
   every URL-sourced image.

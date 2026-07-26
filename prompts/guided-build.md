@@ -150,8 +150,10 @@ upload but not delete: before uploading, check for an existing attachment of the
 removing a stale attachment is a human action in wp-admin.
 - Photos and raster images: pull the exact assets from the Figma frame, **rename each to a
   descriptive, SEO-friendly, kebab-case filename** (what it shows plus its role, not the Figma
-  layer name) and propose alt text, then hand me the named files to upload; reference them **from
-  the media library by media id (an attachment), never a raw URL,** afterwards. **Read names, section labels and content from the design to name
+  layer name) and propose alt text, then hand me the named files to upload; reference them by the
+  uploaded file's URL afterwards (the Breakdance beta MCP cannot bind media, so URL is the working
+  method; it serves WebP and keeps alt but lacks `srcset`, which a human restores by binding in the
+  builder). Never use an external Figma URL. **Read names, section labels and content from the design to name
   and alt-text them, do not ask me for what the design already says**, and name by section
   where it helps. Keep placeholder images (grey silhouettes, dummies) as placeholders, do not
   name them after a real person, and flag them for a real asset later. Write descriptive alt for

@@ -16,11 +16,14 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
 - **Alt text** per `alt-text-guidelines.md`: descriptive for content images, empty for decorative.
 - **SVGs inlined** as SVG Icon elements, not uploaded.
 - Upload with `.claude/tools/optimize-and-upload.py` (scoped media REST API, no dangerous abilities).
-- **Reference images from the media library by attachment / media id, never a raw or hardcoded
-  URL.** A raw `<img src>` URL (or a Figma asset URL) is not an attachment, so it loses responsive
-  `srcset`, WebP conversion and alt binding, and it does not migrate. Bind the Breakdance Image
-  element to the media id; `html-to-page` treats a URL `<img>` as an external URL-sourced image
-  (which is also why it drops the alt), so set the image to the media attachment, do not leave a URL.
+- **Media library binding vs URL is tool-dependent.** Binding an image to the media library (media
+  id) is best, it gives responsive `srcset`, WebP, alt and migration. **But the Breakdance
+  3.0.0-beta.1 native MCP cannot bind media** (the schema forbids the only shape that renders,
+  proven), so MCP-written images are referenced **by URL**. A URL image still serves WebP (WebP
+  Express rewrites uploads-folder URLs) and keeps alt; it only lacks native `srcset`. To restore
+  `srcset`, a human binds the images in the builder (pick from the library, ~30s each) as a batch
+  pass, a responsive-images improvement, not a defect. Never use an external (Figma) URL, always the
+  uploaded image. Revisit when the MCP supports binding.
 
 ## Typography
 - Heading and body fonts from the design; substitute a non-webfont (e.g. Segoe UI) for the closest
