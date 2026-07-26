@@ -4,6 +4,9 @@ Apply this to **every page and every component** (header, footer, menus, section
 the plan, not a nice-to-have. A page or component is not done until every item is met or
 consciously waived with a recorded reason. Work through it, do not wait to be asked.
 
+These items enforce the standards in `build-standards.md` — **that file is the single source**;
+change a standard there, this is the per-page tick-list.
+
 ## Layout and design
 - Matches the design frame (screenshot diff via the chrome-devtools MCP, headless).
 - Sections sit in the container/grid from the tokens (no edge-to-edge unless the design says so).

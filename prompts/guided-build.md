@@ -168,8 +168,9 @@ removing a stale attachment is a human action in wp-admin.
 Do not hotlink external URLs or inline large data URIs. (If discover-abilities shows a
 media-only upload ability outside the Universal pack, we can allow just that.)
 
-Build each page and component (header, footer, menus, sections) against
-`.claude/reference/build-checklist.md` — it is the plan; apply every item (tokens, interactive
+Build each page and component (header, footer, menus, sections) to the standards in
+`.claude/reference/build-standards.md` (the single source) and its per-page tick-list
+`.claude/reference/build-checklist.md` — they are the plan; apply every item (tokens, interactive
 states and hovers, images and alt, responsive, accessibility), do not treat it as optional or
 wait to be asked. Then build one page, verify it against that Figma frame with a screenshot
 diff, record it in `build-log/pages/`, and stop for my review before the next. Take the
