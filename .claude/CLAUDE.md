@@ -66,8 +66,9 @@ must be sized down before upload, not left massive.
   one in place. Removing a stale attachment is a human action in wp-admin. The build extracts the assets it needs from the Figma
   frame, **renames each to a descriptive, SEO-friendly, kebab-case filename** based on what it
   shows and its role (for example `cataract-surgery-hero.jpg`, never the Figma layer name or a
-  hash), and proposes alt text. You upload those named files; the build references them by URL
-  or media id. Do not hotlink external URLs or inline large data URIs.
+  hash), and proposes alt text. You upload those named files; the build references them **from the
+  media library by media id (a real attachment), never a raw URL**, so srcset, WebP, alt and
+  migration all work. Do not hotlink external URLs or inline large data URIs.
 - **Optimise before upload.** Images often export oversized (Figma exports at 2500px).
   Resize each to roughly 2x its display width, cap contained/section images at ~1600px and
   only full-width heroes at ~2500px, then compress (JPEG quality ~82). Pillow is available for

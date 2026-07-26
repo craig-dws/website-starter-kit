@@ -123,7 +123,9 @@ this skill.
   accumulate and pollute the design system.
 - **`html-to-page` drops alt text and force-lazy-loads URL-sourced images.** An image referenced
   by URL renders with no `alt` attribute even when alt was passed (leaving a linked logo with no
-  accessible name), and gets `loading=lazy`, which is wrong for above-the-fold images. Set alt
+  accessible name), and gets `loading=lazy`, which is wrong for above-the-fold images. A URL `<img>` is also **not bound to the media library
+  attachment**, so it loses `srcset`, WebP and migration; reference uploaded images by their media
+  id. Set alt
   (and disable lazy loading for above-the-fold images) with the same element mechanism that
   carries width and height, and verify the rendered HTML rather than trusting the write. Check
   every URL-sourced image.

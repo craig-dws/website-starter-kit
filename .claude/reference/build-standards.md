@@ -16,6 +16,11 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
 - **Alt text** per `alt-text-guidelines.md`: descriptive for content images, empty for decorative.
 - **SVGs inlined** as SVG Icon elements, not uploaded.
 - Upload with `.claude/tools/optimize-and-upload.py` (scoped media REST API, no dangerous abilities).
+- **Reference images from the media library by attachment / media id, never a raw or hardcoded
+  URL.** A raw `<img src>` URL (or a Figma asset URL) is not an attachment, so it loses responsive
+  `srcset`, WebP conversion and alt binding, and it does not migrate. Bind the Breakdance Image
+  element to the media id; `html-to-page` treats a URL `<img>` as an external URL-sourced image
+  (which is also why it drops the alt), so set the image to the media attachment, do not leave a URL.
 
 ## Typography
 - Heading and body fonts from the design; substitute a non-webfont (e.g. Segoe UI) for the closest
