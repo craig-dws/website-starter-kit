@@ -8,12 +8,13 @@ consciously waived with a recorded reason. Work through it, do not wait to be as
 - Matches the design frame (screenshot diff via the chrome-devtools MCP, headless).
 - Sections sit in the container/grid from the tokens (no edge-to-edge unless the design says so).
 - Responsive at every breakpoint from `get-breakpoints` (no invented `@media` queries).
-- **The header is sticky and responsive.** Sticky: fixed to the top on scroll, above content
-  (z-index), with content offset so nothing is hidden. On mobile, follow the design for what
-  stays sticky, commonly the main bar sticks and the utility bar scrolls away. Responsive:
-  everything on **one row** at every width; on mobile the nav collapses to the hamburger, a text
-  CTA becomes an **icon-only** button (shown only on mobile), and the utility bar trims to only
-  what fits **one line**, it must never stack into several rows.
+- **The header is sticky, responsive and short on mobile.** Sticky: fixed to the top on scroll,
+  above content (z-index), with content offset so nothing is hidden; on mobile follow the design
+  for what stays sticky, commonly the main bar sticks and the utility bar scrolls away. Compact
+  on mobile, keep the header **as short as possible**: the **main bar is one row** (logo, an
+  icon-only CTA shown only on mobile, and the hamburger), and a **top/utility bar, if used, is
+  also one row** trimmed to only what fits (phone and hours, drop the address if needed). Neither
+  bar may wrap, so the whole header is at most two single rows on mobile.
 
 ## Tokens
 - Every colour, type and spacing value references a token (`var(--...)`), never a hardcoded value.
