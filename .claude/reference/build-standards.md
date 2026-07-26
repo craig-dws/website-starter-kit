@@ -70,6 +70,8 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
   serialise global-style writes; claim work in `build-log/ACTIVE.md`.
 
 ## See also
+- `design-for-build-checklist.md` — the designer-facing side: how to set up the Figma design so the
+  build goes cleanly. Give it to the designer, and check the design against it at handoff.
 - `limitations.md` — what the tools **cannot** do, and the workaround for each. Consult it before
   attempting something that may not be supported; do not retry a proven limitation.
 - `build-checklist.md` — per-page enforcement of these standards
