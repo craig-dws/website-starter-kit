@@ -107,9 +107,12 @@ must be sized down before upload, not left massive.
   selection link rather than retrying the same call.
 - Work one page at a time and return a staging preview URL.
 - Verify every built page against Figma with a screenshot diff.
-- Snapshot before a write that would lose real work. On a fresh, disposable, empty site
-  the operator may waive it (recorded as a decision); reinstate once there is build work
-  worth keeping.
+- Before a write that would lose real work, make sure a **recovery path** exists: a manual DB
+  snapshot, or existing coverage (a daily automatic backup, Breakdance revision history). A
+  manual export is not mandatory if adequate coverage is in place. On a fresh, disposable site
+  it can be waived (recorded). Caveat: Breakdance per-post revisions may not cover the global
+  design-system layer and direct MCP writes may not create a revision, so for global-settings
+  writes rely on the daily/full backup.
 
 ## Don'ts
 - Do not run wp breakdance total_reset.

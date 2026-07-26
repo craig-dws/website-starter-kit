@@ -99,14 +99,16 @@ Almost always where we start. Walk me through, in order, one step at a time:
 When the Breakdance tools are confirmed, **stop.** Tell me setup is complete and that the
 next session moves to the snapshot and first write. Do not go further unless I say so.
 
-### Stage 2 — Snapshot, proportionate to what is at stake
-Only once connected. Ask me whether this site has content or build work worth keeping:
-- If yes, take a database backup and log it in `build-log/BUILD-LOG.md` before any write.
-- If it is a fresh, empty, disposable starter site, offer to waive the snapshot; if I
-  agree, record the decision and move straight on. Do not stall a disposable-site build on
-  a backup that protects nothing.
-Reinstate the snapshot before we build anything we would not want to regenerate (once a
-design system and real pages exist).
+### Stage 2 — Recovery path, proportionate to what is at stake
+Only once connected. Before any write that would lose real work, make sure a recovery path
+exists. Ask me what covers this site:
+- A manual database backup (take one and log it in `build-log/BUILD-LOG.md`), **or** existing
+  coverage I confirm, a daily automatic backup or Breakdance revision history. A manual export
+  is not required if adequate coverage is already in place.
+- On a fresh, empty, disposable starter site it can be waived; record the decision and move on.
+Caveat to note: Breakdance per-post revisions may not cover the global design-system layer, and
+direct MCP writes may not create a revision, so for global-settings writes rely on the daily or
+full backup. Do not stall a build on a manual snapshot that duplicates coverage already there.
 
 ### Stage 3 — Prove the write path with a throwaway test (not a real page)
 Create one **throwaway** page through the Breakdance MCP, open it in the Breakdance
