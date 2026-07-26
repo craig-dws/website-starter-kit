@@ -69,8 +69,13 @@ is, and wait for me before starting it.
 Read `.claude/CLAUDE.md`, `CONNECT.md`, `START-HERE.md`, `build-log/GATES.md` and
 `build-log/BUILD-LOG.md`. Check whether the site's MCP server is **actually connected
 right now** (look at the live connected MCP servers, do not trust what the repo claims).
+Also check `build-log/ACTIVE.md`, the claim board: if another session is working on this build,
+follow `.claude/reference/parallel-builds.md`, claim your own work there, avoid what another
+session has claimed, and never write global settings while another session is active.
+
 Then give me a short plain-language summary: which client, which build target, whether we
-are connected yet, and what the single next concrete step is. Then wait.
+are connected yet, whether another session is active, and what the single next concrete step is.
+Then wait.
 
 ### Stage 1 — Connect the site (this is usually the whole first session)
 Almost always where we start. Walk me through, in order, one step at a time:
