@@ -59,6 +59,10 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
 ## SEO basics
 - SEO-friendly filenames and slugs, descriptive alt, sensible heading hierarchy, unique title and
   meta per page.
+- **About and Contact page slugs carry the business name:** `about-<business-name>` and
+  `contact-<business-name>` (e.g. `about-eastwood-eye-surgery`, `contact-eastwood-eye-surgery`).
+  Agency default, it helps branded-intent searches. (Mildly redundant where the production domain
+  already contains the business name, but keep it as the default for consistency.)
 
 ## Recovery before risky writes
 - A recovery path must exist before a write that would lose real work: a manual snapshot, or
