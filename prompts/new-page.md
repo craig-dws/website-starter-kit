@@ -31,9 +31,17 @@ human-approved gates.
 - Apply the standards: **descriptive CSS classes**, **one Text element per body block**, images via
   `.claude/tools/optimize-and-upload.py` (referenced by URL, media binding is a known limit), SVGs
   inlined, hover and focus states, responsive from `get-breakpoints`, correct slug and SEO.
+- **Images: if the image is not worked out, build a placeholder block, do not invent one.** Internal
+  pages usually have no design, so their images are not decided yet. For each image slot, put a
+  placeholder at the correct display size per `.claude/reference/image-placeholder.md` (holds the
+  layout, says what image is needed), and list it under **Outstanding images** in the page record. Do
+  not AI-generate images at build time. Real images are sourced in a separate pass afterwards
+  (`prompts/source-images.md`). Only use an actual image now if the client already supplied a clear
+  match, in which case optimise and upload it as normal.
 - **Verify** against the reference with a screenshot diff (chrome-devtools MCP, headless).
 
 ## Finish
-- Record the page in `build-log/pages/<slug>.md`, log the writes, and **release your claim** in
+- Record the page in `build-log/pages/<slug>.md`, **including an Outstanding images list** (every
+  placeholder: what, slot, display size, supply size), log the writes, and **release your claim** in
   `build-log/ACTIVE.md`.
 - Stop for my review before the next page.

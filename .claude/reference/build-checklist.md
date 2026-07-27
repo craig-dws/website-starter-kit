@@ -33,6 +33,10 @@ change a standard there, this is the per-page tick-list.
 
 ## Images
 - Optimised before upload (sized to display width, compressed); full-width heroes only at ~2500px.
+  **Every image, whatever its source** (client gallery, stock, AI-generated), goes through the pipeline.
+- **Images not yet worked out use a placeholder block** at the correct display size (`image-placeholder.md`),
+  never an invented image or a collapsed slot; each placeholder logged under **Outstanding images** in
+  the page record. Sourcing the real image is a post-build pass (`prompts/source-images.md`).
 - Descriptive alt on content images, empty alt on decorative; alt verified in the rendered HTML
   (`html-to-page` silently drops alt on URL-sourced images). See `alt-text-guidelines.md`.
 - SVGs inlined as SVG Icon elements, not uploaded.

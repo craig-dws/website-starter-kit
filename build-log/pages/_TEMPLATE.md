@@ -23,6 +23,12 @@ Copy this file to `pages/<page-slug>.md` for each page built. One record per pag
 - [ ] No console errors on the rendered page
 - [ ] Cache cleared after the last DB write
 
+## Outstanding images (placeholders to source in the post-build pass)
+One row per placeholder built on this page. Cleared as `prompts/source-images.md` swaps each in.
+| What it is | Slot / section | Display size | Supply size (2x) | Requested | Status |
+|------------|----------------|--------------|------------------|-----------|--------|
+| [e.g. Glaucoma anatomy diagram] | [hero / body] | [980 x 468] | [1960 x 936] | [YYYY-MM-DD] | placeholder |
+
 ## Status
 [In progress | Built, awaiting review | Approved]
 

@@ -6,6 +6,9 @@ aligned with this file. Deep-dives are in the linked docs. Design-side standards
 base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` skill.
 
 ## Images
+- **Every image is optimised before upload, whatever its source.** Client-gallery, stock, or
+  AI-generated images go through the same pipeline as design assets, no exceptions. There is no such
+  thing as an image the AI drops in un-optimised.
 - **Optimise before upload:** resize to roughly 2x display width, contained/section images
   ~1600px, full-width heroes ~2500px; compress (JPEG quality ~82). WebP Express serves WebP on
   the site, so do not pre-convert; just size and compress.
@@ -24,6 +27,24 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
   `srcset`, a human binds the images in the builder (pick from the library, ~30s each) as a batch
   pass, a responsive-images improvement, not a defect. Never use an external (Figma) URL, always the
   uploaded image. Revisit when the MCP supports binding.
+- **No worked-out image? Build a placeholder, do not invent one.** For any page built without its
+  imagery decided (any page with no design, or a design whose images are not final), put a
+  **placeholder block** in the slot at the correct display size, per `image-placeholder.md`. Do not
+  AI-generate or guess an image at build time, and do not leave the slot empty and let the layout
+  collapse. Log every placeholder in the page record under **Outstanding images**.
+
+## Image sourcing (a pass after the build, not during it)
+Finding or creating the real images is its own pass once the layout is built, driven by the
+**Outstanding images** lists in the page records. See `prompts/source-images.md`. For each
+placeholder, in order:
+1. **Client gallery first.** If the client supplied a gallery, search it for an image that fits the
+   slot's subject and orientation, and use it if there is a genuine match.
+2. **Else stock or AI.** If there is no gallery match, source a stock image or generate one, fit for
+   purpose and licensed.
+3. **Always optimise and upload** with the tool, set alt, then **swap the placeholder for the image**
+   and clear the Outstanding-images row. Never bypass optimisation because an image "came from AI".
+This pass is deliberately after the build so the layout is settled first; pouring images into a
+still-moving layout wastes work.
 
 ## Typography
 - Heading and body fonts from the design; substitute a non-webfont (e.g. Segoe UI) for the closest
@@ -95,5 +116,6 @@ The output must be navigable and editable by a person in the builder, not just c
 - `limitations.md` — what the tools **cannot** do, and the workaround for each. Consult it before
   attempting something that may not be supported; do not retry a proven limitation.
 - `build-checklist.md` — per-page enforcement of these standards
+- `image-placeholder.md` — the placeholder block for images not yet worked out, and the sourcing pass
 - `alt-text-guidelines.md`, `parallel-builds.md`, `connect.md`
 - the `breakdance-limits` skill — Breakdance constraints and the native-MCP build method

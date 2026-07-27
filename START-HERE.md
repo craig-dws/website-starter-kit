@@ -22,6 +22,10 @@ with you for the session. Pick one:
 - **New page** (internal-pages phase, once the design system is locked). Paste `prompts/new-page.md`.
   Claude builds one internal page from its reference design and content, reusing the type's
   components. Run several in parallel, one page per chat.
+- **Source images** (after pages are built). Paste `prompts/source-images.md`. Claude works through
+  the placeholders left during the build, finds a match in the client gallery or sources stock/AI,
+  optimises and uploads each, and swaps it in. Images are a deliberate post-build pass, not part of a
+  page build.
 - **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
   Claude reviews the built site against the standards, or applies a punch-list of changes you give
   it, one at a time. Use it for sign-off, suggestions, or changes noticed later.
