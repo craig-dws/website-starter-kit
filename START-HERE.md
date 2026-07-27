@@ -19,6 +19,9 @@ with you for the session. Pick one:
   skill and hook does, and asks before anything risky.
 - **Advanced** (once the flow is second nature). Paste `prompts/advanced-build.md`. Claude
   moves in whole stages with little narration, stopping only for real decisions and gates.
+- **New page** (internal-pages phase, once the design system is locked). Paste `prompts/new-page.md`.
+  Claude builds one internal page from its reference design and content, reusing the type's
+  components. Run several in parallel, one page per chat.
 - **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
   Claude reviews the built site against the standards, or applies a punch-list of changes you give
   it, one at a time. Use it for sign-off, suggestions, or changes noticed later.
