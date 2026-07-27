@@ -32,3 +32,9 @@ Use `build-log/ACTIVE.md` as a cooperative claim board:
 Lock the design system and build the shared components first, in **one** session. Then fan out
 independent pages in parallel, one session per page, each claiming its page and logging to its
 own record. Do not parallelise the header and footer, they share the chrome and the global styles.
+
+For a **set of same-type pages** (all the condition pages, all the treatment pages): build the
+**first** one from its reference design in a single session, it establishes that type's shared
+components and global classes. Then fan out the remaining pages of that type in parallel, they reuse
+what the first established and only write their own page. A second page that needs a *new* shared
+component pauses and adds it in one session, then parallel resumes.
