@@ -45,8 +45,9 @@ change a standard there, this is the per-page tick-list.
 - Focus states are visible; images carry the correct alt.
 
 ## Editability (a human logs in and edits this)
-- Every element has a **human-readable name** in the structure tree, no Breakdance defaults
-  ("Div", "Text", "Fundamental Text"). CSS classes stay as the separate BEM styling layer.
+- **Descriptive, consistent CSS class names** (element names cannot be set over MCP, see
+  limitations.md; classes plus Breakdance's content preview carry navigability). Human element names
+  are an optional structural-only manual pass.
 - **Body copy is one Text element** with its paragraphs inside, not a container/element per paragraph.
 - Structure is shallow and sensibly grouped, scannable by a person.
 

@@ -55,15 +55,17 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
 
 ## Editability and structure (humans log in and edit, not only AI)
 The output must be navigable and editable by a person in the builder, not just correct on screen.
-- **Name every element with a human-readable label** in the structure tree, what it *is*, not its
-  CSS class: "Hero", "Heading", "Body text", "Primary button", "Hero main image", "Surgeon card".
-  A client or editor finds things by these names. **Never leave a Breakdance default** ("Div",
-  "Text", "Fundamental Text", "Section").
-- **The CSS class is the styling layer, kept separate from the element name.** Classes stay as the
-  descriptive BEM convention (`ees-hero__copy`); do not use the class as the element's display name.
+- **Descriptive CSS class names carry the meaning.** Element *names* (the structure-tree labels)
+  cannot be set over the Breakdance MCP (see `limitations.md`), so navigability comes from meaningful
+  BEM class names (`ees-hero__copy`, `ees-approach__intro`) plus Breakdance's own content preview in
+  the tree. Keep classes descriptive and consistent, this the build CAN control.
+- **Human element names are an optional manual pass, structural only.** If a person wants extra
+  clarity they name the sections and major groups in the builder, not every leaf. A rebuild through
+  `html-to-page` discards manual names, so do not invest heavily.
 - **Body copy is one Text element with its paragraphs inside it**, not a container or a separate
   Text element per paragraph. Over-structured text is harder to edit and bloats the DOM. Reserve
-  separate elements for genuinely distinct blocks (a callout, a multi-column layout, a card).
+  separate elements for genuinely distinct blocks (a callout, a multi-column layout, a card). This
+  the build CAN control, via the html-to-page markup.
 - **Keep the structure shallow and sensibly grouped** (Section > Container > named groups) so a
   human can scan it. Do not nest for the sake of it.
 

@@ -28,6 +28,11 @@ are Breakdance/Agent-Connector beta constraints, revisit them when the tool upda
   pack). **→** `html-to-page` self-regenerates CSS on page creation; for edits to an existing page,
   clear the cache in wp-admin if it does not self-regenerate (unproven on edit, verify on the first).
 
+- **Element names (the structure-tree labels) cannot be set over MCP.** *(beta)* The AI cannot name
+  elements, so navigability comes from descriptive CSS class names plus Breakdance's content preview
+  in the tree. **→** Keep classes meaningful; a human names structural groups in the builder if
+  wanted; a rebuild through `html-to-page` discards manual names.
+
 ## WordPress
 
 - **SVG uploads are blocked by default.** **→** Inline SVGs as Breakdance SVG Icon elements, or add
