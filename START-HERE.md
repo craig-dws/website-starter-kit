@@ -118,4 +118,5 @@ of likelihood:
 | Skills, agents, commands, hooks | `.claude/` |
 | Build runbooks + best practices | `docs/` |
 | Audit trail (log, gates, decisions, pages) | `build-log/` |
+| End-of-build wp-admin / live-session punch-list | `build-log/CLEANUP.md` |
 | The full agency system | the AI Web Design System repo (separate) |

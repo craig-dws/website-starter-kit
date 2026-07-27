@@ -88,4 +88,6 @@ deferred passes consume; it is not a list of problems.
 ## See also
 - `image-placeholder.md`, `prompts/source-images.md` — the images pass.
 - `prompts/seo-meta.md` — the SEO meta pass.
+- `build-log/CLEANUP.md` — the standing wp-admin / live-session punch-list (media deletion, favicon,
+  breakpoint tidy-up, global-CSS reconciliation) that the build cannot do itself.
 - `build-standards.md`, `build-checklist.md`, `limitations.md`.
