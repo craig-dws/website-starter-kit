@@ -19,6 +19,9 @@ with you for the session. Pick one:
   skill and hook does, and asks before anything risky.
 - **Advanced** (once the flow is second nature). Paste `prompts/advanced-build.md`. Claude
   moves in whole stages with little narration, stopping only for real decisions and gates.
+- **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
+  Claude reviews the built site against the standards, or applies a punch-list of changes you give
+  it, one at a time. Use it for sign-off, suggestions, or changes noticed later.
 
 To paste a prompt: open this folder in Claude Code, copy the file's contents into the
 chat, and send it. That is the whole "start". Claude takes it from there.

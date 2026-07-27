@@ -53,6 +53,20 @@ base kit, anti-AI-look, house style) live in the `discoverweb-design-standard` s
 - Where the design is desktop-only, derive the responsive layer with standard collapse patterns and
   record every derived value for design review at the gate.
 
+## Editability and structure (humans log in and edit, not only AI)
+The output must be navigable and editable by a person in the builder, not just correct on screen.
+- **Name every element with a human-readable label** in the structure tree, what it *is*, not its
+  CSS class: "Hero", "Heading", "Body text", "Primary button", "Hero main image", "Surgeon card".
+  A client or editor finds things by these names. **Never leave a Breakdance default** ("Div",
+  "Text", "Fundamental Text", "Section").
+- **The CSS class is the styling layer, kept separate from the element name.** Classes stay as the
+  descriptive BEM convention (`ees-hero__copy`); do not use the class as the element's display name.
+- **Body copy is one Text element with its paragraphs inside it**, not a container or a separate
+  Text element per paragraph. Over-structured text is harder to edit and bloats the DOM. Reserve
+  separate elements for genuinely distinct blocks (a callout, a multi-column layout, a card).
+- **Keep the structure shallow and sensibly grouped** (Section > Container > named groups) so a
+  human can scan it. Do not nest for the sake of it.
+
 ## Accessibility (WCAG 2.2 AA, human-certified)
 - Sane heading order, contrast meets AA, visible focus states, correct alt text.
 
