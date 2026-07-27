@@ -30,6 +30,9 @@ change a standard there, this is the per-page tick-list.
 - Links have a distinct hover **and** a visible keyboard focus state (WCAG 2.2 AA).
 - Every state comes from a token, and **link hover is distinct from the brand colour**
   (Breakdance derives it from brand otherwise and it loses its distinction).
+- **Reveals and toggles work on touch.** Any hover/focus-driven reveal (dropdowns, expanding panels)
+  also keys off `:focus`, because a tap fires neither `:hover` nor `:focus-visible`. Keep the
+  `:focus-visible` ring separate for keyboard-only.
 
 ## Images
 - Optimised before upload (sized to display width, compressed); full-width heroes only at ~2500px.
@@ -39,7 +42,11 @@ change a standard there, this is the per-page tick-list.
   the page record. Sourcing the real image is a post-build pass (`prompts/source-images.md`).
 - Descriptive alt on content images, empty alt on decorative; alt verified in the rendered HTML
   (`html-to-page` silently drops alt on URL-sourced images). See `alt-text-guidelines.md`.
-- SVGs inlined as SVG Icon elements, not uploaded.
+- **Alt re-verified after any section rebuild** — re-running `html-to-page` renumbers element ids and
+  re-drops alt, so the `edit-post` repair must be re-applied to the new ids (see `limitations.md`).
+- SVGs inlined as SVG Icon elements, not uploaded. **Inlined SVGs set fill and stroke explicitly in
+  CSS** (Breakdance forces `currentColor` on both and overrides the SVG's own `fill="none"`, so
+  stroke-drawn icons otherwise render as solid blobs); an icon inside a button inherits `currentColor`.
 - **Images reference the uploaded file** (WebP served, alt set). On the Breakdance beta the MCP
   cannot bind media, so images are URL-referenced; a human binds them in the builder for `srcset` as
   a batch pass. Never an external (Figma) URL.
@@ -57,3 +64,7 @@ change a standard there, this is the per-page tick-list.
 
 ## Record
 - Page or component recorded in `build-log/`; database writes and uploads logged.
+- **Deferred passes recorded, not failed** (`deferred-passes.md`): placeholder images, internal links
+  to real-but-unbuilt sitemap slugs, and drafted SEO title/meta go once in the page record's Deferred
+  passes section. These do not fail the checklist. A link to an off-sitemap slug or an un-placeholdered
+  empty image slot does fail it.

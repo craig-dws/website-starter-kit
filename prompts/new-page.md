@@ -41,7 +41,12 @@ human-approved gates.
 - **Verify** against the reference with a screenshot diff (chrome-devtools MCP, headless).
 
 ## Finish
-- Record the page in `build-log/pages/<slug>.md`, **including an Outstanding images list** (every
-  placeholder: what, slot, display size, supply size), log the writes, and **release your claim** in
+- Record the page in `build-log/pages/<slug>.md`, log the writes, and **release your claim** in
   `build-log/ACTIVE.md`.
+- **Fill the Deferred passes section** (`.claude/reference/deferred-passes.md`): the Outstanding-images
+  table (every placeholder), the internal links that 404 only because their target is not built yet
+  (real sitemap slugs), and a drafted **SEO title and meta description** for this page. Record these
+  **once, as expected-deferred**, and do not also list them as follow-ups or defects: they are
+  resolved by `source-images.md`, by building the remaining pages, and by `seo-meta.md`. A link to a
+  slug not in the sitemap, or an un-placeholdered empty image slot, IS a defect, so raise those.
 - Stop for my review before the next page.

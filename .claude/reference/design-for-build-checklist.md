@@ -108,6 +108,15 @@ real brand decision rather than a mechanical default. That is judgement the buil
   silhouette for a person whose photo is pending) so they are not mistaken for final.
 - Provide the real images where you have them, export-ready.
 
+## Effects and special fills (the build cannot see these)
+- **Flag every Mesh Gradient and editor-only pattern fill.** A mesh gradient is invisible to the
+  build: it exports as the flat solid beneath it through every route (the CSS export, the design
+  context the AI reads, and Figma's own image render), so a band you designed with a subtle wash comes
+  through as plain white or a flat colour and the build never knows the wash was there. **→** Tell the
+  build which layers use a mesh or pattern fill, and supply a flat **PNG** of each so the wash can be
+  rebuilt as a CSS gradient. *(Eastwood: the hero and anatomy washes were mesh gradients; two days
+  were lost before the cause was found, then rebuilt from designer PNGs.)*
+
 ## Comes with the design (from the designer or PM)
 - A **definitive sitemap** (page list and menu structure), so the navigation can be built. The drawn
   nav and the sitemap must agree. *(Eastwood's sitemap arrived later and differed from the drawn header.)*

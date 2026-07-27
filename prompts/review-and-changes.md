@@ -23,8 +23,20 @@ where one exists. **Change nothing.** Produce a findings list grouped by severit
   accessibility, SEO).
 - **Suggestion** — an improvement, not required.
 
-For each: the page, what is wrong, and the fix. Verify visually with the chrome-devtools MCP. Then
-let me decide what to action.
+**First read `.claude/reference/deferred-passes.md` and separate expected-deferred from defects.** Do
+NOT report a placeholder image, an internal link to a real-but-unbuilt sitemap slug, or a missing live
+SEO title/meta as a defect or gap: those are scheduled passes, listed once in each page record's
+**Deferred passes** section. Report them only as a short **Deferred (expected)** summary so I can see
+what is outstanding, never mixed in with real problems. A link to a slug that is **not** in
+`design/sitemap.md`, an image slot with no placeholder, or a duplicated/templated SEO title across
+pages IS a defect, because the cause is a mistake, not a schedule.
+
+**Run the link check** if pages are complete or near it: crawl the nav, footer and in-content internal
+links and confirm each resolves, or is a known deferred link to an unbuilt sitemap page. Flag only the
+unexpected 404s (wrong or off-sitemap slugs).
+
+For each finding: the page, what is wrong, and the fix. Verify visually with the chrome-devtools MCP.
+Then let me decide what to action.
 
 ## Changes mode (I give you a list)
 Apply a list of changes I provide, one at a time:

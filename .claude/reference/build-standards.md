@@ -117,5 +117,7 @@ The output must be navigable and editable by a person in the builder, not just c
   attempting something that may not be supported; do not retry a proven limitation.
 - `build-checklist.md` — per-page enforcement of these standards
 - `image-placeholder.md` — the placeholder block for images not yet worked out, and the sourcing pass
+- `deferred-passes.md` — what is finished after the build, not during it (images, internal links, SEO
+  meta), and the rule that these are recorded once as expected, never re-flagged as defects
 - `alt-text-guidelines.md`, `parallel-builds.md`, `connect.md`
 - the `breakdance-limits` skill — Breakdance constraints and the native-MCP build method

@@ -26,6 +26,10 @@ with you for the session. Pick one:
   the placeholders left during the build, finds a match in the client gallery or sources stock/AI,
   optimises and uploads each, and swaps it in. Images are a deliberate post-build pass, not part of a
   page build.
+- **SEO meta** (after pages are built). Paste `prompts/seo-meta.md`. Claude gathers the per-page SEO
+  title and meta-description drafts for a human to paste into the SEO plugin (the MCP cannot write post
+  meta). Another deliberate post-build pass. See `.claude/reference/deferred-passes.md` for why images,
+  links and SEO meta are finished after the build, not during it.
 - **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
   Claude reviews the built site against the standards, or applies a punch-list of changes you give
   it, one at a time. Use it for sign-off, suggestions, or changes noticed later.

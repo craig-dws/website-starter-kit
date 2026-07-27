@@ -138,6 +138,30 @@ this skill.
   output. Give every class at least one rule, or do not rely on it existing.
 - **`insert-stylesheet` replaces, it does not merge.** Re-inserting a stylesheet restates every
   rule; restate all breakpoints each time, or earlier ones are lost.
+- **`insert-stylesheet` mangles some values.** `opacity:1` becomes `0.01`, `background-image:none` is
+  dropped, and the `border-*-color` longhands are dropped. Never send `opacity`; write hover fills as
+  an explicit single-colour `linear-gradient`; write borders as the four-side `border: 1px solid ...`
+  shorthand. Test every modifier variant on its first real use.
+- **A `html-to-page` `<style>` block imports only flat class selectors.** Attribute selectors,
+  `:has()`, `:not()`, combinators, pseudo-elements and nested rules are silently dropped from a style
+  block; put those in `insert-stylesheet` (which does store them). Rebuilding a section also
+  **renumbers its element ids**, so re-apply any `edit-post` alt/attribute fix to the new ids.
+- **Inlined SVGs render fill and stroke as `currentColor`,** beating the SVG's own `fill="none"`, so a
+  stroke-drawn icon fills into a solid blob. Set fill and stroke explicitly in CSS keyed off the
+  paths' `[stroke-width]`/`[fill]`; an icon in a button inherits `currentColor`, never a fixed fill;
+  strip `id`s before duplicating a glyph.
+- **`html-to-page` builds from the `F*` primitives** (`FText`, `FTextLink`, `FImage`, `FSvgIcon`, ...):
+  there is **no `FContainer`**, and an empty `<div>` returns as an `FText` that cannot take children.
+  Insert a real element instead of an empty `<div>` placeholder.
+- **Nested slugs need a published-then-drafted parent.** `create-post` has no slug field, and a
+  born-draft parent gets an empty `post_name`, so a child comes out at `/child` not `/parent/child`.
+  Create the parent published, verify its slug, then revert it to draft.
+- **A hover/focus-only reveal is dead on touch.** A tap fires neither `:hover` nor `:focus-visible`, so
+  any dropdown or expanding panel must also key off `:focus` (keep the `:focus-visible` ring separate).
+
+Full evidence and the rest of the proven traps (Figma mesh gradients, QA browser locks, global-settings
+CSS ordering) are in `.claude/reference/limitations.md`; read it before attempting something that may
+not be supported.
 
 **Cache on the native MCP path:** `html-to-page` regenerates the compiled CSS itself on
 page creation (proven), so no manual cache clear is needed there and the WP-CLI
