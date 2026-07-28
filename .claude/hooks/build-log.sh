@@ -16,5 +16,6 @@ log="$CLAUDE_PROJECT_DIR/build-log/BUILD-LOG.md"
 
 ts="$(date '+%Y-%m-%d %H:%M:%S')"
 short="$(printf '%s' "$cmd" | tr '|' '/' | cut -c1-160)"
+# shellcheck disable=SC2016  # single-quoted printf format is intentional; the backticks are literal markdown
 printf '| %s | auto | db-op | `%s` |\n' "$ts" "$short" >> "$log"
 exit 0
