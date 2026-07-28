@@ -30,6 +30,10 @@ with you for the session. Pick one:
   title and meta-description drafts for a human to paste into the SEO plugin (the MCP cannot write post
   meta). Another deliberate post-build pass. See `.claude/reference/deferred-passes.md` for why images,
   links and SEO meta are finished after the build, not during it.
+- **Plan changes** (when a client or reviewer gives feedback). Paste `prompts/plan-changes.md`. Claude
+  turns raw feedback into a structured change plan, splitting each item into "fix what is built" and
+  "standing rule so future pages inherit it", and writes it to `build-log/content-changes.md`. It plans;
+  it does not apply. Feeds review-and-changes.
 - **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
   Claude reviews the built site against the standards, or applies a punch-list of changes you give
   it, one at a time. Use it for sign-off, suggestions, or changes noticed later.
