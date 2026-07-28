@@ -122,7 +122,9 @@ of likelihood:
 | Need | Location |
 |------|----------|
 | How to run the build (this doc) | `START-HERE.md` |
+| Which prompt to use, when | `prompts/README.md` |
 | Guided / advanced prompts (paste into Claude) | `prompts/` |
+| When to commit + two-machine sync | `.claude/reference/git-workflow.md` |
 | Connecting the site + settings + operating model | `CONNECT.md` |
 | This client's brief and rules (loaded every session) | `.claude/CLAUDE.md` |
 | Skills, agents, commands, hooks | `.claude/` |

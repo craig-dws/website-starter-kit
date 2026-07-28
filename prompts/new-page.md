@@ -11,6 +11,7 @@ You are building one internal page. Work to `.claude/reference/build-standards.m
 human-approved gates.
 
 ## Start
+0. **Pull the latest** (`git pull`) so you have other sessions' and the other machine's work.
 1. Read `.claude/CLAUDE.md`, `design/sitemap.md`, `build-standards.md`, `build-checklist.md` and
    `limitations.md`, and check `build-log/ACTIVE.md` for other active sessions.
 2. Get these from me for the page (ask for any I have not given):
@@ -49,4 +50,7 @@ human-approved gates.
   **once, as expected-deferred**, and do not also list them as follow-ups or defects: they are
   resolved by `source-images.md`, by building the remaining pages, and by `seo-meta.md`. A link to a
   slug not in the sitemap, or an un-placeholdered empty image slot, IS a defect, so raise those.
+- **Commit and push** the page's files (its record, content, any design or settings changes) with a
+  short message. One page per commit: it is the recovery point and how the other machine gets your work
+  (see `.claude/reference/git-workflow.md`).
 - Stop for my review before the next page.
