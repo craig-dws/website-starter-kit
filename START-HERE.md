@@ -82,6 +82,12 @@ The connection is one command from the Agent Connector plugin, run in this folde
 full procedure, the settings to set, and the staging operating model are in `CONNECT.md`.
 If the Application Password screen refuses to generate one, see Troubleshooting below.
 
+**New machine, or someone joining the build?** Paste `prompts/connect-mcps.md`. Claude walks
+through connecting every MCP this build uses (Breakdance, chrome-devtools, and Figma if you read
+designs), does what it can itself, and stops to prompt you only for the manual bits (the wp-admin
+login for the Application Password, and restarting the app). The only secret is that one WordPress
+Application Password, and it never enters the repo.
+
 ## Troubleshooting: the site will not connect
 
 The most common wall is the Application Password screen refusing to generate one. In order
