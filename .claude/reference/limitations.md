@@ -53,6 +53,13 @@ are Breakdance/Agent-Connector beta constraints, revisit them when the tool upda
   `FSvgIcon`, `FRichText`, ...). *(beta)* There is **no `FContainer`**, and an empty `<div>` comes back
   as an `FText` that cannot take children. **→** Fetch the `F*` schema (not the plain element name)
   when editing; insert a real element rather than relying on an empty `<div>`.
+- **`html-to-page` tends to emit one Fundamental Text (`FText`) element per `<p>`.** *(observed on the
+  Glaucoma build)* A multi-paragraph passage then becomes several separate elements, which is hard to
+  edit and breaks the one-element-per-block editability standard. **→** Author a multi-paragraph body
+  block as a single **Rich Text** element and confirm in `get-post-tree` that it came out as one
+  element. The exact input that yields one Rich Text (a wrapped block through `html-to-page`, versus
+  building an `FRichText` with `edit-post`) is **to be pinned down on the live install** — test it and
+  record the proven method before relying on it.
 - **The number in a rendered `bde-*` class is the element id** (e.g. `bde-f-text-link-340-152` is
   element 152), usable directly, **but the rendered HTML can lag the post data.** **→** Re-fetch or
   check `get-post-tree` before trusting an id from a cached render, and never conclude another session

@@ -83,10 +83,14 @@ The output must be navigable and editable by a person in the builder, not just c
 - **Human element names are an optional manual pass, structural only.** If a person wants extra
   clarity they name the sections and major groups in the builder, not every leaf. A rebuild through
   `html-to-page` discards manual names, so do not invest heavily.
-- **Body copy is one Text element with its paragraphs inside it**, not a container or a separate
-  Text element per paragraph. Over-structured text is harder to edit and bloats the DOM. Reserve
-  separate elements for genuinely distinct blocks (a callout, a multi-column layout, a card). This
-  the build CAN control, via the html-to-page markup.
+- **Each body block is ONE element holding all its paragraphs**, not one element per paragraph. A
+  passage of two or three paragraphs under a heading is a single block, so it is a single **Rich Text**
+  element with the paragraphs inside it, never a separate Fundamental Text element per paragraph.
+  Per-paragraph elements are hard to edit (the copy lives in many places) and bloat the DOM. Reserve
+  separate elements for genuinely distinct blocks (a callout, a card, a multi-column layout).
+  **Verify this in `get-post-tree`, do not assume it:** `html-to-page` tends to emit one Fundamental
+  Text element per `<p>`, so a multi-paragraph block must be authored as a single Rich Text element and
+  checked that it came out as one element, not several (see `limitations.md`).
 - **Keep the structure shallow and sensibly grouped** (Section > Container > named groups) so a
   human can scan it. Do not nest for the sake of it.
 

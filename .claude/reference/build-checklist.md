@@ -59,7 +59,10 @@ change a standard there, this is the per-page tick-list.
 - **Descriptive, consistent CSS class names** (element names cannot be set over MCP, see
   limitations.md; classes plus Breakdance's content preview carry navigability). Human element names
   are an optional structural-only manual pass.
-- **Body copy is one Text element** with its paragraphs inside, not a container/element per paragraph.
+- **Each body block is ONE element** (a Rich Text element) holding all its paragraphs, not one element
+  per paragraph. Verify in `get-post-tree` that a multi-paragraph passage came out as a single element,
+  since `html-to-page` tends to split `<p>` tags into separate Fundamental Text elements (see
+  limitations.md). Consolidate if it split.
 - Structure is shallow and sensibly grouped, scannable by a person.
 
 ## Record
