@@ -32,8 +32,13 @@ This connects the site so Claude can build layouts.
   do not retype it from memory.
 - **Prompt the human for the Application Password** (needs a wp-admin login, you cannot do this):
   1. Log in to the staging site's wp-admin (`WP_API_URL` in `settings.json`). If you have no login, ask
-     the site owner for a **WordPress admin account on the staging site**.
-  2. Open **Agent Connector > Connect** and generate the Application Password. It shows **once**, copy it.
+     the site owner for a **WordPress admin account on the staging site** (or a second app password on
+     the existing user).
+  2. Open **Agent Connector > Connect** and generate **your own new** Application Password, named for you
+     (e.g. "Eastwood MCP - <your name>"). **Do not reuse anyone else's password.** WordPress shows an app
+     password **once** then stores only a hash, so there is nothing to copy off the site later, and a
+     per-person password is **individually revocable**, which matters because this credential can reach
+     the armed Universal Abilities on the server. Copy it now.
   3. Paste the password and the username it belongs to back here.
 - **Then connect.** Build the working command from `CONNECT.md` step 4 with the **exact server name**
   above, the pasted username and password, and the **default (local) scope** (never `--scope project`,
