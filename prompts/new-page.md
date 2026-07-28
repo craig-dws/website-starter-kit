@@ -16,15 +16,21 @@ human-approved gates.
    `limitations.md`, and check `build-log/ACTIVE.md` for other active sessions.
 2. Get these from me for the page (ask for any I have not given):
    - **Which page** and its **type** (condition / treatment / surgeon / content / other).
-   - The **reference design** node id for that type (identify by node id, never by frame name).
+   - The **reference to match**: either the **Figma node id** of the type's reference design, OR, when
+     there is no design, the **already-built sibling page of the same type** to copy the pattern from
+     (e.g. the built Glaucoma page for a new condition page). Most pages after the first of a type have
+     no design, so a built sibling is the usual reference. Identify a Figma frame by node id, never by name.
    - The **slug** (from the sitemap).
    - The **content** (I paste it or point to the source).
 3. **Claim it** in `build-log/ACTIVE.md` (what, which slug, the time, status active), so a parallel
    session does not collide.
 
 ## Build
-- **Content-first from the reference design**, adapted to this page's content. **Reuse the type's
-  existing components and global classes, do not re-invent them.**
+- **Content-first from the reference**, adapted to this page's content. **Reuse the type's existing
+  components and global classes, do not re-invent them.** When the reference is a **built sibling page**
+  (no design), read its structure with `get-post-tree` and match it: the same sections and the same
+  `.ees-*` classes, with the content deciding which sections appear and how many. When it is a Figma
+  frame, build from that. Either way the **design system**, not a per-page drawing, is the source of the look.
 - **If this is the first page of its type**, it establishes the type's shared components: build it
   **solo** (not in parallel), so the pattern is set before the rest fan out.
 - **Do not write global settings, they are locked.** If the page genuinely needs a new shared
@@ -39,7 +45,9 @@ human-approved gates.
   not AI-generate images at build time. Real images are sourced in a separate pass afterwards
   (`prompts/source-images.md`). Only use an actual image now if the client already supplied a clear
   match, in which case optimise and upload it as normal.
-- **Verify** against the reference with a screenshot diff (chrome-devtools MCP, headless).
+- **Verify** (chrome-devtools MCP, headless): against a Figma frame, a screenshot diff; against a built
+  sibling (no design), confirm the structure and components match the sibling and the full build
+  checklist passes (one element per block, states, responsive, no overflow), since there is no frame to diff.
 
 ## Finish
 - Record the page in `build-log/pages/<slug>.md`, log the writes, and **release your claim** in
