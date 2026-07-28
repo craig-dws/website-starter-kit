@@ -153,10 +153,11 @@ this skill.
 - **`html-to-page` builds from the `F*` primitives** (`FText`, `FTextLink`, `FImage`, `FSvgIcon`, ...):
   there is **no `FContainer`**, and an empty `<div>` returns as an `FText` that cannot take children.
   Insert a real element instead of an empty `<div>` placeholder.
-- **`html-to-page` tends to make one Fundamental Text element per `<p>`.** A multi-paragraph passage
-  then editable in many separate elements, which breaks the one-element-per-block editability standard.
-  Author a multi-paragraph body block as a single **Rich Text** element and confirm in `get-post-tree`
-  that it is one element, not several. Pin down the exact method on the live install before relying on it.
+- **`html-to-page` makes one Fundamental Text element per `<p>` by default.** A multi-paragraph passage
+  then splits across many elements, breaking the one-element-per-block editability standard. **Proven
+  fix:** author the block as one Fundamental Text with `tag=div`, the `<p>` tags inside, and the site's
+  prose/body class; confirm in `get-post-tree` it is a single element. (FRichText rejected: unproven and
+  would split the site across two methods.)
 - **Nested slugs need a published-then-drafted parent.** `create-post` has no slug field, and a
   born-draft parent gets an empty `post_name`, so a child comes out at `/child` not `/parent/child`.
   Create the parent published, verify its slug, then revert it to draft.

@@ -84,13 +84,14 @@ The output must be navigable and editable by a person in the builder, not just c
   clarity they name the sections and major groups in the builder, not every leaf. A rebuild through
   `html-to-page` discards manual names, so do not invest heavily.
 - **Each body block is ONE element holding all its paragraphs**, not one element per paragraph. A
-  passage of two or three paragraphs under a heading is a single block, so it is a single **Rich Text**
-  element with the paragraphs inside it, never a separate Fundamental Text element per paragraph.
-  Per-paragraph elements are hard to edit (the copy lives in many places) and bloat the DOM. Reserve
-  separate elements for genuinely distinct blocks (a callout, a card, a multi-column layout).
-  **Verify this in `get-post-tree`, do not assume it:** `html-to-page` tends to emit one Fundamental
-  Text element per `<p>`, so a multi-paragraph block must be authored as a single Rich Text element and
-  checked that it came out as one element, not several (see `limitations.md`).
+  passage of two or three paragraphs under a heading is a single block, so it is **one Fundamental Text
+  element with `tag=div`, the real `<p>` tags inside it, and the site's prose/body class applied** (the
+  class that styles the `<p>` children), never a separate element per paragraph. This is the proven
+  method: it renders identically and stays a single editable element where the copy lives in one place.
+  Per-paragraph elements are hard to edit and bloat the DOM. Reserve separate elements for genuinely
+  distinct blocks (a callout, a card, a multi-column layout).
+  **Verify in `get-post-tree` that the block came out as one element**, since `html-to-page` otherwise
+  emits one Fundamental Text element per `<p>`; consolidate if it split (see `limitations.md`).
 - **Keep the structure shallow and sensibly grouped** (Section > Container > named groups) so a
   human can scan it. Do not nest for the sake of it.
 
