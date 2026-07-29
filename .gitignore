@@ -9,3 +9,7 @@ node_modules/
 dist/
 .astro/
 *.log
+
+# Python caches
+__pycache__/
+*.py[cod]

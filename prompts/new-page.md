@@ -61,4 +61,13 @@ human-approved gates.
 - **Commit and push** the page's files (its record, content, any design or settings changes) with a
   short message. One page per commit: it is the recovery point and how the other machine gets your work
   (see `.claude/reference/git-workflow.md`).
+- **Hand off the next page.** From `design/sitemap.md` and what is already built, pick the next page to
+  build (prefer the next unbuilt page of the **same type**, so this page's components are reused), and
+  print a **ready-to-paste trigger** for it to run in a fresh chat, filled in from the sitemap and
+  `site-content.md`, in this form:
+  > Follow `prompts/new-page.md`. Page: `<name>` (`<type>`). Reference: `<the built sibling to match>`.
+  > Slug: `<slug from sitemap>`. Content: the `<heading>` section of `design/content/site-content.md`.
+
+  If several pages are equally next, print **two or three** triggers so I can choose (or run them in
+  parallel, one per chat). Do not start building the next page, I run it in a new chat.
 - Stop for my review before the next page.

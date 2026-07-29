@@ -1,0 +1,58 @@
+name: checks
+
+# Guards the two rules this repo actually cares about: no credentials in the
+# repo, and house style in the copy that ships. Plus a lint pass over the hook
+# scripts and upload tool, since a broken hook fails silently during a build.
+#
+# Uses no third-party actions beyond checkout, so there is no supply-chain
+# surface and nothing to keep licensed. shellcheck and Python are preinstalled
+# on the ubuntu-latest runner.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    name: No committed secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/check_secrets.py
+
+  house-style:
+    name: House style in client copy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/check_house_style.py
+
+  lint:
+    name: Hooks and tools
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: shellcheck the hooks
+        # Fail on real problems (warning and error), not pedantic info/style nits
+        # on internal hook scripts. Findings still print in the log.
+        run: shellcheck --severity=warning .claude/hooks/*.sh
+
+      - name: Hooks are executable and LF
+        run: |
+          fail=0
+          for f in .claude/hooks/*.sh; do
+            if grep -q $'\r' "$f"; then
+              echo "$f has CRLF line endings and will fail under bash"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Byte-compile the Python tools
+        run: python3 -m compileall -q .claude/tools .github/scripts
