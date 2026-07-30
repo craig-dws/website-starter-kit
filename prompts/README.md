@@ -9,6 +9,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `advanced-build.md` | Once the flow is second nature | The same build in whole stages with little narration, stopping only for real decisions and gates. |
 | `connect-mcps.md` | A new machine, or someone joining the build | Connects the MCP servers (Breakdance, chrome-devtools, Figma), doing what it can and prompting you for the manual bits (the wp-admin Application Password, the restart). |
 | `new-page.md` | Internal-pages phase, once the design system is locked | Builds one internal page from its reference and content, reusing the type's components. One page per chat; run several in parallel. |
+| `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
 | `source-images.md` | After pages are built | Works through the image placeholders: client gallery first, else stock or AI, optimise, upload, swap in. |
 | `seo-meta.md` | After pages are built | Gathers the per-page SEO title and meta drafts to paste into the SEO plugin, plus the favicon and site-wide config. |
 | `plan-changes.md` | A client or reviewer sends feedback | Turns the feedback into a change plan: fix-now items plus standing rules so future pages inherit it. Plans, does not apply. |
@@ -18,6 +19,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 1. **Connect** — `guided-build.md` or `advanced-build.md` (first machine), `connect-mcps.md` (each extra machine).
 2. **Build** the design system, then home, header and footer.
 3. **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).
+   For a **blog / resources** section use **`blog.md`** instead (templates, not one page per post).
 4. **`source-images.md`**, then **`seo-meta.md`** once pages exist.
 5. **`review-and-changes.md`** for sign-off.
 

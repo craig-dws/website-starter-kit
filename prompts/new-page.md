@@ -50,24 +50,55 @@ human-approved gates.
   checklist passes (one element per block, states, responsive, no overflow), since there is no frame to diff.
 
 ## Finish
-- Record the page in `build-log/pages/<slug>.md`, log the writes, and **release your claim** in
-  `build-log/ACTIVE.md`.
-- **Fill the Deferred passes section** (`.claude/reference/deferred-passes.md`): the Outstanding-images
-  table (every placeholder), the internal links that 404 only because their target is not built yet
-  (real sitemap slugs), and a drafted **SEO title and meta description** for this page. Record these
-  **once, as expected-deferred**, and do not also list them as follow-ups or defects: they are
-  resolved by `source-images.md`, by building the remaining pages, and by `seo-meta.md`. A link to a
-  slug not in the sitemap, or an un-placeholdered empty image slot, IS a defect, so raise those.
-- **Commit and push** the page's files (its record, content, any design or settings changes) with a
-  short message. One page per commit: it is the recovery point and how the other machine gets your work
-  (see `.claude/reference/git-workflow.md`).
-- **Hand off the next page.** From `design/sitemap.md` and what is already built, pick the next page to
-  build (prefer the next unbuilt page of the **same type**, so this page's components are reused), and
-  print a **ready-to-paste trigger** for it to run in a fresh chat, filled in from the sitemap and
-  `site-content.md`, in this form:
-  > Follow `prompts/new-page.md`. Page: `<name>` (`<type>`). Reference: `<the built sibling to match>`.
-  > Slug: `<slug from sitemap>`. Content: the `<heading>` section of `design/content/site-content.md`.
 
-  If several pages are equally next, print **two or three** triggers so I can choose (or run them in
-  parallel, one per chat). Do not start building the next page, I run it in a new chat.
-- Stop for my review before the next page.
+Do these in order, then send me the report and nothing else.
+
+1. **Record the page** in `build-log/pages/<slug>.md`. All the technical detail lives here, not in your
+   message to me. Include the **Deferred passes** section (`deferred-passes.md`): image placeholders,
+   internal links that 404 only because their target is not built yet, and a drafted SEO title and meta
+   description. Record these once as expected, not as defects. (A link to a slug **not** in the sitemap,
+   or an image slot with no placeholder, IS a defect, so flag those.)
+2. **Release your claim** in `build-log/ACTIVE.md`.
+3. **Commit and push** the page's files with a short message. One page per commit (see `git-workflow.md`).
+4. **Check what is already built**, so the next-page suggestion is real: a file in `build-log/pages/`
+   means that page is built; compare against the full list in `design/sitemap.md` to find genuinely
+   unbuilt pages.
+5. **Send me the report below.** Then stop.
+
+### The report to send me
+
+Use this exact shape. Write it for a non-developer: **plain language, no element ids, class names,
+selector counts, percentages or jargon** (those stay in the page record).
+
+```
+## <Page name>
+
+Status: <Complete and committed  |  Built, but N thing(s) need you first>
+
+What I built: <one or two plain sentences. What the page is, and that it reuses the <type> pattern.>
+
+Needs you:
+- On this page: <plain actions only a human can do, or "Nothing.">
+- On other pages: <"None." or e.g. "I changed the shared <thing>, so please re-check <page>.">
+
+Routine, nothing to do now: <ONE line, e.g. "3 image placeholders and the SEO draft; handled by the image and SEO passes later.">
+
+Next page:
+Follow prompts/new-page.md. Page: <name> (<type>). Reference: the built <sibling> page. Slug: <slug>. Content: the <heading> section of design/content/site-content.md
+```
+
+Rules for the report:
+- **Status first, and honest.** "Complete and committed" only when the build checklist passed and
+  nothing on the page needs a person. Otherwise "Built, but N things need you first" and list them.
+- **Needs you = genuine human actions only** (a decision to confirm, something only a person can do).
+  If there is nothing, write "Nothing." Never pad it.
+- **"Routine, nothing to do now" is ONE line.** It covers the ordinary deferred passes (image
+  placeholders, the SEO draft, links to pages not built yet). **Do not explain what these are, I already
+  know.** Only expand if something is genuinely unusual (for example no suitable placeholder was possible).
+- **No internals in the report.** Element ids, `.ees-*` classes, counts and measurements belong in the
+  page record, not the message to me.
+- **Next page must be genuinely unbuilt** (from step 4), preferring the same type so components are
+  reused. If several are equally next, give two or three triggers so I can choose or run them in
+  parallel. If **every page is built**, replace the trigger with: "All pages are built. Next phase: run
+  `source-images.md`, then `seo-meta.md`, then `review-and-changes.md`." Never suggest a page that
+  already has a record, and do not start building it.

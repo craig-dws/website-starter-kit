@@ -22,6 +22,9 @@ with you for the session. Pick one:
 - **New page** (internal-pages phase, once the design system is locked). Paste `prompts/new-page.md`.
   Claude builds one internal page from its reference design and content, reusing the type's
   components. Run several in parallel, one page per chat.
+- **Blog** (building a blog / resources / news section). Paste `prompts/blog.md`. Claude builds the
+  single-post template and the archive listing once, as Breakdance Templates that every post inherits,
+  rather than one page per post. Use it instead of new-page for anything post-based.
 - **Source images** (after pages are built). Paste `prompts/source-images.md`. Claude works through
   the placeholders left during the build, finds a match in the client gallery or sources stock/AI,
   optimises and uploads each, and swaps it in. Images are a deliberate post-build pass, not part of a
