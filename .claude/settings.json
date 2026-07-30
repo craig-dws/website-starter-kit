@@ -29,7 +29,8 @@
       "Bash(node -v)",
       "Bash(npm -v)",
       "Bash(python --version)",
-      "Bash(python .claude/tools/optimize-and-upload.py:*)"
+      "Bash(python .claude/tools/optimize-and-upload.py:*)",
+      "Bash(python .claude/tools/create-post.py:*)"
     ]
   },
   "hooks": {

@@ -33,15 +33,36 @@ and the **Template and Post Loop** notes in the `breakdance-limits` skill. Stagi
 - **Archive / listing.** A Breakdance Template for the blog index (or the post type's archive), using a
   **Post Loop Builder** to list posts: featured image, title, excerpt, date, link. Reuse the existing
   card and grid components. This is the `/resources` or `/blog` index in the sitemap.
+- **Search results template (recommended).** A Breakdance Template for search results, using a Post Loop
+  to list matches, so site search has a designed results page. Reuse the archive's card and loop
+  pattern. Build it if the site has, or will have, a search box.
 - **Do not lay out individual posts.** Once the single template exists, a post is just its title,
-  content and featured image as a WordPress post, with no layout work. If the posts already have content
-  in `site-content.md`, create them as posts (they inherit the template); otherwise note they come later.
+  content and featured image; the template supplies the design. Create the posts in the next step, they
+  inherit the template.
 - Apply the standards: reuse global classes, dynamic body as one Rich Text field, images via the
   pipeline (featured images are set per post, not in the template), hover and focus states, responsive
   from `get-breakpoints`, correct slugs and SEO.
 - **Verify** (chrome-devtools, headless): the single template against one real post (create or pick a
   test post), and the archive listing renders and links correctly. Diff against the design if one
   exists, else confirm structure and the build checklist.
+
+## Create the posts
+Posts are content, not layout, so create them with `.claude/tools/create-post.py` (the safe REST
+`/wp/v2/posts` route, the same Application Password and safety as the image tool, no dangerous
+abilities). Each post inherits the single-post template, so there is no per-post layout.
+
+- For each post with content in `site-content.md`, write its **body as HTML** (real paragraphs and
+  headings, not markdown) to a temp file, then create it:
+  `python .claude/tools/create-post.py --title "<title>" --slug <slug> --content-file <body.html> --excerpt "<excerpt>" --status draft`
+  Add `--category <id>` and `--featured <media-id>` where known.
+- **Status defaults to draft** so nothing goes live by accident. Promote with `--status publish` once
+  reviewed.
+- For a **custom post type**, pass `--rest-base <rest_base>` (confirm it with `wp post-type list`, and
+  that the type is REST-enabled, `show_in_rest`).
+- **Verify on the first post** (this tool is new to the site, as the media tool once was): create one,
+  read it back over REST or in wp-admin, and confirm it renders through the single-post template before
+  creating the rest.
+- Featured images and per-post SEO are the usual **deferred passes**, not done here.
 
 ## Finish
 - **Record** in `build-log/pages/` (name it for the templates, e.g. `blog-templates.md`): the two
