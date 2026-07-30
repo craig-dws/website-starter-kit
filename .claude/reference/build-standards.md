@@ -115,6 +115,13 @@ The output must be navigable and editable by a person in the builder, not just c
 - See `parallel-builds.md`: safe for independent page objects once the design system is locked;
   serialise global-style writes; claim work in `build-log/ACTIVE.md`.
 
+## Content compliance (regulated niches)
+Some clients are regulated (medical, dental, health, legal, finance). Where a client is regulated, keep
+a **content-compliance reference** in the client's `.claude/reference/` (the niche's advertising rules,
+for example AHPRA for medical practices) and **check every page's copy against it before it ships**, now
+and in future. Treat a breach as a defect. This is a content standard, so copy fixes flow through the
+content source (the content-authority rule), never typed onto the live site.
+
 ## See also
 - `design-for-build-checklist.md` — the designer-facing side: how to set up the Figma design so the
   build goes cleanly. Give it to the designer, and check the design against it at handoff.

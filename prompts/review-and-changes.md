@@ -41,6 +41,11 @@ Then let me decide what to action.
 ## Changes mode (I give you a list)
 Apply a list of changes I provide, one at a time:
 - **Restate each change** in your own words so we agree the scope before you touch it.
+- **Change surgically, do not rebuild.** For a copy tweak or a small edit, change only the specific text
+  or property on the element that holds it (via `edit-post`), leaving that element and the rest of the
+  page intact. **Do not re-run `html-to-page` on a whole section for a small change** — a rebuild
+  renumbers elements, re-drops alt text, and can undo earlier build work (consolidated text blocks,
+  swapped images, tuned spacing). Reserve a rebuild for a genuine structural change, and flag it first.
 - Make the change **to the standards**, not just the literal ask (correct naming, tokens, states,
   editability along the way).
 - **Verify each** against the design/standards with a screenshot diff, and **log it** in `build-log/`.
