@@ -37,9 +37,14 @@ with you for the session. Pick one:
   turns raw feedback into a structured change plan, splitting each item into "fix what is built" and
   "standing rule so future pages inherit it", and writes it to `build-log/content-changes.md`. It plans;
   it does not apply. Feeds review-and-changes.
+- **Status** (any time). Paste `prompts/status.md`. Claude gives a read-only snapshot: which pages are
+  built, which are not, plus lists of images to update, things that need you, and what is not done yet.
 - **Review and changes** (after a build or stage is done). Paste `prompts/review-and-changes.md`.
   Claude reviews the built site against the standards, or applies a punch-list of changes you give
   it, one at a time. Use it for sign-off, suggestions, or changes noticed later.
+- **Final check** (before launch). Paste `prompts/final-check.md`. Claude sweeps the whole built site
+  for broken links, spelling, grammar, consistency and house style, and reports what must be fixed
+  before launch. It reports, it does not change anything.
 
 To paste a prompt: open this folder in Claude Code, copy the file's contents into the
 chat, and send it. That is the whole "start". Claude takes it from there.

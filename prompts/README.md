@@ -12,8 +12,10 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
 | `source-images.md` | After pages are built | Works through the image placeholders: client gallery first, else stock or AI, optimise, upload, swap in. |
 | `seo-meta.md` | After pages are built | Gathers the per-page SEO title and meta drafts to paste into the SEO plugin, plus the favicon and site-wide config. |
+| `status.md` | Any time you want to know where the build is | Read-only snapshot: page-by-page progress, plus lists of images to update, things that need you, and what is not done yet. |
 | `plan-changes.md` | A client or reviewer sends feedback | Turns the feedback into a change plan: fix-now items plus standing rules so future pages inherit it. Plans, does not apply. |
 | `review-and-changes.md` | After a build or stage, or to apply a punch-list | Reviews the built site against the standards, or applies changes one at a time. |
+| `final-check.md` | Before launch, once pages are built | Pre-launch sweep of the whole site: broken links, spelling, grammar, consistency, house style. Reports, does not fix. |
 
 ## Rough order over a project
 1. **Connect** — `guided-build.md` or `advanced-build.md` (first machine), `connect-mcps.md` (each extra machine).
@@ -21,8 +23,9 @@ this is the quick index of what each prompt is for and when to reach for it.
 3. **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).
    For a **blog / resources** section use **`blog.md`** instead (templates, not one page per post).
 4. **`source-images.md`**, then **`seo-meta.md`** once pages exist.
-5. **`review-and-changes.md`** for sign-off.
+5. **`review-and-changes.md`** for sign-off, then **`final-check.md`** for the pre-launch sweep.
 
-`plan-changes.md` runs whenever client feedback arrives, at any point.
+`plan-changes.md` runs whenever client feedback arrives, and `status.md` any time you want to see where
+the build stands.
 
 See `.claude/reference/git-workflow.md` for when to commit and how two machines stay in sync.
