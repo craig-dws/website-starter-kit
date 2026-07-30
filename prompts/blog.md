@@ -27,21 +27,28 @@ and the **Template and Post Loop** notes in the `breakdance-limits` skill. Stagi
 
 ## Build (two templates, once)
 - **Single-post template.** A Breakdance **Template** bound to the post type with
-  `set-template-conditions`. Lay the post out with **dynamic data** (title, content, featured image,
-  date, category as the design shows) via `get-dynamic-fields`, not hardcoded text, so every post
-  inherits it. Reuse the type's prose and heading components. One template serves all posts.
+  `set-template-conditions`. It carries all the chrome, once, for every post: the banner, the sticky
+  booking rail, the related-links band, the CTA, and the **On This Page nav generated from the post's
+  own headings** (a table-of-contents element or plugin, confirm what the install has, never hand-built
+  per post), wrapped around a **Post Content** element that renders the article body. Use dynamic data
+  (title, featured image, date, category) via `get-dynamic-fields`, never hardcoded. One template serves
+  every post, and this is where the page-level richness lives.
 - **Archive / listing.** A Breakdance Template for the blog index (or the post type's archive), using a
   **Post Loop Builder** to list posts: featured image, title, excerpt, date, link. Reuse the existing
   card and grid components. This is the `/resources` or `/blog` index in the sitemap.
 - **Search results template (recommended).** A Breakdance Template for search results, using a Post Loop
   to list matches, so site search has a designed results page. Reuse the archive's card and loop
   pattern. Build it if the site has, or will have, a search box.
-- **Do not lay out individual posts.** Once the single template exists, a post is just its title,
-  content and featured image; the template supplies the design. Create the posts in the next step, they
-  inherit the template.
-- Apply the standards: reuse global classes, dynamic body as one Rich Text field, images via the
-  pipeline (featured images are set per post, not in the template), hover and focus states, responsive
-  from `get-breakpoints`, correct slugs and SEO.
+- **A blog post is a WordPress post, not a Breakdance layout.** The article lives in the post's
+  `post_content` and the template renders it. **Never build a per-post Breakdance layout** — that takes
+  the article out of the CMS (not editable as a post, not portable, not uniform across posts). In-body
+  rich elements (a callout box, a ticked key-points list) go in the post's HTML body using the
+  **existing design-system classes** the site CSS already styles. Create the posts in the next step;
+  they inherit the template.
+- Apply the standards: reuse global classes, the template renders the body through a **Post Content**
+  element (the article lives in the post, not the template), images via the pipeline (featured images
+  are set per post, not in the template), hover and focus states, responsive from `get-breakpoints`,
+  correct slugs and SEO.
 - **Verify** (chrome-devtools, headless): the single template against one real post (create or pick a
   test post), and the archive listing renders and links correctly. Diff against the design if one
   exists, else confirm structure and the build checklist.
@@ -54,7 +61,8 @@ abilities). Each post inherits the single-post template, so there is no per-post
 - For each post with content in `site-content.md`, write its **body as HTML** (real paragraphs and
   headings, not markdown) to a temp file, then create it:
   `python .claude/tools/create-post.py --title "<title>" --slug <slug> --content-file <body.html> --excerpt "<excerpt>" --status draft`
-  Add `--category <id>` and `--featured <media-id>` where known.
+  Add `--category <id>` and `--featured <media-id>` where known. Use the **existing design-system
+  classes** for any callout box or key-points list in the body, so it matches the rest of the site.
 - **Status defaults to draft** so nothing goes live by accident. Promote with `--status publish` once
   reviewed.
 - For a **custom post type**, pass `--rest-base <rest_base>` (confirm it with `wp post-type list`, and

@@ -195,9 +195,13 @@ what gets built.
 - **Claude can design pages that have no explicit frame** (a page type without a design) from the
   reference designs, the style guide and the content, staying within the design system. That is
   AI proposing a design for a human to approve, never AI approving its own design.
-- **Genuinely uniform, content-light pages** (blog posts) can use a Breakdance **Template**
-  applied with `set-template-conditions`, so one layout serves many and changes once. Do not
-  duplicate a page N times, that creates copies that drift.
+- **Blog posts are WordPress posts, not Breakdance layouts.** The article lives in the post's
+  `post_content`, and a single-post **Template** (`set-template-conditions`) supplies the chrome
+  (banner, rail, On This Page from the post's headings, related links, CTA) around a Post Content
+  element. **Never build a per-post Breakdance layout**: it takes the article out of the CMS, so it is
+  not editable as a post, not portable and not uniform. In-body callouts and lists are HTML in
+  `post_content` using the design-system classes. Create posts with `create-post.py` (the REST posts
+  endpoint). One template serves many and changes once. See `prompts/blog.md`.
 - **Shared sections** (a CTA band, a contact block, related links) go in a
   `create-reusable-global-block` Global Block, edited once, reused everywhere.
 
