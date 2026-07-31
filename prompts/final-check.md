@@ -28,16 +28,18 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    phone, address, business name. Also terminology (one name per thing), button labels, heading
    capitalisation, and date formats. Flag every mismatch with both variants and where each appears.
 5. **House style.** No em dashes, en dashes, double hyphens or emojis in visible copy.
-6. **Accessibility and SEO sanity** (light pass). One H1 per page, sensible heading order, alt text on
-   content images, a unique title and meta per page (or note SEO is still deferred). For the deep
-   audits, hand off to the auditor agents (`accessibility-auditor`, `seo-optimizer`,
-   `performance-tuner`) rather than duplicating them here.
+6. **Accessibility sanity** (light pass only). One H1 per page, sensible heading order, alt text on
+   content images. **Do not check SEO here.** SEO titles, meta and AI-readiness are a separate deferred
+   pass (`seo-meta.md`), done after the build at **Gate 6**, so this pass says nothing about them and
+   flags nothing missing. The deep accessibility audit (Gate 5) is the `accessibility-auditor` agent's
+   own run and performance (Gate 6) the `performance-tuner`'s; hand those off rather than doing them here.
 
 ## Report
 - Grouped by the six headings. For each finding: page, what is wrong, the fix. Mark severity:
   **must-fix before launch**, **should-fix**, or **minor**.
-- Keep **expected-deferred** items (links to unbuilt pages, un-applied SEO) in their own short list, so
-  the scheduled passes are not counted as failures.
+- Keep **expected-deferred** items (links to pages not built yet) in their own short list, so the
+  scheduled passes are not counted as failures. **SEO is not in scope** here at all (it is Gate 6, a
+  later pass), so do not list it.
 - End with a plain verdict: **is the site launch-ready**, and the short list of must-fix items.
 - **Change nothing.** Copy fixes go into `design/content/site-content.md` then to staging (the Gate 7
   content rule); build fixes go through `review-and-changes.md`.
