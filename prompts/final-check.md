@@ -15,7 +15,11 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
 - `design/sitemap.md` (all pages and slugs), `design/content/site-facts.md` (the facts that must match
   everywhere), `design/content/site-content.md` (the approved copy), and the `STAGING_URL`.
 - `.claude/reference/deferred-passes.md`, so you separate expected-deferred work from real problems.
-- Crawl every built page with the chrome-devtools MCP (headless).
+- Crawl every built page with the chrome-devtools MCP (headless). **Extract prose from the rendered
+  `innerText`, not `textContent`** — `textContent` glues a label to its body across block boundaries
+  (`display:block`) and includes hidden responsive labels (`display:none`), which produces false
+  run-together findings like "Referral-Based CareA current referral...". Verify any run-together or
+  doubled-word hit against the rendered DOM before reporting it.
 
 ## Check, and report findings grouped by these headings
 
