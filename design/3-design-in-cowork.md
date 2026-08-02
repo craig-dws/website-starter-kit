@@ -33,7 +33,13 @@ brief carries the strategy, so design to it rather than re-doing it.
 - **Three-tier tokens** named to the token model (no duplicated raw values, every variable scoped with
   `var(--...)`), **components with hover variants** and text as properties, and the **Breakdance
   structure** (each band a full-bleed frame around a fixed container; Header and Footer as Global
-  Blocks). Flag any judgment call (spacing normalisation, an over-wide variant matrix) and ask.
+  Blocks).
+- **Apply the agency defaults, do not ask** (report each at the gate): **spacing** snaps to the 4pt grid
+  (a many-valued source is a dump, not a scale, drop the odd one-offs); the **type ramp** collapses
+  near-identical heading sizes into a minimal ramp (two or three roles below H2, drop sizes the design
+  never uses); **contrast** failures are fixed at the token level to pass WCAG 2.2 AA while keeping the
+  look, with any accent that only clears 3:1 confined to icons, rules and large text; **hover and focus
+  states** are always kept. Only stop for a genuinely novel or ambiguous call.
 
 ## Finish, and stop
 - **QA:** zero unbound fills or strokes, zero unstyled text, zero default names, contrast to AA. Check

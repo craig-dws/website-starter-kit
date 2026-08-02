@@ -18,10 +18,23 @@ the Figma workflow skill first (it runs discovery, foundations, components, asse
   (`design/0-build-agency-base-kit.md`).
 - Read the transferred design and `reference/design-for-build-checklist.md`. Extract the tokens and
   component inventory, inspect the Figma file, confirm the fonts are available.
-- **Flag the decisions and ask me before writing:** whether to tokenise or keep the source's one-off
-  spacing values (a dump is not a scale), and any variant matrix that runs over the guideline (keep
-  hover states regardless, Breakdance needs them). Lock the token set and component list with me, then
-  build.
+- The transferred design is **one breakpoint (desktop)**. Systematise that; the responsive layer is a
+  **separate later pass**, not decided here, so do not ask about responsive scope.
+
+## Apply the agency defaults (do this, do not ask; report each at the gate)
+These recurring decisions have a standard answer, so **apply them and report what you did** rather than
+stopping to ask each time. Only stop for a genuinely novel or ambiguous call (a new shared component, a
+real departure from the brand).
+- **Spacing: snap to the agency 4pt grid.** A source with many one-off values is a dump, not a scale.
+  Snap each to the nearest 4pt step and drop the odd one-offs (7, 11, 13, 19 and the like), so there are
+  no off-scale spacing tokens.
+- **Type ramp: collapse near-identical sizes.** Fold near-duplicate heading sizes into a minimal ramp
+  (usually two or three roles below H2), and drop any size the design never uses. Never ship five
+  near-identical heading tokens.
+- **Contrast: fix AA failures at the token level.** Where a pair fails WCAG 2.2 AA, adjust the token to
+  pass while keeping the look (darken a hover, lift a legal grey, raise an accent-on-dark). Confine a
+  bright accent that only clears 3:1 to icons, rules and text at 24px or larger. Never ship a known failure.
+- **Hover and focus states: always keep them**, even if the variant matrix widens (Breakdance needs them).
 
 ## Build (to standard)
 - **Three-tier tokens** named to the token model: semantic aliases primitive, component aliases
