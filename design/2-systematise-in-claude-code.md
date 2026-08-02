@@ -18,8 +18,8 @@ the Figma workflow skill first (it runs discovery, foundations, components, asse
   (`design/0-build-agency-base-kit.md`).
 - Read the transferred design and `reference/design-for-build-checklist.md`. Extract the tokens and
   component inventory, inspect the Figma file, confirm the fonts are available.
-- The transferred design is **one breakpoint (desktop)**. Systematise that; the responsive layer is a
-  **separate later pass**, not decided here, so do not ask about responsive scope.
+- The transferred design is **desktop only**. You build the responsive layer here, as part of the
+  system, Claude Design does not (see the responsive default below).
 
 ## Apply the agency defaults (do this, do not ask; report each at the gate)
 These recurring decisions have a standard answer, so **apply them and report what you did** rather than
@@ -34,6 +34,10 @@ real departure from the brand).
 - **Contrast: fix AA failures at the token level.** Where a pair fails WCAG 2.2 AA, adjust the token to
   pass while keeping the look (darken a hover, lift a legal grey, raise an accent-on-dark). Confine a
   bright accent that only clears 3:1 to icons, rules and text at 24px or larger. Never ship a known failure.
+- **Responsive: build desktop plus a mobile frame at 375.** From the one desktop design, build the
+  mobile frame using the token system: stack and reflow to a single column, and **design the mobile
+  header explicitly** (logo, icon-only call button, menu on one row). Tablet interpolates from the two
+  and does not need its own frame. Apply this scope, do not ask.
 - **Hover and focus states: always keep them**, even if the variant matrix widens (Breakdance needs them).
 
 ## Build (to standard)
