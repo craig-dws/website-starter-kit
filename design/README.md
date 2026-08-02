@@ -7,6 +7,18 @@ into a homepage and a build-ready Figma **design system**, it does not re-do str
 There are **two paths to the same result**. Run both on the same brief to see which you prefer, then
 standardise on the winner.
 
+## First, the reuse model (read `reference/base-kit.md`)
+Do **not** build a bespoke design system per client. The agency keeps **one shared base kit** (the
+spacing scale, type ramp, component structure, naming, states — the plumbing) and each client **swaps
+only the brand layer** (colour, fonts, radius, logo, brand-only components). Sharing the base does not
+make sites look alike: the look comes from the theme and composition.
+- **Once, for the agency:** build the base kit with **`0-build-agency-base-kit.md`**, then record it in
+  `reference/base-kit.md`. Best done after two or three clients exist so you extract what is common.
+- **Per client, once the base kit is recorded:** the client Figma file **extends** the base (overriding
+  only colour, type, radius). Prompts 2 and 3 do this automatically when `reference/base-kit.md` is filled.
+- **Until the base kit exists (early clients):** build fresh, and the prompts flag the shared tokens and
+  components as base-kit candidates for later extraction.
+
 ## Path A — Claude Design, then Claude Code (best for a build-ready system)
 1. **`1-design-in-claude-design.md`** — Claude Design designs the homepage from the brief.
 2. **`2-systematise-in-claude-code.md`** — its "transfer to Claude Code" prompt, plus our standard, has

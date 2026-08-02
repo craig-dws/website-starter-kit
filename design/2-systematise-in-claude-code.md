@@ -10,6 +10,12 @@ Also build this to the agency design-system standard, and **work through it with
 the Figma workflow skill first (it runs discovery, foundations, components, assembly and QA).
 
 ## Start (discovery, no writes yet)
+- **Base kit first.** Check `reference/base-kit.md`. If the agency base kit **exists** (filled with a
+  library URL), build this client file as a Figma **Extended Collection** that inherits it and
+  **overrides only colour, typography family and radius** (plus any brand-only components), do NOT
+  rebuild the shared tokens or components. If it does **not** exist yet (early clients), build fresh as
+  below, but **flag which tokens and components are base-kit candidates** for later extraction
+  (`design/0-build-agency-base-kit.md`).
 - Read the transferred design and `reference/design-for-build-checklist.md`. Extract the tokens and
   component inventory, inspect the Figma file, confirm the fonts are available.
 - **Flag the decisions and ask me before writing:** whether to tokenise or keep the source's one-off

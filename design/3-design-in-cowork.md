@@ -24,6 +24,11 @@ brief carries the strategy, so design to it rather than re-doing it.
 - **Show me the homepage and stop for review** before you build the system or the other breakpoints.
 
 ## Build the system (after I approve the homepage)
+- **Base kit first.** Check `reference/base-kit.md`. If the agency base kit **exists** (filled with a
+  library URL), build this file as a Figma **Extended Collection** that inherits it and **overrides only
+  colour, typography family and radius** (plus brand-only components), do NOT rebuild the shared tokens
+  or components. If it does **not** exist yet, build fresh as below and **flag the base-kit candidates**
+  (`design/0-build-agency-base-kit.md`).
 - **Tablet and mobile** frames.
 - **Three-tier tokens** named to the token model (no duplicated raw values, every variable scoped with
   `var(--...)`), **components with hover variants** and text as properties, and the **Breakdance
