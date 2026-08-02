@@ -39,7 +39,7 @@ Run it with the transition you are at. It reports; a human approves.
 - Named frames, token names, and breakpoints are present and consistent.
 - Establish whether there is a design for every page, or a few reference designs plus a style
   guide, and record which. It determines how internal pages are built (see breakdance-limits).
-- Check the design against `.claude/reference/design-for-build-checklist.md` (complete and correct
+- Check the design against `design/reference/design-for-build-checklist.md` (complete and correct
   variables, unique frame names, webfonts not system fonts, responsive frames, named sections). Flag
   any gaps to the designer before accepting the handoff.
 - Approved by: Dev Lead. An incomplete handoff is rejected, not patched informally.

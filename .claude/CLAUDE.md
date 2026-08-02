@@ -8,8 +8,7 @@ build time, not to connect; Figma is reached via its MCP]). Build target is the
 Breakdance staging site at [STAGING_URL]. Production is
 [PRODUCTION_URL - recorded for migration and launch only, never touched; fill at migration].
 
-Build target: [ A = WordPress + Breakdance | B = Astro + Payload ]. Delete the
-sections for the target you are not using.
+Build target: WordPress + Breakdance.
 
 Starting condition: [ blank staging | DWS starter template | existing site with content ].
 If a starter template or existing site, its current header, footer, home and demo content
@@ -33,7 +32,7 @@ to restore.
 - Agent Connector settings: **Universal Abilities OFF, Log MCP events OFF**, everything
   else left as shipped. Exact toggle table in CONNECT.md.
 
-## Breakdance conventions (Target A)
+## Breakdance conventions
 - Auto Layout maps to Section and Div; column arrangements map to Columns.
 - Repeating content uses the Post Loop Builder.
 - Never write raw PHP layout files. Build through Breakdance elements only.
@@ -44,8 +43,7 @@ to restore.
 
 ## Token source of truth
 - Figma Local Variables are the source of truth for design tokens.
-- Breakdance global variables (Target A) or the code token layer (Target B)
-  mirror the Figma tokens.
+- Breakdance global variables mirror the Figma tokens.
 - Reference variables, never hardcoded hex or off-scale spacing.
 
 ## Images and SVGs
@@ -136,8 +134,7 @@ must be sized down before upload, not left massive.
   prose (CLI flags in code are fine). No emojis.
 
 ## Reference
-- Build runbooks and best practices are in docs/ (19 for Breakdance, 19b for Astro,
-  23 best practices).
+- Build runbooks and best practices are in docs/ (19 for the build runbook, 23 best practices).
 - The full agency system, its complete docs and the front-half creative skills live
   in the AI Web Design System repo, not here. Consult it for anything not covered by
   this project. This repo is one client build and stays lean by design.

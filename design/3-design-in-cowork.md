@@ -1,0 +1,39 @@
+# 3. Design and systematise in Cowork (one tool, end to end)
+
+Paste this into Claude Cowork, with the client folder (brief, brand assets, photos) attached and the
+Figma plugin connected (a Full/edit Figma seat). This is the alternative to prompts 1 and 2: Cowork
+designs **and** builds the system in Figma. It works through the process with you and stops at the
+natural gates. Use it to compare against the Claude Design to Claude Code path.
+
+---
+
+Design this client's site in Figma from the brief and build a build-ready design system. **Work
+through it with me, stopping where I need to decide or approve.** Load the Figma skills first. The
+brief carries the strategy, so design to it rather than re-doing it.
+
+## Start
+- Read the brief and the brand assets (logo files, photos).
+- **Confirm what you need and ask me for anything missing or ambiguous** before designing: the logo
+  files, any open scope question in the brief, any brand colour that fails WCAG AA. One question at a
+  time; default sensibly from the brief where you can.
+
+## Design the homepage, then stop
+- Design the **homepage (desktop)** to the brand palette and fonts exactly, the signature accent
+  dominant; match the voice to the visual; follow the homepage notes; primary call to action in the
+  header, body and foot with tap-to-call. Avoid the AI look and honour the brief's "what to avoid".
+- **Show me the homepage and stop for review** before you build the system or the other breakpoints.
+
+## Build the system (after I approve the homepage)
+- **Tablet and mobile** frames.
+- **Three-tier tokens** named to the token model (no duplicated raw values, every variable scoped with
+  `var(--...)`), **components with hover variants** and text as properties, and the **Breakdance
+  structure** (each band a full-bleed frame around a fixed container; Header and Footer as Global
+  Blocks). Flag any judgment call (spacing normalisation, an over-wide variant matrix) and ask.
+
+## Finish, and stop
+- **QA:** zero unbound fills or strokes, zero unstyled text, zero default names, contrast to AA. Check
+  against `design-for-build-checklist.md`.
+- Give me a **short report** and **stop for my review.** On my go-ahead, **produce the Breakdance token
+  export** (variables to Global Settings), the bridge to the build.
+
+British and Australian English, no em dashes, no emojis unless the brand calls for them.
