@@ -46,6 +46,7 @@ for which, when):
 - **Status.** `prompts/status.md`. Where the build is, plus the outstanding lists.
 - **Review and changes.** `prompts/review-and-changes.md`. Review the site, or apply a punch-list, one at a time.
 - **Final check.** `prompts/final-check.md`. Pre-launch sweep: links, spelling, grammar, consistency, technical SEO.
+- **Triage final check.** `prompts/triage-final-check.md`. Turns the report into an AI fix-plan plus a tab-per-fix-type tracker (a Google Sheet you drag in).
 
 To paste a prompt: open this folder in Claude Code, copy the file's contents into the chat, and send it.
 

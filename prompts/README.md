@@ -16,6 +16,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `plan-changes.md` | A client or reviewer sends feedback | Turns the feedback into a change plan: fix-now items plus standing rules so future pages inherit it. Plans, does not apply. |
 | `review-and-changes.md` | After a build or stage, or to apply a punch-list | Reviews the built site against the standards, or applies changes one at a time. |
 | `final-check.md` | Before launch, once pages are built | Pre-launch sweep of the whole site: broken links, spelling, grammar, consistency, house style. Reports, does not fix. |
+| `triage-final-check.md` | After a final check | Turns the report into an AI fix-plan plus a tab-per-fix-type tracker (a Google Sheet you drag in) with page, URL, section, issue, fix and owner. Triages, does not fix. |
 
 ## Rough order over a project
 1. **Connect** — `guided-build.md` or `advanced-build.md` (first machine), `connect-mcps.md` (each extra machine).
@@ -23,7 +24,8 @@ this is the quick index of what each prompt is for and when to reach for it.
 3. **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).
    For a **blog / resources** section use **`blog.md`** instead (templates, not one page per post).
 4. **`source-images.md`**, then **`seo-meta.md`** once pages exist.
-5. **`review-and-changes.md`** for sign-off, then **`final-check.md`** for the pre-launch sweep.
+5. **`review-and-changes.md`** for sign-off, then **`final-check.md`** for the pre-launch sweep, then
+   **`triage-final-check.md`** to turn the report into a fix-plan and tracker.
 
 `plan-changes.md` runs whenever client feedback arrives, and `status.md` any time you want to see where
 the build stands.
