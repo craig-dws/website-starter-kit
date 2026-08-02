@@ -25,10 +25,10 @@ The brief carries the strategy, audience, voice and page notes, so design to it,
   hierarchy, not centred and uniform with even padding. Honour the brief's "what to avoid".
 - Keep **WCAG 2.2 AA** contrast; where a bright accent fails on white, use it as a field or on a dark
   ground, not as text or a thin mark on white.
-- **Design on the system, not to the pixel.** Use a **4pt spacing grid** (8, 12, 16, 24, 32, 48, 64,
-  96 and so on), do not scatter one-off gaps. Keep a **tight type ramp**: one display, one H1, one H2,
-  and two or three smaller heading roles at most, not a new size per card. This is what Claude Code
-  tokenises next, so a design already on the scale carries through cleanly instead of being snapped.
+- **Creative, but consistent.** The creativity comes from the brief, so design to it. Just keep the
+  design internally consistent: reuse a coherent set of spacing and text sizes rather than reaching for a
+  fresh value each time, so there is a real scale rather than thirty one-off gaps and five near-identical
+  headings. Consistency, not a rigid grid, and the brief leads.
 
 ## Finish, and stop
 - Show me the homepage and **tell me the judgment calls you made** (how you handled any contrast
