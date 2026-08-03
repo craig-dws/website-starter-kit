@@ -34,6 +34,12 @@ make sites look alike: the look comes from the theme and composition.
 4. **Internal pages** — feed the polished homepage and system back to Design or Cowork.
 5. **Token export to Breakdance Global Settings** hands over to the build side (`new-page`, etc.).
 
+## Later, any time — one more page on a built site
+- **`4-design-an-extra-page.md`** — design a **single** page (a landing page, or an extra service page)
+  against the **existing** system, reusing its tokens and components. This is the design-side twin of
+  `prompts/new-page.md`: it does not rebuild the system, it composes one page from it, and only adds a
+  new component if the page genuinely needs one. Run it whenever a site needs another page.
+
 ## The checks (guardrails, not stages)
 All three prompts point at the same standards in `reference/`:
 - `design-for-build-checklist.md` — is the Figma build-ready.
