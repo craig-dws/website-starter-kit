@@ -64,6 +64,28 @@ build defect, and it does not block building the page.
 - **A real defect instead of deferred:** a drafted clinical claim presented as final, or one with no
   sign-off flag at all.
 
+### 6. Schema / structured data
+Structured data (JSON-LD for Organisation, Service / MedicalClinic, Physician, FAQPage, Article,
+BreadcrumbList, and og:image) is a **later SEO pass, not build work**. On WordPress it is usually owned
+by the SEO plugin (The SEO Framework) and configured in wp-admin, and a host WAF may block direct
+`<script>` injection entirely (proven on one site: LiteSpeed returned a 403 for any payload containing
+`<script>`). So the build **does not add schema and does not flag its absence**.
+- **Resolved by:** the later SEO pass, in wp-admin / the SEO plugin (a human job unless a safe write
+  path is ever confirmed).
+- **Logged under:** nothing per page; it is a site-level later pass, not a page record item.
+- **A real defect instead of deferred:** none at build time. Absent schema before the SEO pass is
+  expected, never a launch blocker.
+
+### 7. Cache, Core Web Vitals and performance tuning
+Caching, CDN, CWV tuning and production performance are **set up after launch on the production host**,
+not during the staging build. Measuring CWV on staging is misleading, it is a different host in a
+different region.
+- **Resolved by:** the production performance pass (Gate 6 / `performance-tuner`) after go-live, on the
+  client's servers (for Australian clients, Sydney).
+- **Logged under:** nothing per page; production work.
+- **A real defect instead of deferred:** a genuinely oversized or un-optimised image shipped during the
+  build IS a build-time defect; caching, CDN and CWV are not.
+
 ### Related, already documented: media-library binding
 Images are URL-referenced because the beta MCP cannot bind media (`limitations.md`). A human binds
 them in the builder for `srcset` as a batch pass. Same shape as the above: a scheduled improvement,
