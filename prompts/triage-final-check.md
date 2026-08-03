@@ -10,6 +10,17 @@ through `review-and-changes.md` / the compliance pass (AI items) and to the huma
 You are triaging the latest final-check report into an actionable plan and tracker. Change nothing on
 the site.
 
+## Preflight, stop if the build is not ready
+This runs at the **end of a build**, after `final-check.md`. Before anything else, confirm these exist:
+- a final-check report in `build-log/`,
+- `design/sitemap.md`,
+- a staging URL for the built site.
+
+If any are missing, **stop and say so plainly**, for example: "Triage runs after the site is built and
+`final-check.md` has run. This site is not there yet (missing: the final-check report, the sitemap). There
+is nothing to triage." Do **not** ask what I meant, do **not** scaffold the missing files, and do **not**
+invent findings. A site still in design has nothing to triage; that is expected, not an error.
+
 ## Read
 - The final-check report in `build-log/` (ask me which file if there is more than one).
 - `design/sitemap.md` (to turn each page into its URL) and `.claude/reference/deferred-passes.md`.
