@@ -93,8 +93,11 @@ WordPress Application Password, and it never enters the repo.
 The most common wall is the Application Password screen refusing to generate one. In order of likelihood:
 
 1. **An "Application passwords require HTTPS" error, but the site IS on https.** A security plugin is
-   blocking it. Check **Admin and Site Enhancements (ASE)** to Security tab to turn **off** "Disable
-   Application Passwords". This overrides everything else, so check first.
+   blocking it. In **Admin and Site Enhancements (ASE)**, go to **Disable Components to Disable Smaller
+   Components** and make sure **Application Passwords** is **not** disabled (on that tab the toggles turn
+   features off, so leave it enabled). The exact location has moved between ASE versions, older builds
+   put it on the Security tab, so if it is not there check the Security and "Log In/Out | Register" tabs.
+   This overrides everything else, so check first.
 2. **A genuinely local dev site (LocalWP).** Confirm `define( 'WP_ENVIRONMENT_TYPE', 'local' );` is in
    `wp-config.php`, then **restart the site** in Local so PHP reloads the file.
 3. **A staging site behind LiteSpeed / a proxy that terminates SSL.** WordPress cannot see the HTTPS.
