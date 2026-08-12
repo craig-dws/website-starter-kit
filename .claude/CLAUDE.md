@@ -96,6 +96,29 @@ must be sized down before upload, not left massive.
 - If a plugin exposes a media-only upload ability outside the Universal pack, that one can be
   allowed so the build uploads safely. Check discover-abilities before assuming.
 
+## Page copy: this repo owns it during the build
+
+During the build this repo owns page copy. ZilvaEdge does not edit released pages while the
+build is live. The Google Doc will go stale during the build; that is expected, and it is
+refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
+
+- `content/` holds the approved copy, one markdown file per page. Build pages from those
+  files. **Refuse to build a page whose released content is missing**, and tell the operator
+  to request it, rather than improvising copy. Improvised copy looks finished, passes a
+  visual review, and is not found out until the client reads it.
+- **Microcopy is the only direct-write exception**: CTAs, button labels, short connective
+  copy. Two lines of copy do not go through the full ZilvaEdge pipeline.
+- **Full new pages or sections are requested from ZilvaEdge through ClickUp** and arrive as
+  released content in `content/`. Do not improvise a page.
+- **Any edit to a file under `content/`, and any copy written directly into a page including
+  microcopy, gets a line in `CONTENT_CHANGELOG.md` in the same session.** That log is what
+  ZilvaEdge reads at launch to work out what changed and why. An unexplained change gets
+  reported as needing attention later, so logging it now costs ten seconds and saves a
+  conversation.
+- `content/_live/` is the export of what the site actually says, and it is evidence rather
+  than input. Breakdance keeps live copy in the database, so without it there is no git trace
+  of a heading changed in the Breakdance UI.
+
 ## Protected paths (do not edit)
 - wp-config.php, wp-settings.php
 - Anything under the production environment.

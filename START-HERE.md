@@ -55,9 +55,31 @@ To paste a prompt: open this folder in Claude Code, copy the file's contents int
 `content/` holds the approved page copy, one markdown file per page. ZilvaEdge puts it there once the
 editor has signed off the Google Doc. Build from those files, not from a Doc somebody sent you.
 
-While the build is live this repo owns the copy. Edit microcopy here and log it in
-`CONTENT_CHANGELOG.md`, but request new pages and substantial sections from ZilvaEdge rather than
-writing them yourself. `content/README.md` has the detail.
+**The ownership rule.** During the build this repo owns page copy. ZilvaEdge does not edit released
+pages while the build is live. The Google Doc will go stale during the build; that is expected, and
+it is refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
+
+That gives you three cases:
+
+- **Microcopy**, meaning CTAs, button labels and short connective copy: write it here and log it in
+  `CONTENT_CHANGELOG.md`. Two lines of copy do not go through the full ZilvaEdge pipeline.
+- **A full new page or a substantial section:** request it from ZilvaEdge through ClickUp. It comes
+  back as released content in `content/`. Do not improvise a page.
+- **A factual error or a compliance problem:** raise it. Do not quietly correct it, because the Doc
+  is what the client approved.
+
+`content/_live/` is a different thing again: the export of what the site **actually says**, pulled
+out of WordPress and committed. Breakdance keeps live copy in the database rather than in a file, so
+without the export there is no git evidence of a heading someone changed in the Breakdance UI.
+`content/` is the approved copy, `content/_live/` is the truth, `CONTENT_CHANGELOG.md` is the
+explanation.
+
+**A build folder arrives with all of this already populated.** If a piece is missing, that is a
+handover problem to raise with the PM, not something to improvise around. Improvised copy is the
+single most expensive thing that can happen in a build: it looks finished, it passes a visual review,
+and nobody finds out it was invented until the client reads it.
+
+`content/README.md` has the detail.
 
 ## Before you start (build phase)
 
@@ -128,6 +150,12 @@ The most common wall is the Application Password screen refusing to generate one
 | Need | Location |
 |------|----------|
 | How to run it (this doc) | `START-HERE.md` |
+| Released page content, the baseline for the build | `content/` |
+| What the pages actually say now, exported from the site | `content/_live/` |
+| Condensed strategy, audience, voice, page notes | `strategy-brief.md` |
+| Style guide, brand assets, design brief | `design-pack/` |
+| Page list and menu structure | `sitemap.md` |
+| Every content change made during the build | `CONTENT_CHANGELOG.md` |
 | The design workflow (Phase 1) | `design/` and `design/README.md` |
 | Design standards the design is held to | `design/reference/` |
 | Which build prompt to use, when | `prompts/README.md` |

@@ -2,7 +2,7 @@
 
 The audit trail for this client build. It exists because **git tracks file
 changes, but nothing tracks what an agent did to the WordPress database on
-staging** — and that is precisely the risky, hard-to-reconstruct part of a
+staging**, and that is precisely the risky, hard-to-reconstruct part of a
 Breakdance build. This folder closes that gap.
 
 ## Files
@@ -31,6 +31,11 @@ records them.
   AI never approves a gate.
 - **Milestones and decisions.** Page signed off, design system certified, UAT passed,
   launch. One line in `BUILD-LOG.md` and, for decisions, a row in `DECISIONS.md`.
+- **Content changes go somewhere else.** Any edit to a file under `content/`, and any copy
+  written straight into a page including microcopy, gets a line in `CONTENT_CHANGELOG.md` at
+  the repo root, not in `BUILD-LOG.md`. It is a separate log because it has a separate
+  reader: ZilvaEdge reads it at launch to reconcile the Google Docs against what the site
+  ended up saying. See `content/README.md` for what counts.
 
 ## Rule of thumb
 
