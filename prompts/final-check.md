@@ -60,9 +60,10 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    - Any such difference with **no entry in `CONTENT_CHANGELOG.md` explaining it**. That is the
      finding that matters: it means the site says something nobody recorded deciding, and the
      client's Google Doc is about to be refreshed to the wrong thing.
-   - Whether `content/_live/` exists and is current. If it is missing or stale, say so plainly and
-     state that this check ran on the repo alone, so its result is self-reported and unverified.
-     Breakdance keeps live copy in the database, so without the export there is no proof.
+   - Whether `content/_live/` exists and is current. **Run `prompts/export-content.md` first if it
+     is missing or stale**, because that is what makes this check verified rather than
+     self-reported. If it cannot be run, say so plainly and state that this check ran on the repo
+     alone. Breakdance keeps live copy in the database, so without the export there is no proof.
 
    **Report, do not fix.** An unexplained difference is the PM's to resolve with ZilvaEdge, and
    guessing at the reason is how a wrong explanation ends up in the record.
