@@ -13,7 +13,7 @@ need to name who owns it, just approve the work when it is right.
 | 5 | Accessibility passed (WCAG 2.2 AA) | Not yet | | |
 | 6 | SEO / performance / AI-readiness QA | Not yet | | |
 | 7 | Client UAT sign-off | Not yet | | |
-| 8 | Launch approved (backed up, to production) | Not yet | | |
+| 8 | Launch approved (backed up, to production) | Not yet | | needs content reconciliation complete |
 
 **Status:** Not yet | In progress | Approved | Blocked.
 
@@ -25,3 +25,9 @@ Notes:
 - Gate 7: UAT copy fixes go in the content source and are pulled into staging, never typed
   onto the staging site.
 - Gate 8 is the single authority-transfer point, to production, backed up, by a person.
+- **Gate 8 has a precondition: content reconciliation is complete.** Before it can be approved,
+  the PM confirms `CONTENT_CHANGELOG.md` covers every copy change made during the build, and has
+  run ZilvaEdge's content reconciliation so the client's Google Docs match the launched site.
+  Without it the Docs stay frozen at whatever was approved months earlier, and the first person
+  to notice is usually the client. `prompts/final-check.md` reports the gaps; closing them is the
+  PM's, with ZilvaEdge.

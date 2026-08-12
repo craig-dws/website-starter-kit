@@ -73,9 +73,21 @@ Also check `build-log/ACTIVE.md`, the claim board: if another session is working
 follow `.claude/reference/parallel-builds.md`, claim your own work there, avoid what another
 session has claimed, and never write global settings while another session is active.
 
+**Then orient on the handover pack**, which is what you build from: `strategy-brief.md`
+(positioning, audience, voice, page notes), `design/sitemap.md` (the pages and the menus), and
+`content/` (the approved copy, one markdown file per page). List which sitemap pages have a
+file in `content/` and which do not.
+
+**A page with no file in `content/` cannot be built.** Say so and ask me to request it from
+ZilvaEdge. Do not write the copy yourself, and do not build the page with placeholder text
+meaning to swap it later. Improvised copy is the most expensive mistake available here: it
+looks finished, it passes a visual review, and nobody finds out it was invented until the
+client reads it. Microcopy is the only exception, meaning CTAs, button labels and short
+connective copy, and it goes in `CONTENT_CHANGELOG.md` the same session.
+
 Then give me a short plain-language summary: which client, which build target, whether we
-are connected yet, whether another session is active, and what the single next concrete step is.
-Then wait.
+are connected yet, whether another session is active, how many sitemap pages have approved
+copy and which are missing it, and what the single next concrete step is. Then wait.
 
 ### Stage 1 — Connect the site (this is usually the whole first session)
 Almost always where we start. Walk me through, in order, one step at a time:

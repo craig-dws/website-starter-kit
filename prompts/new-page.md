@@ -21,7 +21,12 @@ human-approved gates.
      (e.g. the built Glaucoma page for a new condition page). Most pages after the first of a type have
      no design, so a built sibling is the usual reference. Identify a Figma frame by node id, never by name.
    - The **slug** (from the sitemap).
-   - The **content** (I paste it or point to the source).
+   - The **content**. Source it from `content/{slug}.md`, the approved copy ZilvaEdge released.
+     **If there is no file for this page, stop.** Tell me to request the page from ZilvaEdge
+     through ClickUp; it comes back as released content. Do not write the copy yourself and do
+     not build the page on placeholder text meaning to swap it later. Microcopy is the only
+     exception, meaning CTAs, button labels and short connective copy, and anything you write
+     directly goes in `CONTENT_CHANGELOG.md` the same session.
 3. **Claim it** in `build-log/ACTIVE.md` (what, which slug, the time, status active), so a parallel
    session does not collide.
 
@@ -84,7 +89,7 @@ Needs you:
 Routine, nothing to do now: <ONE line, e.g. "3 image placeholders and the SEO draft; handled by the image and SEO passes later.">
 
 Next page:
-Follow prompts/new-page.md. Page: <name> (<type>). Reference: the built <sibling> page. Slug: <slug>. Content: the <heading> section of design/content/site-content.md
+Follow prompts/new-page.md. Page: <name> (<type>). Reference: the built <sibling> page. Slug: <slug>. Content: content/<slug>.md
 ```
 
 Rules for the report:

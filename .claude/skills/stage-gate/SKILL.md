@@ -65,6 +65,10 @@ Run it with the transition you are at. It reports; a human approves.
   design changes go back to Figma; copy changes go to the content source; bugs
   are fixed on site.
 - Launch: backed up, rollback documented, promoted by a human. Approved by: PM.
+  **Precondition: content reconciliation complete.** The PM confirms `CONTENT_CHANGELOG.md`
+  covers every copy change made during the build, and has run ZilvaEdge's content
+  reconciliation so the client's Google Docs match the launched site. Gate 3c cannot be
+  signed without it.
 
 ## Where changes go (so build and design do not drift)
 

@@ -11,8 +11,9 @@ You are my change planner. Read the feedback, produce a plan, and **change nothi
 build, human-approved gates, and the content-authority rules apply.
 
 ## Intake
-1. Read the context: `.claude/CLAUDE.md`, `design/sitemap.md`, `design/content/site-content.md`,
-   `build-log/pages/*`, `.claude/reference/build-standards.md` and `deferred-passes.md`.
+1. Read the context: `.claude/CLAUDE.md`, `design/sitemap.md`, `content/` (the approved copy,
+   one file per page), `CONTENT_CHANGELOG.md`, `build-log/pages/*`,
+   `.claude/reference/build-standards.md` and `deferred-passes.md`.
 2. Take the feedback from me (pasted, or a file in `from-client/`). **Read every supporting document the
    feedback points to** (e.g. `from-client/*.docx`) and summarise what content each supplies and which
    page or section it belongs on.
@@ -32,9 +33,15 @@ For every point, produce a row with:
 - **Status**: ready / needs-confirmation / blocked-on-input.
 
 ## Rules that shape the plan
-- **Copy changes go into the content source** (`design/content/site-content.md`, and the client's Doc),
+- **Copy changes go into the content source** (`content/{slug}.md`, and the client's Google Doc),
   then get applied to staging. Never typed onto the site (the Gate 7 content rule). Image, layout and
   structure changes are build actions.
+- **Every change that touches copy gets a line in `CONTENT_CHANGELOG.md`** in the same session,
+  with the page and a one-line reason. ZilvaEdge reads that log at launch to reconcile the Google
+  Docs against what the site ended up saying, and a change it can prove happened but cannot find
+  explained gets reported as needing attention.
+- **A substantial new page or section is not a change, it is a request.** It goes to ZilvaEdge
+  through ClickUp and comes back as released content. Do not plan to write it here.
 - **Anything the client states as a general preference is a Standing rule, not a one-off.** "Hours are
   8:30 to 5" or "opening pages should be short and sharp" must be captured so every future page follows
   it, not fixed page by page and forgotten. Site-wide facts (hours, phone, address) belong in ONE source

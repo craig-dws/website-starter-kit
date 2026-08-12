@@ -25,6 +25,17 @@ job in one place: **design through build**. Staging only, never production. One 
 
 ## Starting a new client build
 
-Clone or copy this kit to a new location for the client, give it its own git history, then follow
-`START-HERE.md`. The kit is lean and Breakdance-focused: no Astro/Payload clutter, no old design stages,
-just what a build needs.
+**Normally ZilvaEdge does this for you.** Its `/new-site` command copies this kit to a new folder,
+gives it fresh git history, and fills the handover pack from the client's own work: the approved
+page copy into `content/`, the condensed strategy into `strategy-brief.md`, the style guide, brand
+assets and design brief into `design-pack/`, and the client name into the bracket placeholders. It
+refuses to scaffold a client whose pages have not been approved and pulled back from their Google
+Doc, so a build folder never arrives holding stale copy.
+
+Ask for it with "new site for [client]".
+
+**By hand, when you need to.** Copy this kit to a new location for the client, give it its own git
+history (copy the files then `git init`, do not clone, or the client's repo inherits every other
+build's commits), then follow `START-HERE.md`. You will be filling the handover pack yourself; see
+the "Where things live" table there for what belongs in it. The kit is lean and Breakdance-focused:
+no Astro/Payload clutter, no old design stages, just what a build needs.

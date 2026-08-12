@@ -21,5 +21,15 @@ date each as it is done.
 - [ ] **Any global-CSS reconciliation** where two rules fight for one role (e.g. two `a:hover` sources).
   Inspect the live cascade, pick one authority, remove the other.
 
+## Content handoff back to ZilvaEdge (PM, before Gate 8)
+- [ ] **`CONTENT_CHANGELOG.md` complete.** Every copy change made during the build has a line,
+  including microcopy written straight into Breakdance. Check it against what `final-check.md`
+  found on the live site, not from memory.
+- [ ] **`content/_live/` exported and committed**, so reconciliation runs on what the site actually
+  says rather than on what the repo claims. A missing export does not block the launch, but it
+  makes the reconciliation self-reported, and that has to be stated rather than glossed over.
+- [ ] **ZilvaEdge content reconciliation run**, so the client's Google Docs match the launched
+  site. This is a Gate 8 precondition, not a nicety.
+
 ## Verified done (record what was checked, so it is not re-raised)
 - [ ] ...

@@ -29,6 +29,16 @@ this build system. Work efficiently and drive the build. Skip the teaching.
 
 ## Start
 
-Read `.claude/CLAUDE.md`, `build-log/GATES.md` and `build-log/BUILD-LOG.md`. Give me a
-two-line status and the plan for this session, then proceed through the first stage
-without step-by-step confirmation. Stop at the next gate or the next real decision.
+Read `.claude/CLAUDE.md`, `build-log/GATES.md` and `build-log/BUILD-LOG.md`, then the
+handover pack you build from: `strategy-brief.md`, `design/sitemap.md` and `content/`, the
+approved copy, one markdown file per page.
+
+**Refuse to build a page that has no file in `content/`.** Name it and tell me to request it
+from ZilvaEdge. Do not write the copy and do not stand the page up on placeholder text
+intending to swap it later; invented copy passes a visual review and is not caught until the
+client reads it. Microcopy is the only exception, and it goes in `CONTENT_CHANGELOG.md` the
+same session.
+
+Give me a two-line status, plus which sitemap pages are missing approved copy, and the plan
+for this session, then proceed through the first stage without step-by-step confirmation.
+Stop at the next gate or the next real decision.

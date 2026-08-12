@@ -145,6 +145,23 @@ The most common wall is the Application Password screen refusing to generate one
    Breakdance native MCP is not enabled. Copy the command exactly from the Agent Connector Connect
    screen, and check Breakdance > Settings > Agents & MCP.
 
+## Placeholders: what arrives filled and what does not
+
+This kit is a template. Bracket placeholders such as `[CLIENT]` mark what has to be replaced per
+build. **A remaining bracket is a signal, not an oversight**: it tells you the value is genuinely
+not known yet.
+
+| Placeholder | Where | Filled by |
+|---|---|---|
+| `[CLIENT]` | `.claude/CLAUDE.md`, `build-log/BUILD-LOG.md`, `DECISIONS.md`, `GATES.md`, `design/reference/design-system-checklist.md`, `handoff-checklist.md` | Scaffolding, automatically |
+| `[STAGING_URL]` | `.claude/CLAUDE.md` | **You**, once the staging site exists |
+| `[HOST]`, `[PRODUCTION_URL]` | Added per build where relevant | **You**, at launch planning |
+| `[NAME]`, `[LINK]`, `[DESIGNER]`, `[ROLE]`, `[VALUE]`, `[VALUES]`, `[USAGE]`, `[EXCLUSION]`, `[RATIONALE]`, `[BEHAVIOUR]`, `[EVIDENCE]` | `design/reference/DESIGN.template.md`, the design checklists | **The designer**, as the design system is built |
+
+**Nothing should ever guess a staging URL, a production URL or a host.** A plausible wrong URL is
+worse than a visible gap, because somebody will try to connect to it and spend an hour working out
+why it fails.
+
 ## Where things live
 
 | Need | Location |
@@ -154,7 +171,7 @@ The most common wall is the Application Password screen refusing to generate one
 | What the pages actually say now, exported from the site | `content/_live/` |
 | Condensed strategy, audience, voice, page notes | `strategy-brief.md` |
 | Style guide, brand assets, design brief | `design-pack/` |
-| Page list and menu structure | `sitemap.md` |
+| Page list and menu structure | `design/sitemap.md` |
 | Every content change made during the build | `CONTENT_CHANGELOG.md` |
 | The design workflow (Phase 1) | `design/` and `design/README.md` |
 | Design standards the design is held to | `design/reference/` |

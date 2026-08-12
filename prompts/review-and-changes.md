@@ -56,8 +56,12 @@ Apply a list of changes I provide, one at a time:
 
 ## Rules
 - You never approve your own work; a change set is reviewed by a human.
-- After launch, content changes go to the content source, not typed onto staging (see CLAUDE.md).
+- After launch, content changes go to the content source (`content/{slug}.md`), not typed onto
+  staging (see CLAUDE.md).
 - Record what changed and why in `build-log/`, so the trail stays complete.
+- **Any change that touches copy also gets a line in `CONTENT_CHANGELOG.md` in the same session**,
+  with the page and a one-line reason. That log is what ZilvaEdge reconciles the Google Docs
+  against at launch, and it is a separate log from `build-log/` because it has a separate reader.
 - Heed `limitations.md`, do not retry what the tools cannot do.
 
 ## Start

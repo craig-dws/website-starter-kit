@@ -48,8 +48,14 @@ is wrong), **Fix** (the *actual* fix, not a restatement of the issue), **Owner**
 - **Schema / structured data / og:image go in "SEO & Schema (later)"**, not the AI plan.
 - **Core Web Vitals / performance is production work**; do not put it in the AI plan, and record the
   server-location note.
-- **AI-fixable** = copy (into `site-content.md` then surgical `edit-post`) and links (`review-and-changes`).
+- **AI-fixable** = copy (into `content/{slug}.md` then surgical `edit-post`) and links
+  (`review-and-changes`).
   **Human** = clinical sign-off, image commissioning, wp-admin, production, Gate approvals.
+- **Content reconciliation gaps are launch blockers**, so they go in the fix plan, never the
+  deferred list. A page whose live copy differs from `content/` with nothing in
+  `CONTENT_CHANGELOG.md` explaining it means the site says something nobody recorded deciding.
+  Gate 8 cannot be signed until it is resolved, and resolving it is the PM's with ZilvaEdge, not
+  an AI fix. List each one with its page and the unexplained difference.
 
 ## Produce
 1. **`build-log/prelaunch-fix-plan.md`** — the AI-doable half only, ordered (compliance recasts first,

@@ -13,8 +13,11 @@ before launch.
 You are doing the pre-launch final check on the built **staging** site. **Read-only, change nothing.**
 
 ## Read and set up
-- `design/sitemap.md` (all pages and slugs), `design/content/site-facts.md` (the facts that must match
-  everywhere), `design/content/site-content.md` (the approved copy), and the `STAGING_URL`.
+- `design/sitemap.md` (all pages and slugs), `content/` (the approved copy, one file per page),
+  `CONTENT_CHANGELOG.md` (every copy change made during the build), and the `STAGING_URL`.
+  `content/_facts.md` is optional: where it exists it holds the facts that must match everywhere.
+  Where it does not, check cross-page consistency against the approved copy and say the facts file
+  was not supplied, rather than reporting nothing to check.
 - `.claude/reference/deferred-passes.md`, so you separate expected-deferred work from real problems.
 - Crawl every built page with the chrome-devtools MCP (headless). **Extract prose from the rendered
   `innerText`, not `textContent`** — `textContent` glues a label to its body across block boundaries
@@ -51,13 +54,27 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    are actually scheduled, the separate agents handle them: full WCAG (Gate 5) `accessibility-auditor`,
    technical SEO `seo-optimizer`, performance (Gate 6) `performance-tuner`.
 
+7. **Content reconciliation.** A launch-gate item, not a nicety. Compare what the site actually says
+   against `content/` and `CONTENT_CHANGELOG.md`, and report:
+   - Copy live on the site that differs from the approved file in `content/`, page by page.
+   - Any such difference with **no entry in `CONTENT_CHANGELOG.md` explaining it**. That is the
+     finding that matters: it means the site says something nobody recorded deciding, and the
+     client's Google Doc is about to be refreshed to the wrong thing.
+   - Whether `content/_live/` exists and is current. If it is missing or stale, say so plainly and
+     state that this check ran on the repo alone, so its result is self-reported and unverified.
+     Breakdance keeps live copy in the database, so without the export there is no proof.
+
+   **Report, do not fix.** An unexplained difference is the PM's to resolve with ZilvaEdge, and
+   guessing at the reason is how a wrong explanation ends up in the record.
+
 ## Report
-- Grouped by the six headings. For each finding: page, what is wrong, the fix. Mark severity:
+- Grouped by the seven headings. For each finding: page, what is wrong, the fix. Mark severity:
   **must-fix before launch**, **should-fix**, or **minor**.
 - Keep **expected-deferred** items (links to pages not built yet) in their own short list, so the
   scheduled passes are not counted as failures. **Page titles, meta descriptions, schema / structured
   data, and cache / performance are all out of scope** (done after the build), so do not flag them and
   do not attempt them. The accessibility signals above ARE in scope.
 - End with a plain verdict: **is the site launch-ready**, and the short list of must-fix items.
-- **Change nothing.** Copy fixes go into `design/content/site-content.md` then to staging (the Gate 7
-  content rule); build fixes go through `review-and-changes.md`.
+- **Change nothing.** Copy fixes go into `content/{slug}.md` then to staging (the Gate 7 content
+  rule); build fixes go through `review-and-changes.md`. Reconciliation gaps go to the PM, who
+  runs ZilvaEdge's content reconciliation before Gate 8.
