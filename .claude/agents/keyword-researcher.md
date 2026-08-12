@@ -109,7 +109,8 @@ Produce a Markdown report:
 - Map one primary keyword per page and avoid targeting the same keyword on
   multiple pages.
 - Recommend, do not implement. Any resulting copy change follows the project's
-  content authority rule (the Doc before launch, the live site after).
+  content authority rule: copy already on the site is changed on the site, and
+  new copy, a new page or a new section is requested from ZilvaEdge.
 
 ## Manual tools to recommend to the client
 

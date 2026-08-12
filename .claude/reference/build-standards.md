@@ -119,8 +119,19 @@ The output must be navigable and editable by a person in the builder, not just c
 Some clients are regulated (medical, dental, health, legal, finance). Where a client is regulated, keep
 a **content-compliance reference** in the client's `.claude/reference/` (the niche's advertising rules,
 for example AHPRA for medical practices) and **check every page's copy against it before it ships**, now
-and in future. Treat a breach as a defect. This is a content standard, so copy fixes flow through the
-content source (the content-authority rule), never typed onto the live site.
+and in future. Treat a breach as a defect.
+
+**The narrower carve-out on where copy is fixed.** For AHPRA-regulated clients the site still owns copy
+during the build, as everywhere else, but only for changes that cannot alter a regulated claim.
+
+- **On the site:** corrections, formatting, length fixes, headings, and non-clinical wording.
+- **Back to ZilvaEdge:** any clinical claim, any outcome or benefit claim, any practitioner
+  qualification, and any description of a treatment or service.
+
+The reason is the order the checks run in. Those four categories are exactly what the AHPRA compliance
+persona exists to check, and **it runs before the Doc, not after**. A change made on the site never
+passes it. Editing one of them directly on the site does not just skip a review step, it puts a
+regulated claim live that nothing has ever checked.
 
 ## See also
 - `design/reference/design-for-build-checklist.md` — the designer-facing side: how to set up the Figma design so the

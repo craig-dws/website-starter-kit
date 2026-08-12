@@ -4,9 +4,9 @@ Paste this into Claude Code (in the client folder) for a thorough pre-launch swe
 broken links, spelling, grammar, consistency, house style, and accessibility sanity (headings,
 landmarks, alt, canonical, image weight), across every page. It does **not** check page titles, meta
 descriptions, schema / structured data, or cache / performance, which are all done **after** the build
-and are never launch blockers. **Read-only** — it reports, it does not fix. Copy fixes go into the
-content source, build fixes go through `review-and-changes.md`. Run it when the pages are built and
-before launch.
+and are never launch blockers. **Read-only** — it reports, it does not fix. Copy fixes go onto the site
+and into `content/{slug}.md`; build fixes go through `review-and-changes.md`. Run it when the pages are
+built and before launch.
 
 ---
 
@@ -56,10 +56,13 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
 
 7. **Content reconciliation.** A launch-gate item, not a nicety. Compare what the site actually says
    against `content/` and `CONTENT_CHANGELOG.md`, and report:
-   - Copy live on the site that differs from the approved file in `content/`, page by page.
-   - Any such difference with **no entry in `CONTENT_CHANGELOG.md` explaining it**. That is the
-     finding that matters: it means the site says something nobody recorded deciding, and the
-     client's Google Doc is about to be refreshed to the wrong thing.
+   - **A difference between the live site and the Google Doc is EXPECTED during a build and is not a
+     finding. Do not report it.** The site owns page copy while the build is live, so the Doc is meant
+     to be behind; the PM brings it back into line at launch. The same goes for copy that has moved on
+     from the approved file in `content/` where the changelog explains it.
+   - **The one thing to report: live copy with no entry in `CONTENT_CHANGELOG.md` explaining it.** It
+     means the site says something nobody recorded deciding, and the client's Google Doc is about to
+     be refreshed to the wrong thing. Report it, do not fix it, and do not guess at the reason.
    - Whether `content/_live/` exists and is current. **Run `prompts/export-content.md` first if it
      is missing or stale**, because that is what makes this check verified rather than
      self-reported. If it cannot be run, say so plainly and state that this check ran on the repo
@@ -76,6 +79,6 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
   data, and cache / performance are all out of scope** (done after the build), so do not flag them and
   do not attempt them. The accessibility signals above ARE in scope.
 - End with a plain verdict: **is the site launch-ready**, and the short list of must-fix items.
-- **Change nothing.** Copy fixes go into `content/{slug}.md` then to staging (the Gate 7 content
+- **Change nothing.** Copy fixes go onto the site and into `content/{slug}.md` (the Gate 7 content
   rule); build fixes go through `review-and-changes.md`. Reconciliation gaps go to the PM, who
   runs ZilvaEdge's content reconciliation before Gate 8.

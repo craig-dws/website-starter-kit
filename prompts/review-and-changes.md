@@ -31,6 +31,13 @@ what is outstanding, never mixed in with real problems. A link to a slug that is
 `design/sitemap.md`, an image slot with no placeholder, or a duplicated/templated SEO title across
 pages IS a defect, because the cause is a mistake, not a schedule.
 
+**A difference between the live site and the Google Doc is expected during a build, not a finding.**
+The site owns page copy while the build is live and the Doc is brought back into line at launch, so do
+not report it, and do not report copy that has moved on from `content/` where `CONTENT_CHANGELOG.md`
+explains it. The one content thing worth reporting is **live copy with no changelog entry**: that means
+the site says something nobody recorded deciding. Report it, do not fix it, and do not guess at the
+reason.
+
 **Run the link check** if pages are complete or near it: crawl the nav, footer and in-content internal
 links and confirm each resolves, or is a known deferred link to an unbuilt sitemap page. Flag only the
 unexpected 404s (wrong or off-sitemap slugs).
@@ -56,8 +63,8 @@ Apply a list of changes I provide, one at a time:
 
 ## Rules
 - You never approve your own work; a change set is reviewed by a human.
-- After launch, content changes go to the content source (`content/{slug}.md`), not typed onto
-  staging (see CLAUDE.md).
+- After launch the client owns the site in Client Mode. Copy already on the site is changed on the
+  site; new copy, a new page or a new section is requested from ZilvaEdge (see CLAUDE.md).
 - Record what changed and why in `build-log/`, so the trail stays complete.
 - **Any change that touches copy also gets a line in `CONTENT_CHANGELOG.md` in the same session**,
   with the page and a one-line reason. That log is what ZilvaEdge reconciles the Google Docs

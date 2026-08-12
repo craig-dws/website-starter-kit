@@ -33,9 +33,9 @@ For every point, produce a row with:
 - **Status**: ready / needs-confirmation / blocked-on-input.
 
 ## Rules that shape the plan
-- **Copy changes go into the content source** (`content/{slug}.md`, and the client's Google Doc),
-  then get applied to staging. Never typed onto the site (the Gate 7 content rule). Image, layout and
-  structure changes are build actions.
+- **Copy changes go onto the site, and into `content/{slug}.md` so the repo matches.**
+  During a build the live site owns page copy. Log every one in `CONTENT_CHANGELOG.md`.
+  Image, layout and structure changes are build actions.
 - **Every change that touches copy gets a line in `CONTENT_CHANGELOG.md`** in the same session,
   with the page and a one-line reason. ZilvaEdge reads that log at launch to reconcile the Google
   Docs against what the site ended up saying, and a change it can prove happened but cannot find

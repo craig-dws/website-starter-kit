@@ -22,8 +22,9 @@ Notes:
   reaches this repo it is already approved. Gate 2 just confirms that.
 - Gate 3 covers anything the build had to derive that the design did not specify, for example
   a responsive scale for breakpoints that were never drawn. Approve it before building pages.
-- Gate 7: UAT copy fixes go in the content source and are pulled into staging, never typed
-  onto the staging site.
+- Gate 7: UAT feedback is on the built site, which is what the client is reviewing.
+  Copy fixes are made on the site and mirrored into `content/{slug}.md`, and logged in
+  `CONTENT_CHANGELOG.md`. Substantial new pages or sections are requested from ZilvaEdge.
 - Gate 8 is the single authority-transfer point, to production, backed up, by a person.
 - **Gate 8 has a precondition: content reconciliation is complete.** Before it can be approved,
   the PM confirms `CONTENT_CHANGELOG.md` covers every copy change made during the build, and has
