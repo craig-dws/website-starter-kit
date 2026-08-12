@@ -50,10 +50,20 @@ for which, when):
 
 To paste a prompt: open this folder in Claude Code, copy the file's contents into the chat, and send it.
 
+## Where the words come from
+
+`content/` holds the approved page copy, one markdown file per page. ZilvaEdge puts it there once the
+editor has signed off the Google Doc. Build from those files, not from a Doc somebody sent you.
+
+While the build is live this repo owns the copy. Edit microcopy here and log it in
+`CONTENT_CHANGELOG.md`, but request new pages and substantial sections from ZilvaEdge rather than
+writing them yourself. `content/README.md` has the detail.
+
 ## Before you start (build phase)
 
 - **Claude Code** installed, and this folder open in it.
 - The **design done** (Phase 1), with its tokens ready to load into Breakdance.
+- The client's **approved page copy** in `content/`.
 - The client's **sitemap** (page list and menu structure) before you build navigation.
 - A **WordPress staging site** with the **Agent Connector** plugin, and wp-admin access.
 - **Node.js**, and **Python** with `pillow` and `requests` (the image and post tools).
