@@ -23,6 +23,27 @@ job in one place: **design through build**. Staging only, never production. One 
 | `docs/` | The build runbook and best practices |
 | `.github/` | CI checks (no committed secrets, house style, hook health) |
 
+## Files shared with the AI Web Design System
+
+These files are copies of the design system's. **Change them there first, then sync the wording across
+verbatim**, so the two repos cannot drift. A few carry a deliberate kit-only difference: keep it
+through the sync rather than letting a verbatim copy delete it.
+
+| File | Intended difference from the design system's copy |
+|------|---------------------------------------------------|
+| `docs/19_implementation_runbook.md` | None, byte-identical |
+| `docs/23_best_practices.md` | None, byte-identical |
+| `.claude/agents/keyword-researcher.md` | None, byte-identical |
+| `.claude/agents/content-optimizer.md` | One bullet under Scope and honesty: a site-versus-Doc difference during a build is expected and is not reported, and the one reportable case is live copy with no `CONTENT_CHANGELOG.md` entry |
+| `.claude/reference/build-standards.md` | The `See also` path, which is `design/reference/design-for-build-checklist.md` here |
+| `.claude/skills/stage-gate/SKILL.md` | Two: that same checklist path, and a sentence in the Gate 3c precondition requiring the PM to confirm `CONTENT_CHANGELOG.md` is complete |
+
+**The changelog differences do not go upstream.** The design system treats ZilvaEdge as one optional
+content source and deliberately never names `CONTENT_CHANGELOG.md`, because the changelog is part of
+the ZilvaEdge handover pack this kit ships. The generic condition belongs there, the operational one
+belongs here. `build-log/GATES.md` Gate 8 carries the same requirement, so the skill and the gate
+tracker agree.
+
 ## Starting a new client build
 
 **Normally ZilvaEdge does this for you.** Its `/new-site` command copies this kit to a new folder,

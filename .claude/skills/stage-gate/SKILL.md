@@ -72,7 +72,10 @@ Run it with the transition you are at. It reports; a human approves.
   ZilvaEdge's records and the site agree at the point authority transfers to the
   client. A release that disagrees with the site is caught by ZilvaEdge rather
   than applied silently, but reconciling here is what stops the client's first
-  post-launch edit starting from stale copy.
+  post-launch edit starting from stale copy. The PM also confirms
+  `CONTENT_CHANGELOG.md` covers every copy change made during the build, because
+  ZilvaEdge's reconciliation reports live copy with no changelog entry as the one
+  finding that matters, and an incomplete log turns that signal into noise.
 
 ## Where changes go (so build and design do not drift)
 
