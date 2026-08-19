@@ -40,6 +40,7 @@ for which, when):
 - **New machine or joining.** `prompts/connect-mcps.md`. Connects the MCPs, prompting you for the manual bits.
 - **New page.** `prompts/new-page.md`. One internal page from its reference and content. Run several in parallel.
 - **Blog.** `prompts/blog.md`. The single-post template and archive, as Breakdance Templates, not one page per post.
+- **Page on an already-live site.** `prompts/existing-site-page.md`. A different job from the rest of this list: a page on a client site that is already live and was built in Elementor or Breakdance 2.x. Built on a throwaway local copy of that site, matched to its own patterns, and promoted by a person. Not for a site we are building.
 - **Source images.** `prompts/source-images.md`. Fill the image placeholders (a post-build pass).
 - **SEO meta.** `prompts/seo-meta.md`. The per-page title and meta drafts to paste into the SEO plugin.
 - **Plan changes.** `prompts/plan-changes.md`. Turn client feedback into a fix-now plus standing-rule plan.

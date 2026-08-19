@@ -4,6 +4,11 @@ Paste this into Claude Code (in the client folder) to build **one internal page*
 internal-pages phase, once the design system is locked and the shared chrome (header/footer) is
 built. For the first build or setup, use the guided or advanced prompt instead.
 
+**This prompt is for a page on a site we are building, on the Breakdance 3.0 connection.** For a page
+on a client site that is **already live** and was built in Elementor or Breakdance 2.x, use
+`existing-site-page.md` instead: different builder, no native connection, and the work happens on a
+throwaway local copy of that site first.
+
 ---
 
 You are building one internal page. Work to `.claude/reference/build-standards.md`, the limits in
