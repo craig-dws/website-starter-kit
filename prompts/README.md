@@ -11,6 +11,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `export-design-pack.md` | Once, when the design is final, **before the build starts** | Pulls the tokens, per-frame structure, reference screenshots and assets out of Figma into `design-pack/`, so the build needs no Figma dev seat. Run it on the machine that has the Figma connection, and again after any design change. See `design-pack/README.md`. |
 | `new-page.md` | Internal-pages phase, once the design system is locked | Builds one internal page from its reference and content, reusing the type's components. One page per chat; run several in parallel. |
 | `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
+| `existing-site-page.md` | A page on a client site that is **already live**, built by someone else in Elementor or Breakdance 2.x | Builds the page on a throwaway local copy of that site, matched to the site's own patterns, and hands you the steps to put it live. Nothing in this kit's normal build path applies; a different builder, a different connection. Not for a site we are building. |
 | `source-images.md` | After pages are built | Works through the image placeholders: client gallery first, else stock or AI, optimise, upload, swap in. |
 | `seo-meta.md` | After pages are built | Gathers the per-page SEO title and meta drafts to paste into the SEO plugin, plus the favicon and site-wide config. |
 | `status.md` | Any time you want to know where the build is | Read-only snapshot: page-by-page progress, plus lists of images to update, things that need you, and what is not done yet. |
@@ -35,5 +36,12 @@ this is the quick index of what each prompt is for and when to reach for it.
 
 `plan-changes.md` runs whenever client feedback arrives, and `status.md` any time you want to see where
 the build stands.
+
+`existing-site-page.md` sits outside that order entirely. It is not part of building a site; it is the
+job that arrives months later, when a client whose site we did not build in Breakdance 3.0 asks for one
+more page on it. **The dividing line: `new-page.md` adds a page to a site we are building, on the
+Breakdance 3.0 connection. `existing-site-page.md` adds a page to a site that is already live, in
+Elementor or Breakdance 2.x, where that connection does not exist and the work happens on a throwaway
+local copy first.**
 
 See `.claude/reference/git-workflow.md` for when to commit and how two machines stay in sync.
