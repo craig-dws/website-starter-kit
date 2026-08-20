@@ -33,10 +33,38 @@ change a standard there, this is the per-page tick-list.
 - **Reveals and toggles work on touch.** Any hover/focus-driven reveal (dropdowns, expanding panels)
   also keys off `:focus`, because a tap fires neither `:hover` nor `:focus-visible`. Keep the
   `:focus-visible` ring separate for keyboard-only.
+- **The focus ring is judged by tabbing to the control, never by a script.** A programmatic
+  `.focus()` reports `outline: 0px` even when the rule is applying, because a headless window has no
+  true focus. Press Tab and read it, or screenshot it. Check the ring's colour against what is
+  actually behind it, not just that a ring exists (see `limitations.md`).
+
+## Links and buttons
+- **Every external link carries `target="_blank"` and `rel="noopener noreferrer"`; no internal link
+  does.** Check the rendered `<a>` tags, not the element tree, so links inside a rich-text field
+  (a FAQ answer) are covered.
+- **No button label wraps**, at any breakpoint, and no button breaks out of its card, column or
+  grid track. Check each button against its container, not just against the viewport.
 
 ## Images
 - Optimised before upload (sized to display width, compressed); full-width heroes only at ~2500px.
   **Every image, whatever its source** (client gallery, stock, AI-generated), goes through the pipeline.
+- **Every image is cropped to the ratio of its box, and the crop is measured, not eyeballed.** For
+  each image on the page, read the rendered box (`getBoundingClientRect`) and the file's natural
+  dimensions, and work out the percentage of the picture `object-fit: cover` is throwing away:
+
+  ```
+  box_ratio = box_w / box_h ; img_ratio = natural_w / natural_h
+  lost = 1 - min(box_ratio, img_ratio) / max(box_ratio, img_ratio)
+  ```
+
+  **Anything above 0% needs a decision**, not a shrug: re-crop the source to the box ratio and
+  re-upload, or set an explicit `object-position` and say why. Above ~15% it is a defect. A default
+  `object-position: 50% 50%` on a mismatched box means nothing chose what to keep. Record each
+  composed crop in the page record, because a rebuild loses the judgement.
+- **No text sits on top of an image or graphic unintentionally**, at any breakpoint. Checking that
+  the page does not scroll sideways does NOT catch this: measure element boxes against each other,
+  not just against the viewport. Exclude any deliberate overlay by name rather than changing the
+  design, and measure the real clearance before calling an overlap a defect.
 - **Images not yet worked out use a placeholder block** at the correct display size (`image-placeholder.md`),
   never an invented image or a collapsed slot; each placeholder logged under **Outstanding images** in
   the page record. Sourcing the real image is a post-build pass (`prompts/source-images.md`).

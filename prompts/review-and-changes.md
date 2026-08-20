@@ -42,6 +42,20 @@ reason.
 links and confirm each resolves, or is a known deferred link to an unbuilt sitemap page. Flag only the
 unexpected 404s (wrong or off-sitemap slugs).
 
+**Measure, do not eyeball, these three.** Each is a class of defect a visual review reliably misses,
+and checking that the page does not scroll sideways catches none of them:
+- **Image crop loss.** Read each image's rendered box and natural dimensions and compute
+  `lost = 1 - min(box_ratio, img_ratio) / max(box_ratio, img_ratio)`. Anything above 0% needs a
+  decision; above ~15% it is a defect. A default `object-position: 50% 50%` on a mismatched box
+  means nothing chose what to keep.
+- **Text or content sitting on a graphic**, at every breakpoint. Measure element boxes against each
+  other. Exclude deliberate overlays by name and measure the real clearance before calling it a
+  defect.
+- **Buttons breaking their container** (card, footer column, grid track), not just the viewport.
+
+**Judge a focus ring by tabbing to the control, never by a script.** A programmatic `.focus()`
+reports `outline: 0px` even when the rule is applying. Press Tab and read it, or screenshot it.
+
 For each finding: the page, what is wrong, and the fix. Verify visually with the chrome-devtools MCP.
 Then let me decide what to action.
 

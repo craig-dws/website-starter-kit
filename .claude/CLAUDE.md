@@ -68,6 +68,13 @@ must be sized down before upload, not left massive.
   uploaded file's URL** (the Breakdance beta MCP cannot bind media, proven), which still serves WebP
   and keeps alt but lacks `srcset`; a human binds them in the builder afterwards for `srcset`. Never
   use an external (Figma) URL; do not inline large data URIs.
+- **Crop to the box before uploading.** A photo is usually 4:3 landscape and the slot it goes in
+  often is not, so the browser centre-crops it and nothing has chosen what to keep. Work out the box
+  ratio from the design, compose the crop so the subject and any branding stay in frame, and save it
+  at that ratio. Record what each crop keeps in the page record; one source used at two box ratios
+  becomes two files. Never upscale to reach 2x. **Measure the crop loss on the rendered page rather
+  than checking it by eye** (`.claude/reference/build-checklist.md`): on a past build the worst two
+  cases, losing 37 and 35 per cent of the picture, were invisible to a visual review.
 - **Optimise before upload.** Images often export oversized (Figma exports at 2500px).
   Resize each to roughly 2x its display width, cap contained/section images at ~1600px and
   only full-width heroes at ~2500px, then compress (JPEG quality ~82). Pillow is available for
@@ -161,3 +168,22 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
 - The full agency system, its complete docs and the front-half creative skills live
   in the AI Web Design System repo, not here. Consult it for anything not covered by
   this project. This repo is one client build and stays lean by design.
+
+## Talking to the operator
+The person running this build is a project manager, not a developer, and never runs
+commands. Explain each term below in plain words the first time it appears in a reply.
+
+| Term | Say this instead |
+|------|------------------|
+| MCP | the connection that lets Claude drive Figma or the WordPress site |
+| postmeta, `_breakdance_data` | where WordPress stores the page layout in the database |
+| node id, selection link | the link copied from a single Figma frame |
+| `srcset` | the setting that serves a smaller image to a phone, added by hand in the builder afterwards |
+| WebP, WebP Express | the compressed image format, converted on the server |
+| Application Password | the site login the upload script uses |
+| Universal Abilities | the locked group of risky site actions, kept switched off |
+| differential merge | comparing settings and applying only the changes, rather than overwriting everything |
+
+Every page report says which page it covers, which staging URL to look at, and what needs
+a human decision. Never ask the operator for something the Figma frame or `content/`
+already says.

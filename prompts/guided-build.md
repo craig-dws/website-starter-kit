@@ -193,6 +193,15 @@ removing a stale attachment is a human action in wp-admin.
   to ~2x its display width (cap contained images ~1600px, full-width heroes ~2500px) and
   compress (JPEG ~82). Pillow is available. WebP Express converts format server-side but does
   not resize.
+- **Crop each image to the ratio of the box it goes in, before uploading it.** A photo is usually
+  4:3 landscape and the slot often is not, and the browser then centre-crops it with nothing having
+  chosen what to keep, so the framing reads as an accident. Work out the box ratio from the design,
+  compose the crop by eye so the subject, faces and any branding stay in frame, and save it at that
+  exact ratio. Tell me what each crop keeps and loses, and record it in the page record, because a
+  rebuild loses the judgement. One source used at two different box ratios becomes **two files under
+  two names**. Do not upscale to reach 2x: say so if the source is too small and I will ask the
+  client for a better original. Measure the crop loss on the rendered page afterwards rather than
+  checking it by eye, per `.claude/reference/build-checklist.md`.
 - Icons and logos (SVG): do not try to upload them, WordPress blocks SVG. Inline the SVG straight
   into the layout as a Breakdance SVG Icon element, from `design-pack/assets/svg/` where the pack
   exists and from the Figma frame otherwise, and style it with the colour
@@ -204,6 +213,14 @@ removing a stale attachment is a human action in wp-admin.
   building the flat colour.
 Do not hotlink external URLs or inline large data URIs. (If discover-abilities shows a
 media-only upload ability outside the Universal pack, we can allow just that.)
+
+**Lock the heading scale before the first page, not during it.** Fill in
+`.claude/reference/type-scale.md` from the design: every level, at every breakpoint, as tokens, and
+check the scale is strictly descending at every tier with all levels switching at the same widths.
+Then apply those classes on every page. Settling this per page is how H2 and H3 end up the same size
+on a phone and how literal px sizes end up buried in media queries. Same for heading
+capitalisation: pick title case or sentence case once and record it, because a Figma file will often
+carry both within one page.
 
 Build each page and component (header, footer, menus, sections) to the standards in
 `.claude/reference/build-standards.md` (the single source) and its per-page tick-list

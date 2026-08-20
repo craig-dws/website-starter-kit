@@ -17,11 +17,26 @@ Copy this file to `pages/<page-slug>.md` for each page built. One record per pag
 - [ ] Matches the Figma frame (screenshot diff attached / linked)
 - [ ] Token names only, no hardcoded colour / type / spacing values
 - [ ] Responsive at the required breakpoints
+- [ ] **Measured, not eyeballed:** image crop loss 0% on every image, no text over a graphic at any
+      breakpoint, no button breaking its container
 - [ ] Interactive states: hovers on menus / buttons / links / dropdowns, visible focus states
+      (focus rings checked by pressing Tab, never by a script)
+- [ ] External links open in a new tab with `rel="noopener noreferrer"`; internal links do not
 - [ ] Accessibility pass (contrast, headings, alt text, focus)
 - [ ] Full build checklist applied (`.claude/reference/build-checklist.md`)
 - [ ] No console errors on the rendered page
 - [ ] Cache cleared after the last DB write
+
+## Composed image crops (judgement calls a rebuild would lose)
+Only where a source was cropped to fit its box. Record what was kept and why, so a later rebuild or
+a re-export does not blindly centre-crop it again. Omit if no image needed a crop.
+
+| Image / class | Box (w x h) | Source | Crop taken (source px) | What the crop keeps |
+|---|---|---|---|---|
+| [e.g. hero photo, `x-hero__img`] | [663 x 769] | [file.jpg, 2048 wide] | [x 418-1742, full height] | [driver, roof sign, P plate; loses the rear of the car] |
+
+Note where one source is used at two different box ratios: that is **two files under two names**,
+not one. Note any image left below 2x for its box, with the reason (do not upscale).
 
 ## Deferred passes (expected, resolved in a later pass — NOT defects)
 What is deliberately left for a dedicated pass. See `.claude/reference/deferred-passes.md`. Record

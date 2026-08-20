@@ -1,6 +1,6 @@
 ---
 name: stage-gate
-description: The between-stages checklist that confirms one stage is genuinely finished before the next starts. Use at each lifecycle transition (brief to design, design to build, build to QA, QA to launch). Confirms the required human approval is recorded, the required artefacts exist, and authority is transferring cleanly. Content availability is checked as an advisory, never as a blocker; content reconciliation at launch is a Gate 3c condition.
+description: The between-stages checklist that confirms one stage is genuinely finished before the next starts. Use at each lifecycle transition (brief to design, design to build, build to QA, QA to launch). Confirms the required human approval is recorded, the required artefacts exist, and authority is transferring cleanly. Checks the sitemap slugs against the SEO standard at the brief gate, which blocks. Content availability is checked as an advisory, never as a blocker; content reconciliation at launch is a Gate 3c condition.
 ---
 
 # Stage gate
@@ -19,6 +19,22 @@ Run it with the transition you are at. It reports; a human approves.
 - The brief exists in the client folder (site-brief skill), with goals,
   audience, sitemap, competitive summary, and the chosen build target recorded.
 - Approved by: PM and client. Confirm the approval is recorded.
+- **Slug check on the sitemap. This one blocks.** Read every slug in
+  `design/sitemap.md` against the SEO basics in
+  `.claude/reference/build-standards.md`, before any page is built. In
+  particular: the About and Contact pages carry the business name
+  (`about-<business-name>`, `contact-<business-name>`), and **`/contact-us/` and
+  `/about-us/` are never acceptable**. The standard outranks a sitemap that
+  disagrees, including one that has kept an old slug to preserve ranking history:
+  take the business-name slug and carry a 301 (a permanent redirect) from the old
+  URL, which preserves the history anyway.
+  The gate does not pass on a non-compliant slug until either the sitemap is
+  corrected, or the operator records a deliberate exception in
+  `build-log/DECISIONS.md` with the reason. It must not pass silently.
+  Why it blocks here rather than later: on Skills Beyond this was caught after
+  the pages were built and cost 42 internal link repairs across the header,
+  footer and five pages, plus a redirect that must now be recreated on production
+  at migration. At this gate it is a one-line edit.
 - Content: note the expected content source and whether it is present. This is
   advisory only. A missing or placeholder content source does not block the
   gate (CLAUDE.md, Content).
@@ -29,6 +45,15 @@ Run it with the transition you are at. It reports; a human approves.
   docs/22 and pilot-artefacts/03_figma_component_and_naming_standard.md.
 - The design system checklist passes:
   pilot-artefacts/02_design_system_checklist.md.
+- **`.claude/reference/type-scale.md` is filled in and self-consistent.** The
+  heading scale is set once here, not per page. Check it is strictly descending
+  at every tier with no two levels the same size, that all levels switch at the
+  same breakpoints, and that every value is a token rather than a literal. Every
+  heading-scale failure on record came from settling this late.
+- **The heading capitalisation convention is chosen and recorded**, with its
+  deliberate exceptions. A Figma file will often carry both title case and
+  sentence case within one page, so this cannot be resolved by following the
+  design later.
 - Approved by: Design Lead. This gate is the most-skipped and everything downstream
   inherits it. Do not wave it through.
 

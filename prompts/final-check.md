@@ -1,7 +1,8 @@
 # Final check (pre-launch QA)
 
 Paste this into Claude Code (in the client folder) for a thorough pre-launch sweep of the built site:
-broken links, spelling, grammar, consistency, house style, and accessibility sanity (headings,
+broken links, spelling, grammar, consistency, house style, measured layout checks (image crop loss,
+text over graphics, buttons breaking their container), and accessibility sanity (headings,
 landmarks, alt, canonical, image weight), across every page. It does **not** check page titles, meta
 descriptions, schema / structured data, or cache / performance, which are all done **after** the build
 and are never launch blockers. **Read-only** — it reports, it does not fix. Copy fixes go onto the site
@@ -38,9 +39,39 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    phone, address, business name. Also terminology (one name per thing), button labels, heading
    capitalisation, and date formats. Flag every mismatch with both variants and where each appears.
 5. **House style.** No em dashes, en dashes, double hyphens or emojis in visible copy.
-6. **Accessibility sanity** (light pass). Check only the signals that are ready by build time: one H1
+6. **Rendered-layout checks. Measure these, do not review them by eye.** Three classes of defect
+   that a visual review reliably misses, and that a "does the page scroll sideways" check does not
+   cover. Run each at every breakpoint the site registers.
+
+   - **Image crop loss.** For every image, read the rendered box and the file's natural dimensions
+     and compute how much of the picture `object-fit: cover` is discarding:
+     `lost = 1 - min(box_ratio, img_ratio) / max(box_ratio, img_ratio)`. Report a table of page,
+     image, box, ratio, per cent lost, and the `object-position` in force. **Anything above 0% is a
+     finding**; above ~15% it is must-fix. A default `object-position: 50% 50%` on a mismatched box
+     means nothing chose what to keep, so the framing is an accident. On Skills Beyond the two an
+     operator noticed by eye were the 25% and 23% cases; the 37% and 35% cases were worse and only
+     measuring found them.
+   - **Text or content sitting on a graphic.** Measure element boxes against each other, not against
+     the viewport. Exclude any deliberate overlay by name (chips designed to sit on a map, a caption
+     over a hero) and measure the real clearance before calling an overlap a defect.
+   - **Buttons and labels breaking their container.** A button that fits the page but spills out of
+     its card, footer column or grid track still reads as broken, and a zero-minimum grid track
+     (`minmax(0, <fr>)`) will squeeze one until it does.
+
+   Also confirm **every external link opens in a new tab** (`target="_blank"` plus
+   `rel="noopener noreferrer"`) and no internal link does, reading the rendered `<a>` tags so links
+   inside FAQ answers and other rich-text fields are covered.
+
+7. **Accessibility sanity** (light pass). Check only the signals that are ready by build time: one H1
    per page, sensible heading order, semantic landmarks, alt text on content images, `lang` set, a
    canonical per page, and images sized and optimised (flag an obviously oversized image).
+
+   **Judge a focus ring by tabbing to the control, never by a script.** A programmatic `.focus()`
+   reports `outline: 0px` even when the rule is applying, because the headless window has no true
+   focus, and `:focus-visible` still matches, so the reading looks trustworthy. Press Tab and read
+   it, or screenshot it. Check the ring's colour against what is behind it, not just that a ring
+   exists. If the rule is in `selectors.css` with the right values and nothing competes with it,
+   suspect the measurement before reporting a defect.
 
    **Done after the build, never a launch blocker. Do NOT check these, do NOT attempt them, and do NOT
    flag their absence:**
@@ -54,7 +85,7 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    are actually scheduled, the separate agents handle them: full WCAG (Gate 5) `accessibility-auditor`,
    technical SEO `seo-optimizer`, performance (Gate 6) `performance-tuner`.
 
-7. **Content reconciliation.** A launch-gate item, not a nicety. Compare what the site actually says
+8. **Content reconciliation.** A launch-gate item, not a nicety. Compare what the site actually says
    against `content/` and `CONTENT_CHANGELOG.md`, and report:
    - **A difference between the live site and the Google Doc is EXPECTED during a build and is not a
      finding. Do not report it.** The site owns page copy while the build is live, so the Doc is meant
@@ -72,7 +103,7 @@ You are doing the pre-launch final check on the built **staging** site. **Read-o
    guessing at the reason is how a wrong explanation ends up in the record.
 
 ## Report
-- Grouped by the seven headings. For each finding: page, what is wrong, the fix. Mark severity:
+- Grouped by the eight headings. For each finding: page, what is wrong, the fix. Mark severity:
   **must-fix before launch**, **should-fix**, or **minor**.
 - Keep **expected-deferred** items (links to pages not built yet) in their own short list, so the
   scheduled passes are not counted as failures. **Page titles, meta descriptions, schema / structured
