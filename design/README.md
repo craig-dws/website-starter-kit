@@ -33,10 +33,12 @@ make sites look alike: the look comes from the theme and composition.
 3. **Polish in Figma** and approve (one design gate).
 4. **Internal pages** — feed the polished homepage and system back to Design or Cowork.
 5. **Token export to Breakdance Global Settings** hands over to the build side (`new-page`, etc.).
-6. **`5-export-design-pack.md`** pulls everything the build needs out of Figma into `design-pack/`,
-   so the developer can build the whole site from the repo with no Figma seat. Run it **once the
-   design is final**, on the machine that has the Figma connection, and re-run it after any later
-   design change. Optional, but it is what lets a developer with only a view seat build the site.
+6. **Hand over to the build with `prompts/export-design-pack.md`.** It lives on the build side because
+   you paste it into Claude Code in the client folder, but it is the last thing the design phase does.
+   It pulls everything the build needs out of Figma into `design-pack/`, so whoever builds the site can
+   work from the repo with no Figma seat. Run it **once the design is final**, on the machine that has
+   the Figma connection, and re-run it after any later design change. Skip it only if the builder has a
+   Figma dev seat of their own.
 
 ## Later, any time — one more page on a built site
 - **`4-design-an-extra-page.md`** — design a **single** page (a landing page, or an extra service page)

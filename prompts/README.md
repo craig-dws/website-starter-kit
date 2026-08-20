@@ -8,6 +8,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `guided-build.md` | First build, or you are new to this | Connects the site, then walks you through the whole build step by step, explaining as it goes and asking before anything risky. |
 | `advanced-build.md` | Once the flow is second nature | The same build in whole stages with little narration, stopping only for real decisions and gates. |
 | `connect-mcps.md` | A new machine, or someone joining the build | Connects the MCP servers (Breakdance, chrome-devtools, Figma), doing what it can and prompting you for the manual bits (the wp-admin Application Password, the restart). |
+| `export-design-pack.md` | Once, when the design is final, **before the build starts** | Pulls the tokens, per-frame structure, reference screenshots and assets out of Figma into `design-pack/`, so the build needs no Figma dev seat. Run it on the machine that has the Figma connection, and again after any design change. See `design-pack/README.md`. |
 | `new-page.md` | Internal-pages phase, once the design system is locked | Builds one internal page from its reference and content, reusing the type's components. One page per chat; run several in parallel. |
 | `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
 | `source-images.md` | After pages are built | Works through the image placeholders: client gallery first, else stock or AI, optimise, upload, swap in. |
@@ -20,6 +21,9 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `triage-final-check.md` | After a final check | Turns the report into an AI fix-plan plus a tab-per-fix-type tracker (a Google Sheet you drag in) with page, URL, section, issue, fix and owner. Triages, does not fix. |
 
 ## Rough order over a project
+0. **`export-design-pack.md`**, once the design is final, on the machine with the Figma connection. Do it
+   before handing the repo to whoever builds, so they never need Figma. Skip it only if the builder has a
+   Figma dev seat.
 1. **Connect** — `guided-build.md` or `advanced-build.md` (first machine), `connect-mcps.md` (each extra machine).
 2. **Build** the design system, then home, header and footer.
 3. **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).

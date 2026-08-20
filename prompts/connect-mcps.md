@@ -68,7 +68,7 @@ user's own claude.ai account in connector settings. It is needed to read the ref
 (condition, treatment, surgeon designs), not to build from components already established on the site.
 If `mcp__figma__*` tools are absent when a design is needed **and there is no design pack**, either tell
 them to authorise Figma in their claude.ai connector settings, or, if they have no dev seat, tell them
-to ask whoever does to run `design/5-export-design-pack.md` and commit the pack.
+to ask whoever does to run `prompts/export-design-pack.md` and commit the pack.
 
 ## 4. Restart, then verify (you cannot restart the app yourself)
 - Tell them to **fully quit and reopen Claude Code** (a new chat is not enough; MCP servers load at app

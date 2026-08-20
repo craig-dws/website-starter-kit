@@ -4,7 +4,7 @@
 
 Building a page means reading exact measurements, colours, structure and assets out of the design, and
 that needs a Figma dev seat. A view seat lets a developer look at the design, which is worth having, but
-not extract from it. So the person who has the dev seat runs `design/5-export-design-pack.md` once, when
+not extract from it. So the person who has the dev seat runs `prompts/export-design-pack.md` once, when
 the design is final, and commits the result here. The developer clones the repo and builds from these
 files.
 
@@ -97,7 +97,7 @@ frame links when it is absent.
 
 ## See also
 
-- `design/5-export-design-pack.md`, the prompt that fills this folder
+- `prompts/export-design-pack.md`, the prompt that fills this folder
 - `design/reference/handoff-checklist.md`, the designer-side handover check
 - `.claude/reference/limitations.md`, what Figma cannot export
 - `.claude/reference/build-standards.md`, the naming and alt-text rules the pack follows

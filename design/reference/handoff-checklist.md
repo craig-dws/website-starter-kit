@@ -52,7 +52,7 @@ Date: [YYYY-MM-DD]
 
 - [ ] Mesh gradients and other editor-only fills are identified and flagged
 - [ ] Each one is exported by hand as a PNG into `design-pack/assets/manual/`
-- [ ] `design/5-export-design-pack.md` has been run against the final design
+- [ ] `prompts/export-design-pack.md` has been run against the final design
 - [ ] `design-pack/MANIFEST.md` shows no gaps against the sitemap
 - [ ] The pack is committed and pushed
 

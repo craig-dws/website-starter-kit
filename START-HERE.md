@@ -28,7 +28,7 @@ Then **polish in Figma, approve, and export the tokens to Breakdance Global Sett
 the build). You design to the standards in **`design/reference/`** (the design-for-build checklist, the
 design-system rules, the quality standard) and the `discoverweb-design-standard` audit.
 
-**Last, once the design is final: `design/5-export-design-pack.md`.** It pulls everything the build
+**Last, once the design is final: `prompts/export-design-pack.md`.** It pulls everything the build
 needs out of Figma into `design-pack/`, so whoever builds the site can clone the repo and work without
 a Figma dev seat. Run it on the machine that has the Figma connection, commit it, and re-run it after
 any later design change. See `design-pack/README.md`.
