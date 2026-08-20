@@ -25,9 +25,11 @@ Four things have to be true, and all four are yours to do, not Claude's.
    means installing a migration plugin on the live site to export it. That is a change to a live
    client site, so it is a decision to make on purpose, with the plugin removed afterwards, and not
    something to slide into on the way to the real job.
-3. **The bridge plugin connected to that copy and nothing else.** A copied site usually arrives with
-   the bridge switched off and its domain lock still pointing at the live site, so re-open its
-   settings and fix both before you start. **The bridge is never installed on the live site.**
+3. **The bridge plugin connected to that copy and nothing else.** Use `prompts/connect-bridge.md`,
+   which walks the whole thing: the clone traps, the plugin settings, registering the connection and
+   arming the safety guard. A copied site usually arrives with the bridge switched off and its domain
+   lock still pointing at the live site, and that prompt handles both.
+   **The bridge is never installed on the live site.**
 4. **The approved copy for the new page in `content/`.** If it is not there, request it from
    ZilvaEdge first. Claude will refuse to build the page without it, which is deliberate.
 

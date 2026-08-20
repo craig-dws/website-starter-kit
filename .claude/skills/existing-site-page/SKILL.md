@@ -129,6 +129,10 @@ it is never lifted wholesale into a new page as a substitute for released conten
 
 ### 2. Connect the bridge to the copy, and only to the copy
 
+`prompts/connect-bridge.md` is the guided setup for this whole step, including the
+safety guard that has to be armed alongside the connection. Use it rather than
+improvising the sequence. The summary below is what it is protecting against.
+
 - On a LocalWP copy, Application Passwords need either HTTPS or
   `define( 'WP_ENVIRONMENT_TYPE', 'local' );` in `wp-config.php`, followed by a
   restart of the site so PHP reloads the file. **The build cannot do this.**
