@@ -57,11 +57,18 @@ claude mcp add -s user chrome-devtools -- npx -y chrome-devtools-mcp@latest --he
 ```
 User scope, so every build on this machine gets it.
 
-## 3. Figma MCP (optional, only if they will read designs)
-The Figma connection is the claude.ai connector: **no local secret**, authorised through the user's own
-claude.ai account in connector settings. It is needed to read the reference frames (condition, treatment,
-surgeon designs), not to build from components already established on the site. If `mcp__figma__*` tools
-are absent when a design is needed, tell them to authorise Figma in their claude.ai connector settings.
+## 3. Figma MCP (optional, and usually not needed at all)
+**Check `design-pack/MANIFEST.md` first. If it exists, skip this section entirely**: the design has
+already been extracted into `design-pack/` and this build reads that instead of Figma. Say so rather
+than sending someone to authorise a connector they do not need, and note that reading Figma properly
+needs a paid dev seat, which most developers here do not have.
+
+Otherwise: the Figma connection is the claude.ai connector, **no local secret**, authorised through the
+user's own claude.ai account in connector settings. It is needed to read the reference frames
+(condition, treatment, surgeon designs), not to build from components already established on the site.
+If `mcp__figma__*` tools are absent when a design is needed **and there is no design pack**, either tell
+them to authorise Figma in their claude.ai connector settings, or, if they have no dev seat, tell them
+to ask whoever does to run `design/5-export-design-pack.md` and commit the pack.
 
 ## 4. Restart, then verify (you cannot restart the app yourself)
 - Tell them to **fully quit and reopen Claude Code** (a new chat is not enough; MCP servers load at app

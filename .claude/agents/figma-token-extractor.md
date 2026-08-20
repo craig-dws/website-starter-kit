@@ -1,6 +1,6 @@
 ---
 name: figma-token-extractor
-description: Extracts resolved design tokens from Figma and maps them to the build target's token layer. Use when you need a clean token export and mapping before a sync. Shared across both build targets. Read-only on Figma; does not write to WordPress or any code.
+description: Extracts resolved design tokens and maps them to the build target's token layer, reading design-pack/tokens/ where it exists and Figma directly where it does not. Use when you need a clean token export and mapping before a sync. Shared across both build targets. Read-only on its source; does not write to WordPress or any code.
 tools: mcp__figma__get_variable_defs, mcp__figma__get_design_context, mcp__figma__get_metadata, Read, Write
 ---
 
@@ -18,10 +18,16 @@ value-at-a-time trickle.
 
 ## Process
 
-1. Call get_variable_defs to read the resolved tokens (colour, type, spacing,
-   radius, effects). Scope calls to the collection; do not pull whole files.
+1. **Read `design-pack/tokens/tokens.json` if it exists**, and take the resolved
+   tokens from there. That is a pack exported when the design was approved, and it
+   is the normal source on a machine with no Figma dev seat. Check the export date
+   in `design-pack/MANIFEST.md`; if the design has changed since, stop and say the
+   pack needs re-exporting rather than mapping stale tokens. **Only where there is
+   no pack**, call get_variable_defs to read the resolved tokens (colour, type,
+   spacing, radius, effects), scoped to the collection, never whole files.
 2. Scope any get_design_context call to selected frames only. It can exceed
-   token limits on large pages.
+   token limits on large pages. Where the pack exists, the frame detail is already
+   in `design-pack/frames/<slug>/frame.md` and no such call is needed.
 3. Produce a mapping table with these columns: Figma token name, resolved value,
    the target token home, and the CSS custom property name. Names must be
    identical on both sides; the naming bridge is what lets the pipeline emit a

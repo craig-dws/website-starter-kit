@@ -16,9 +16,14 @@ tokens into Breakdance, which is a different job.
 
 ## Steps
 
-1. Read the current design tokens from Figma with the Figma variable-definitions
-   capability (get_variable_defs). Scope reads to the collection, not whole
-   files.
+1. Read the current design tokens. **Check `design-pack/tokens/` first**: where the
+   design pack exists, `tokens.json` is the source and no Figma access is needed,
+   which is the normal case for a developer without a Figma dev seat. The pack is a
+   snapshot taken when the design was approved, so check the export date in
+   `design-pack/MANIFEST.md` and, if the design has moved since, stop and ask for a
+   re-export rather than syncing stale tokens. Where there is no pack, read from
+   Figma with the variable-definitions capability (get_variable_defs), scoped to the
+   collection rather than whole files.
 2. Export the current Breakdance settings: `wp breakdance export_settings`.
 3. Perform a differential merge:
    - Preserve every existing key.

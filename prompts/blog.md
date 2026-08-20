@@ -18,7 +18,8 @@ and the **Template and Post Loop** notes in the `breakdance-limits` skill. Stagi
 2. Get these from me (ask for any I have not given):
    - The **post type**: standard WordPress posts, or a custom post type. **Confirm the real slug with
      `wp post-type list`, never hardcode it** (limits/skill rule).
-   - The **reference to match**: a Figma blog design if one exists (single and archive), otherwise the
+   - The **reference to match**: `design-pack/frames/<slug>/` if the pack has a blog design (single and
+     archive), else a Figma blog design if one exists, otherwise the
      already-built page patterns to reuse (the card and grid for the archive, the prose pattern for the
      single post).
    - The **archive slug** and the **single-post URL pattern**, from the sitemap.

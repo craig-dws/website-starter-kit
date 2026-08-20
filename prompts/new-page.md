@@ -16,7 +16,11 @@ human-approved gates.
    `limitations.md`, and check `build-log/ACTIVE.md` for other active sessions.
 2. Get these from me for the page (ask for any I have not given):
    - **Which page** and its **type** (condition / treatment / surgeon / content / other).
-   - The **reference to match**: either the **Figma node id** of the type's reference design, OR, when
+   - The **reference to match**, in this order. **Check `design-pack/` first:** if
+     `design-pack/frames/<slug>/` exists, that is the reference, and you need nothing from me and no
+     Figma access. Its `frame.md` has the structure, measurements, tokens and assets, and its
+     `reference-*.png` is what you check the built page against. Otherwise it is either the **Figma
+     node id** of the type's reference design, OR, when
      there is no design, the **already-built sibling page of the same type** to copy the pattern from
      (e.g. the built Glaucoma page for a new condition page). Most pages after the first of a type have
      no design, so a built sibling is the usual reference. Identify a Figma frame by node id, never by name.
@@ -50,7 +54,9 @@ human-approved gates.
   not AI-generate images at build time. Real images are sourced in a separate pass afterwards
   (`prompts/source-images.md`). Only use an actual image now if the client already supplied a clear
   match, in which case optimise and upload it as normal.
-- **Verify** (chrome-devtools MCP, headless): against a Figma frame, a screenshot diff; against a built
+- **Verify** (chrome-devtools MCP, headless): against a design, a screenshot diff, comparing to
+  `design-pack/frames/<slug>/reference-*.png` where the pack exists and to the Figma frame otherwise;
+  against a built
   sibling (no design), confirm the structure and components match the sibling and the full build
   checklist passes (one element per block, states, responsive, no overflow), since there is no frame to diff.
 

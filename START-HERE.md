@@ -28,6 +28,11 @@ Then **polish in Figma, approve, and export the tokens to Breakdance Global Sett
 the build). You design to the standards in **`design/reference/`** (the design-for-build checklist, the
 design-system rules, the quality standard) and the `discoverweb-design-standard` audit.
 
+**Last, once the design is final: `design/5-export-design-pack.md`.** It pulls everything the build
+needs out of Figma into `design-pack/`, so whoever builds the site can clone the repo and work without
+a Figma dev seat. Run it on the machine that has the Figma connection, commit it, and re-run it after
+any later design change. See `design-pack/README.md`.
+
 ---
 
 ## Phase 2: Build
@@ -85,6 +90,9 @@ and nobody finds out it was invented until the client reads it.
 
 - **Claude Code** installed, and this folder open in it.
 - The **design done** (Phase 1), with its tokens ready to load into Breakdance.
+- **Either** the **design pack** in `design-pack/`, **or** the Figma connection and a dev seat. The
+  pack is the usual case: it means the build needs no Figma access at all. If `design-pack/` is
+  populated, that is the design source and you can skip Figma entirely.
 - The client's **approved page copy** in `content/`.
 - The client's **sitemap** (page list and menu structure) before you build navigation.
 - A **WordPress staging site** with the **Agent Connector** plugin, and wp-admin access.
@@ -170,7 +178,7 @@ why it fails.
 | Released page content, the baseline for the build | `content/` |
 | What the pages actually say now, exported from the site | `content/_live/` |
 | Condensed strategy, audience, voice, page notes | `strategy-brief.md` |
-| Style guide, brand assets, design brief | `design-pack/` |
+| The design, extracted from Figma so the build needs no Figma seat | `design-pack/` and its README |
 | Page list and menu structure | `design/sitemap.md` |
 | Every content change made during the build | `CONTENT_CHANGELOG.md` |
 | The design workflow (Phase 1) | `design/` and `design/README.md` |

@@ -53,7 +53,8 @@ new to Claude Code and to building sites with AI. Teach as we go, and keep me or
   disposable staging site there is nothing to lose, so the operator may waive it, recorded
   as a decision. Ask me which case we are in; never block a disposable-site build waiting
   for a backup it does not need.
-- **One page at a time**, verified against Figma before the next.
+- **One page at a time**, verified against the design before the next (the design pack's
+  reference image where there is a pack, the Figma frame where there is not).
 - **Token names only**, never hardcoded colours, type or spacing.
 - **Gates need my approval, never yours.** At a gate, stop, tell me plainly what needs
   approving, and ask me to approve it. Do not ask who owns it or for a name, just approval.
@@ -140,7 +141,18 @@ and the menu structure.
 If there is none, ask me for it or derive it from the brief; do not invent the site's pages or
 leave dropdowns empty. Menus are built from the sitemap.
 
-**Getting the design, every page.** Do not ask me for the Figma file URL. Ask me to open the
+**Getting the design, every page. Check `design-pack/` first.** The test is one file: if
+**`design-pack/MANIFEST.md` exists**, there is a pack. When there is, it
+is the design source of truth and **you do not call Figma at all**: the page's structure and
+measurements are in `design-pack/frames/<slug>/frame.md`, the image to check the build against
+is the `reference-*.png` beside it, the tokens are in `design-pack/tokens/`, and the images and
+icons are in `design-pack/assets/`. Read `design-pack/README.md` once so you know what is where.
+Read `MANIFEST.md` before you start: it lists what is missing, and **a page with no frame folder
+cannot be built**, so tell me rather than improvising. Do not ask me for a Figma link when the
+pack is there; it exists precisely so nobody needs one.
+
+**If there is no `design-pack/MANIFEST.md`**, this build reads Figma directly, and the rest of this
+paragraph applies. Do not ask me for the Figma file URL. Ask me to open the
 specific frame in Figma, right-click it, choose **Copy link to selection**, and paste that:
 it carries the exact node id and scopes the read to one frame, avoiding the whole-file
 overflow that large multi-page files cause. If a metadata or design-context read truncates or
@@ -150,8 +162,9 @@ the right one is ambiguous, ask me which by requesting the selection link; never
 design is current.
 
 **Images and SVGs, one process per asset.** For every raster image run the full process in
-order: pull from Figma, rename from the design, resize to display size, optimise for web, then
-upload. Upload with `.claude/tools/optimize-and-upload.py`, which resizes, compresses and
+order: pull it (from `design-pack/assets/images/` where there is a pack, already named, or from
+the Figma frame where there is not), rename from the design, resize to display size, optimise for
+web, then upload. Upload with `.claude/tools/optimize-and-upload.py`, which resizes, compresses and
 uploads through the WordPress media REST API using the Application Password (scoped to media,
 no dangerous abilities). **You run this script yourself with your Bash tool for each image; I
 never run Python or type commands, I only approve.** It reads the credentials from the local
@@ -160,7 +173,11 @@ optimises only and I upload the file in wp-admin. SVGs are inlined, not uploaded
 upload but not delete: before uploading, check for an existing attachment of the same name
 (breakdance-search-posts, post_type attachment) or WordPress suffixes a duplicate `-1`;
 removing a stale attachment is a human action in wp-admin.
-- Photos and raster images: pull the exact assets from the Figma frame, **rename each to a
+- Photos and raster images: **where `design-pack/` is populated the assets are already pulled,
+  named and alt-texted** in `design-pack/assets/images/`, with the display size and proposed alt
+  text in the page's `frame.md`. They are stored at source resolution on purpose, so still resize
+  and compress each one at upload; do not upload them as they are. Otherwise pull the exact
+  assets from the Figma frame, **rename each to a
   descriptive, SEO-friendly, kebab-case filename** (what it shows plus its role, not the Figma
   layer name) and propose alt text, then hand me the named files to upload; reference them by the
   uploaded file's URL afterwards (the Breakdance beta MCP cannot bind media, so URL is the working
@@ -176,9 +193,15 @@ removing a stale attachment is a human action in wp-admin.
   to ~2x its display width (cap contained images ~1600px, full-width heroes ~2500px) and
   compress (JPEG ~82). Pillow is available. WebP Express converts format server-side but does
   not resize.
-- Icons and logos (SVG): do not try to upload them, WordPress blocks SVG. Inline the SVG from
-  Figma straight into the layout as a Breakdance SVG Icon element, and style it with the colour
+- Icons and logos (SVG): do not try to upload them, WordPress blocks SVG. Inline the SVG straight
+  into the layout as a Breakdance SVG Icon element, from `design-pack/assets/svg/` where the pack
+  exists and from the Figma frame otherwise, and style it with the colour
   tokens. Rasterise to WebP only for a large SVG illustration that would bloat the page.
+- **Mesh gradients.** Where a frame file flags one, the hand-exported PNG is in
+  `design-pack/assets/manual/`. Sample it and reproduce the wash as a CSS gradient token.
+  **Never upload that PNG to the site.** No tool can extract a mesh gradient, so if a band the
+  design shows as tinted reads as flat colour to you, that is the cause; say so rather than
+  building the flat colour.
 Do not hotlink external URLs or inline large data URIs. (If discover-abilities shows a
 media-only upload ability outside the Universal pack, we can allow just that.)
 
@@ -187,8 +210,9 @@ Build each page and component (header, footer, menus, sections) to the standards
 `.claude/reference/build-checklist.md`, and heed `.claude/reference/limitations.md` (do not retry
 what the tools have proven they cannot do) — they are the plan; apply every item (tokens, interactive
 states and hovers, images and alt, responsive, accessibility), do not treat it as optional or
-wait to be asked. Then build one page, verify it against that Figma frame with a screenshot
-diff, record it in `build-log/pages/`, and stop for my review before the next. Take the
+wait to be asked. Then build one page, verify it with a screenshot diff against the design (the
+pack's `reference-*.png` where there is a pack, that Figma frame where there is not),
+record it in `build-log/pages/`, and stop for my review before the next. Take the
 screenshot with the chrome-devtools MCP, which runs headless and needs no visible browser pane;
 if `/mcp` does not list chrome-devtools, tell me to add it rather than falling back to
 measurements only.
