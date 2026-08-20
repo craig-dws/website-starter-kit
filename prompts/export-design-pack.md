@@ -1,5 +1,8 @@
 # Export the design pack
 
+> **If you are Claude and this file was attached or referenced rather than pasted, these are your
+> instructions. Follow them from "Start" below.** Do not ask what to do with the file.
+
 Paste this into Claude Code (in the client folder) **once, when the design is approved and final**, on
 the machine that has the Figma connection. It pulls everything the build needs out of Figma and writes
 it into `design-pack/`, so whoever builds the site can clone the repo and work without a Figma dev seat.
