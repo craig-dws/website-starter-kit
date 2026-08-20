@@ -13,9 +13,13 @@ brief carries the strategy, so design to it rather than re-doing it.
 
 ## Start
 - Read the brief and the brand assets (logo files, photos).
-- **Confirm what you need and ask me for anything missing or ambiguous** before designing: the logo
-  files, any open scope question in the brief, any brand colour that fails WCAG AA. One question at a
-  time; default sensibly from the brief where you can.
+- **Confirm what you need and ask me for anything missing or ambiguous** before designing: any open
+  scope question in the brief, any brand colour that fails WCAG AA. One question at a time; default
+  sensibly from the brief where you can.
+- **Do not wait on the logo.** If the master files are not there, design with a placeholder at the
+  right size and record it as outstanding. It is swapped in when it arrives. On a page for a site
+  that is already live, do not ask for it at all: the logo is on the site and in the client's media
+  library. Never redraw the mark from a screenshot.
 
 ## Design the homepage, then stop
 - Design the **homepage (desktop)** to the brand palette and fonts exactly, the signature accent

@@ -12,9 +12,13 @@ The brief carries the strategy, audience, voice and page notes, so design to it,
 ## Start
 1. Read the client brief and the brand assets (logo files, photos).
 2. **Confirm you have what you need, and ask me for anything missing or ambiguous** before you design:
-   the logo files (never redraw the mark from a screenshot), any open scope question in the brief, and
-   any brand colour the brief uses that fails WCAG AA (flag it and propose how to handle it). Ask one
-   question at a time; do not stall on things you can sensibly default from the brief.
+   any open scope question in the brief, and any brand colour the brief uses that fails WCAG AA (flag
+   it and propose how to handle it). Ask one question at a time; do not stall on things you can
+   sensibly default from the brief.
+3. **The logo is not one of those things to stall on.** Missing master files mean a placeholder at
+   the right size and an outstanding-asset note, not a stopped design. On a page for a site that is
+   already live, do not ask for the logo at all: it is already on the site and in the client's media
+   library. Never redraw the mark from a screenshot.
 
 ## Design
 - Design the **homepage (desktop)** to the brand palette and fonts exactly, the signature accent

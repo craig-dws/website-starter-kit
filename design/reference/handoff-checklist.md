@@ -45,7 +45,11 @@ Date: [YYYY-MM-DD]
 - [ ] Approved content is used or placeholder status is clearly marked
 - [ ] Long-content and missing-content behaviour is documented
 - [ ] Image crop, fit, ratio and fallback behaviour are documented
-- [ ] Required logos, icons and images are supplied
+- [ ] Logos, icons and images are either supplied, or recorded as outstanding with a sized
+      placeholder standing in for them. **Neither state blocks the build.** A missing logo is an
+      ordinary outstanding asset that gets swapped in when it arrives, and on a page added to a
+      site that is already live there is nothing to supply at all, because the logo is already
+      on the site and in the client's media library
 - [ ] Export format and naming are clear
 
 ## Design pack (so the build needs no Figma seat)
