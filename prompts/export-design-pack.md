@@ -60,7 +60,11 @@ answer questions.
    editor-only fill. Tell me to drop the hand-exported PNGs into `design-pack/assets/manual/` and name
    each one after the section it belongs to. Do not attempt to extract them yourself and do not report
    the flat colour underneath as if it were the real fill.
-4. Create the folder structure in `design-pack/` per `design-pack/README.md`.
+4. Create the folder structure in `design-pack/` per `design-pack/README.md`. **`design-pack/` may
+   already hold the brand handover pack** (the style guide, brand assets and design brief, put there
+   when the project was scaffolded). You write only `MANIFEST.md`, `tokens/`, `frames/` and `assets/`.
+   **Leave everything else in that folder exactly as it is**, and read the style guide if it is there,
+   because it may name colours or fonts the Figma variables do not.
 
 ## Export the tokens, once
 

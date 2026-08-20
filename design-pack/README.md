@@ -15,6 +15,16 @@ instead of calling Figma, and prompts stop asking for frame links.
 so if it is there the export finished. A folder holding only this README is not a pack, and the build
 falls back to reading Figma.
 
+## This folder has a second occupant
+
+`design-pack/` is also where the **brand handover pack** lands: the style guide, the brand assets and
+the design brief, put here by ZilvaEdge's `/new-site` scaffolder (see the repo `README.md`). That
+arrives at the start of a project; the Figma extraction arrives at the end of the design phase.
+
+The two coexist and do not overlap. The extraction only ever writes `MANIFEST.md`, `tokens/`,
+`frames/` and `assets/`, so **anything else already in this folder is the brand pack and is left
+alone.** If you are looking for the style guide, it is here at the top level, not inside those four.
+
 ## The one rule
 
 **The pack is only correct while the design is unchanged.** It is a snapshot with a date on it, and the

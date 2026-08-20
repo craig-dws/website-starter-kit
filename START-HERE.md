@@ -179,7 +179,8 @@ why it fails.
 | Released page content, the baseline for the build | `content/` |
 | What the pages actually say now, exported from the site | `content/_live/` |
 | Condensed strategy, audience, voice, page notes | `strategy-brief.md` |
-| The design, extracted from Figma so the build needs no Figma seat | `design-pack/` and its README |
+| Style guide, brand assets, design brief | `design-pack/` (top level) |
+| The design extracted from Figma, so the build needs no Figma seat | `design-pack/tokens/`, `frames/`, `assets/`, `MANIFEST.md` |
 | Page list and menu structure | `design/sitemap.md` |
 | Every content change made during the build | `CONTENT_CHANGELOG.md` |
 | The design workflow (Phase 1) | `design/` and `design/README.md` |
