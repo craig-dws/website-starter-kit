@@ -1,11 +1,12 @@
-# 5. Export the design pack (so the build never needs Figma)
+# Export the design pack
 
-Run this **once, when the design is approved and final**, on the machine that has the Figma connection.
-It pulls everything the build needs out of Figma and writes it into `design-pack/`, so the developer can
-clone the repo and build the whole site without a Figma dev seat.
+Paste this into Claude Code (in the client folder) **once, when the design is approved and final**, on
+the machine that has the Figma connection. It pulls everything the build needs out of Figma and writes
+it into `design-pack/`, so whoever builds the site can clone the repo and work without a Figma dev seat.
 
-This is the **design-to-build handover step**. Everything before it is design; everything after it reads
-the pack instead of Figma.
+This is the **design-to-build handover step**, the last thing the design side does. Everything before it
+is design; every build prompt after it reads the pack instead of Figma. It is the design-side twin of
+`export-content.md`, which does the same job in the other direction for page copy.
 
 ## Who runs this, and why
 
