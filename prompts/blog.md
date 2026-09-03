@@ -26,6 +26,19 @@ and the **Template and Post Loop** notes in the `breakdance-limits` skill. Stagi
    - The **posts**: which already have content (in `site-content.md`), and whether the rest come later.
 3. **Claim it** in `build-log/ACTIVE.md`.
 
+## Reuse, do not rebuild
+
+**Read `build-log/GLOBAL-BLOCKS.md` before building any section.** It is the register of every
+section that repeats across this site and what each one is.
+
+- Listed as a **global block**: insert the existing block. Do not rebuild it, and do not build
+  a similar-looking one beside it.
+- Listed as a **template part**: it is already inherited. Do not add it here.
+- Listed as a **pattern**: copy the documented structure and change only what the register says
+  varies.
+- **Repeats but is not in the register**: stop and tell me rather than building the duplicate.
+  The register was wrong, which costs ten seconds now and an afternoon later.
+
 ## Build (two templates, once)
 - **Single-post template.** A Breakdance **Template** bound to the post type with
   `set-template-conditions`. It carries all the chrome, once, for every post: the banner, the sticky

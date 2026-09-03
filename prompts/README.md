@@ -9,6 +9,7 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `advanced-build.md` | Once the flow is second nature | The same build in whole stages with little narration, stopping only for real decisions and gates. |
 | `connect-mcps.md` | A new machine, or someone joining the build | Connects the MCP servers (Breakdance, chrome-devtools, Figma), doing what it can and prompting you for the manual bits (the wp-admin Application Password, the restart). |
 | `export-design-pack.md` | Once, when the design is final, **before the build starts** | Pulls the tokens, per-frame structure, reference screenshots and assets out of Figma into `design-pack/`, so the build needs no Figma dev seat. Run it on the machine that has the Figma connection, and again after any design change. See `design-pack/README.md`. |
+| `global-blocks.md` | Once, after the design system is approved and **before the first page or template** | Reads the design, `content/` and the sitemap together, finds every section that repeats across the site, and decides whether each is a template part, a global block, a documented pattern, or inline. Writes `build-log/GLOBAL-BLOCKS.md`, which every page and template prompt then reads. Running it after pages are built does not work. |
 | `new-page.md` | Internal-pages phase, once the design system is locked | Builds one internal page from its reference and content, reusing the type's components. One page per chat; run several in parallel. |
 | `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
 | `connect-bridge.md` | Only before `existing-site-page.md`, and only on a local copy of a live site | Installs and connects the third-party bridge plugin that writes layouts on Elementor or Breakdance 2.x, and arms the safety guard at the same time. Never on a live site. Not needed for a normal Breakdance 3.0 build. |
@@ -27,8 +28,9 @@ this is the quick index of what each prompt is for and when to reach for it.
    before handing the repo to whoever builds, so they never need Figma. Skip it only if the builder has a
    Figma dev seat.
 1. **Connect** — `guided-build.md` or `advanced-build.md` (first machine), `connect-mcps.md` (each extra machine).
-2. **Build** the design system, then home, header and footer.
-3. **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).
+2. **Build** the design system.
+2b. **`global-blocks.md`**, the repeating-sections audit, **before the first page or template**. Then build each global block on its own, before the pages that use it.
+3. Then home, header and footer, and **`new-page.md`** for each internal page (one per chat, parallel once the first of a type is set).
    For a **blog / resources** section use **`blog.md`** instead (templates, not one page per post).
 4. **`source-images.md`**, then **`seo-meta.md`** once pages exist.
 5. **`review-and-changes.md`** for sign-off, then **`export-content.md`** to put what the site

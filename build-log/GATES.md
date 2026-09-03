@@ -9,6 +9,7 @@ need to name who owns it, just approve the work when it is right.
 | 1 | Brief approved | Not yet | | |
 | 2 | Design approved and handed to build | Not yet | | designed and approved internally before it reaches this repo |
 | 3 | Build's design system approved | Not yet | | tokens and responsive the build derived, approved before building pages on them |
+| 3b | Global blocks register approved | Not yet | | `build-log/GLOBAL-BLOCKS.md`. Every repeating section decided **before** the first page or template. Extracting a shared section afterwards means editing every page that already has it |
 | 4 | Build complete on staging | Not yet | | |
 | 5 | Accessibility passed (WCAG 2.2 AA) | Not yet | | |
 | 6 | SEO / performance / AI-readiness QA | Not yet | | |
