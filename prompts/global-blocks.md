@@ -63,8 +63,10 @@ not easier.
 
 Fill in `build-log/GLOBAL-BLOCKS.md`:
 
-- One row per candidate, with what it is, where it appears, what is identical, what varies, and
-  the decision.
+- One row per candidate, with what it is, where it appears, what is identical, what varies, the
+  decision, **and the class prefix that follows from it** per
+  `.claude/reference/class-naming.md`. The decision and the prefix are the same call, so fill
+  them in together rather than leaving the naming to be invented later, page by page.
 - **Rejected candidates stay in the register with the reason.** Otherwise the next person
   re-litigates it or quietly globalises it.
 - Fill in the client handover table. Every global block is edited once and changes every page it

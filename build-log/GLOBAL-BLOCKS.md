@@ -33,12 +33,23 @@ pattern. Planned appearances count where the sitemap says so and a person confir
 
 ## The register
 
-| # | Name | What it is | Appears on | Identical | Varies | Decision | Built | Notes |
-|---|------|-----------|-----------|-----------|--------|----------|-------|-------|
-| 1 | | | | | | | Not yet | |
+| # | Name | What it is | Appears on | Identical | Varies | Decision | Prefix | Built | Notes |
+|---|------|-----------|-----------|-----------|--------|----------|--------|-------|-------|
+| 1 | | | | | | | | Not yet | |
 
 **Decision** is one of: template part (name the template), global block, pattern, inline,
 rejected.
+
+**Prefix** follows from the decision, per `.claude/reference/class-naming.md`. They are the same
+call written twice, so fill both in together:
+
+| Decision | Prefix |
+|---|---|
+| template part, or design system furniture | `sw-` |
+| global block | `gb-` |
+| pattern, reused component | `wg-` |
+| inline, one page | `pg-` |
+| inline, one section | `sc-` |
 
 **Varies** is the crux. If you cannot say precisely what changes between instances, the
 candidate has not been looked at closely enough. "Nothing" is a valid and useful answer.

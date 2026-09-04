@@ -26,6 +26,13 @@ and the **Template and Post Loop** notes in the `breakdance-limits` skill. Stagi
    - The **posts**: which already have content (in `site-content.md`), and whether the rest come later.
 3. **Claim it** in `build-log/ACTIVE.md`.
 
+## Class names
+
+- **Name every class per `.claude/reference/class-naming.md`.** The prefix states the blast
+  radius and must be true: `sw-` sitewide, `gb-` global block, `wg-` widget, `pg-` page only,
+  `sc-` section only. Take the prefix from `build-log/GLOBAL-BLOCKS.md`, not from taste.
+  Widening a class's reach later is a rename, applied everywhere it is used.
+
 ## Reuse, do not rebuild
 
 **Read `build-log/GLOBAL-BLOCKS.md` before building any section.** It is the register of every

@@ -39,6 +39,13 @@ human-approved gates.
 3. **Claim it** in `build-log/ACTIVE.md` (what, which slug, the time, status active), so a parallel
    session does not collide.
 
+## Class names
+
+- **Name every class per `.claude/reference/class-naming.md`.** The prefix states the blast
+  radius and must be true: `sw-` sitewide, `gb-` global block, `wg-` widget, `pg-` page only,
+  `sc-` section only. Take the prefix from `build-log/GLOBAL-BLOCKS.md`, not from taste.
+  Widening a class's reach later is a rename, applied everywhere it is used.
+
 ## Reuse, do not rebuild
 
 **Read `build-log/GLOBAL-BLOCKS.md` before building any section.** It is the register of every
@@ -56,7 +63,7 @@ section that repeats across this site and what each one is.
 - **Content-first from the reference**, adapted to this page's content. **Reuse the type's existing
   components and global classes, do not re-invent them.** When the reference is a **built sibling page**
   (no design), read its structure with `get-post-tree` and match it: the same sections and the same
-  `.ees-*` classes, with the content deciding which sections appear and how many. When it is a Figma
+  classes, with the content deciding which sections appear and how many. When it is a Figma
   frame, build from that. Either way the **design system**, not a per-page drawing, is the source of the look.
 - **If this is the first page of its type**, it establishes the type's shared components: build it
   **solo** (not in parallel), so the pattern is set before the rest fan out.
@@ -124,7 +131,7 @@ Rules for the report:
 - **"Routine, nothing to do now" is ONE line.** It covers the ordinary deferred passes (image
   placeholders, the SEO draft, links to pages not built yet). **Do not explain what these are, I already
   know.** Only expand if something is genuinely unusual (for example no suitable placeholder was possible).
-- **No internals in the report.** Element ids, `.ees-*` classes, counts and measurements belong in the
+- **No internals in the report.** Element ids, class names, counts and measurements belong in the
   page record, not the message to me.
 - **Next page must be genuinely unbuilt** (from step 4), preferring the same type so components are
   reused. If several are equally next, give two or three triggers so I can choose or run them in

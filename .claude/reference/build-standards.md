@@ -131,8 +131,14 @@ still-moving layout wastes work.
 The output must be navigable and editable by a person in the builder, not just correct on screen.
 - **Descriptive CSS class names carry the meaning.** Element *names* (the structure-tree labels)
   cannot be set over the Breakdance MCP (see `limitations.md`), so navigability comes from meaningful
-  BEM class names (`ees-hero__copy`, `ees-approach__intro`) plus Breakdance's own content preview in
-  the tree. Keep classes descriptive and consistent, this the build CAN control.
+  class names plus Breakdance's own content preview in the tree. Keep classes descriptive and
+  consistent, this the build CAN control.
+- **Class names follow `.claude/reference/class-naming.md`, which is not optional.** Every class
+  carries a scope prefix stating its blast radius: `sw-` sitewide, `gb-` global block, `wg-`
+  widget, `pg-` page only, `sc-` section only. Words are hyphenated, `__` marks a child and `--`
+  a variant (`sc-quote-name__title--lg`). The prefix comes from `build-log/GLOBAL-BLOCKS.md`,
+  not from taste, and **widening a class's reach is a rename**, because a prefix that lies is
+  worse than no prefix.
 - **Human element names are an optional manual pass, structural only.** If a person wants extra
   clarity they name the sections and major groups in the builder, not every leaf. A rebuild through
   `html-to-page` discards manual names, so do not invest heavily.
