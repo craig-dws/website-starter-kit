@@ -2,10 +2,10 @@
   "permissions": {
     "defaultMode": "plan",
     "deny": [
-      "Write(wp-config.php)",
-      "Write(wp-settings.php)",
-      "Write(**/wp-config.php)",
-      "Write(**/wp-settings.php)",
+      "Edit(wp-config.php)",
+      "Edit(wp-settings.php)",
+      "Edit(**/wp-config.php)",
+      "Edit(**/wp-settings.php)",
       "Bash(rm -rf:*)",
       "Bash(sudo:*)",
       "Bash(wp breakdance import_settings:*)",
