@@ -3,6 +3,10 @@
 How to connect a client's WordPress / Breakdance staging site to Claude Code. Do this
 once per site, on each developer's machine. The steps are identical for every build.
 
+This is the `breakdance-native-mcp` connection (`.claude/connections/`). A block theme site
+connects with `prompts/connect-rest.md` instead, and an Elementor or Breakdance 2.x site with
+`prompts/connect-bridge.md`.
+
 ## How it works, and why there is nothing to edit
 
 The Agent Connector plugin generates a WordPress Application Password and hands you a

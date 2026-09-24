@@ -8,7 +8,7 @@ are Breakdance/Agent-Connector beta constraints, revisit them when the tool upda
 **Which Breakdance version each entry was proven on.** Entries dated **2026-08-17** or
 **2026-08-18** come from the Skills Beyond build on **Breakdance 3.0.0-beta.3**. Undated entries
 were proven earlier, on **3.0.0-beta.1**. This matters: these are bugs in a beta, and some of them
-will be fixed. **Pin the version in `.claude/CLAUDE.md` at the start of every build, and re-test any
+will be fixed. **Pin the version in the builder file (`.claude/builders/breakdance.md`) at the start of every build, and re-test any
 *(beta)* entry that blocks you rather than trusting it.** A limitation that no longer reproduces
 gets its entry struck through with the version it was fixed in, not deleted, so the trail survives.
 

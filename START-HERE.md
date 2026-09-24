@@ -10,6 +10,41 @@ client. It covers two phases:
 - **Design** (Phase 1), in Claude Design / Cowork / Figma, and
 - **Build** (Phase 2), in Claude Code on the Breakdance staging site.
 
+It also handles pages on a client site that is **already built and live**, in Breakdance 2.x,
+Elementor or a WordPress block theme, with no design file at all.
+
+## Three choices, made once per client
+
+Every client project chooses a **builder** (what the site's pages are built in), a **connection**
+(how Claude reaches the site) and a **design source** (where the design comes from). They fill three
+lines in `.claude/CLAUDE.md`, and only the matching rules load into Claude's chats, so a Breakdance
+client never reads block theme rules or the reverse. `/new-site` fills them; by hand, Claude asks for
+them in the first chat.
+
+| Choice | Options |
+|---|---|
+| Builder (`.claude/builders/`) | `breakdance`, `elementor`, `block-theme` |
+| Connection (`.claude/connections/`) | `breakdance-native-mcp`, `bridge`, `wordpress-rest` |
+| Design source (`.claude/design-source/`) | `figma` (a design file or design pack), `existing-site` (the site is the design) |
+
+**Which builder and connection work together:**
+
+| Builder | Connection | Status | The usual job |
+|---|---|---|---|
+| `breakdance` (3.0) | `breakdance-native-mcp` | **Proven** on client builds | A new build from a design |
+| `breakdance` (2.x, or 3.0 if the native MCP fails the write test) | `bridge` | Unverified, no real run yet | A page on an existing site, on a local copy |
+| `elementor` | `bridge` | Unverified, no real run yet | A page on an existing site, on a local copy |
+| `block-theme` | `wordpress-rest` | Storage and endpoints verified on a live site; writes not yet proven on a client | A page added or rebuilt on an existing site, on staging |
+
+Anything not in this table is **not supported**: Claude stops and asks. A block theme never uses the
+bridge, and the REST API does not write Breakdance or Elementor layouts. The design source is
+independent of both, but `figma` is proven on Breakdance only, and `existing-site` is the normal
+choice for every job on a site that is already live.
+
+**Adding a builder or a connection later** is one new file from the template in its folder (plus a
+limits skill for a builder), each with a checklist of what has to be proven on a real staging site
+first. The core `.claude/CLAUDE.md` is never edited to add one.
+
 ---
 
 ## Phase 1: Design
@@ -38,15 +73,24 @@ any later design change. See `design-pack/README.md`.
 ## Phase 2: Build
 
 You run a build by pasting one prompt into Claude Code, in this folder. Pick one (see `prompts/README.md`
-for which, when):
+for which, when).
+
+**The three jobs, one line each:**
+- **A new build from a design:** `prompts/guided-build.md`, then `prompts/new-page.md` for each page.
+- **Adding a page to an existing site:** `prompts/existing-site-page.md`.
+- **Rebuilding existing pages on an existing site** (same addresses, new copy): `prompts/rebuild-existing-pages.md`.
+
+Every prompt:
 
 - **Guided** (new to this). `prompts/guided-build.md`. Connects the site, walks every step, asks before risk.
 - **Advanced** (once fluent). `prompts/advanced-build.md`. Whole stages, little narration.
 - **New machine or joining.** `prompts/connect-mcps.md`. Connects the MCPs, prompting you for the manual bits.
 - **New page.** `prompts/new-page.md`. One internal page from its reference and content. Run several in parallel.
 - **Blog.** `prompts/blog.md`. The single-post template and archive, as Breakdance Templates, not one page per post.
-- **Connect the bridge.** `prompts/connect-bridge.md`. Only before the prompt below, and only against a local copy of a live site. Not part of a normal build.
-- **Page on an already-live site.** `prompts/existing-site-page.md`. A different job from the rest of this list: a page on a client site that is already live and was built in Elementor or Breakdance 2.x. Built on a throwaway local copy of that site, matched to its own patterns, and promoted by a person. Not for a site we are building.
+- **Connect the bridge.** `prompts/connect-bridge.md`. Only before the prompt below, and only against a local copy of a live Elementor or Breakdance 2.x site. Not part of a normal build, and never on a block theme.
+- **Connect through the WordPress REST API.** `prompts/connect-rest.md`. The block theme connection: no plugin, just an Application Password, on a staging or local copy.
+- **Page on an already-live site.** `prompts/existing-site-page.md`. A different job from the rest of this list: a page on a client site that is already live and was built in Elementor, Breakdance 2.x or a block theme. Built on a copy of that site, matched to its own patterns, and promoted by a person. Not for a site we are building.
+- **Rebuild pages on an already-live site.** `prompts/rebuild-existing-pages.md`. Existing pages keep their addresses and get new copy: snapshot first, buttons and links kept exactly, one page at a time.
 - **Source images.** `prompts/source-images.md`. Fill the image placeholders (a post-build pass).
 - **SEO meta.** `prompts/seo-meta.md`. The per-page title and meta drafts to paste into the SEO plugin.
 - **Plan changes.** `prompts/plan-changes.md`. Turn client feedback into a fix-now plus standing-rule plan.
@@ -89,6 +133,9 @@ and nobody finds out it was invented until the client reads it.
 `content/README.md` has the detail.
 
 ## Before you start (build phase)
+
+This list is for a new build from a design. A job on an existing site needs only what its own
+prompt's "Before you paste" lists.
 
 - **Claude Code** installed, and this folder open in it.
 - The **design done** (Phase 1), with its tokens ready to load into Breakdance.
@@ -164,6 +211,8 @@ not known yet.
 | Placeholder | Where | Filled by |
 |---|---|---|
 | `[CLIENT]` | `.claude/CLAUDE.md`, `build-log/BUILD-LOG.md`, `DECISIONS.md`, `GATES.md`, `design/reference/design-system-checklist.md`, `handoff-checklist.md` | Scaffolding, automatically |
+| `[BUILDER]`, `[CONNECTION]`, `[DESIGN_SOURCE]` | The three import lines in `.claude/CLAUDE.md` | Scaffolding, or Claude asks in the first chat. **Until they are filled, no builder rules load** |
+| `[HOST]`, versions, `[CACHE_PLUGIN]` | The chosen builder file in `.claude/builders/` | Claude, once connected, reading them from wp-admin |
 | `[STAGING_URL]` | `.claude/CLAUDE.md` | **You**, once the staging site exists |
 | `[HOST]`, `[PRODUCTION_URL]` | Added per build where relevant | **You**, at launch planning |
 | `[NAME]`, `[LINK]`, `[DESIGNER]`, `[ROLE]`, `[VALUE]`, `[VALUES]`, `[USAGE]`, `[EXCLUSION]`, `[RATIONALE]`, `[BEHAVIOUR]`, `[EVIDENCE]` | `design/reference/DESIGN.template.md`, the design checklists | **The designer**, as the design system is built |
@@ -191,6 +240,7 @@ why it fails.
 | When to commit + two-machine sync | `.claude/reference/git-workflow.md` |
 | Connecting the site + settings + operating model | `CONNECT.md` |
 | This client's brief and rules (loaded every session) | `.claude/CLAUDE.md` |
+| The chosen builder, connection and design source rules (one of each loads) | `.claude/builders/`, `.claude/connections/`, `.claude/design-source/` |
 | Skills, agents, hooks | `.claude/` |
 | Build runbook + best practices | `docs/` |
 | Audit trail (log, gates, decisions, pages) | `build-log/` |

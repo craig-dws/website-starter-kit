@@ -37,6 +37,8 @@ through the sync rather than letting a verbatim copy delete it.
 | `.claude/agents/content-optimizer.md` | One bullet under Scope and honesty: a site-versus-Doc difference during a build is expected and is not reported, and the one reportable case is live copy with no `CONTENT_CHANGELOG.md` entry |
 | `.claude/reference/build-standards.md` | The `See also` path, which is `design/reference/design-for-build-checklist.md` here |
 | `.claude/skills/stage-gate/SKILL.md` | Two: that same checklist path, and a sentence in the Gate 3c precondition requiring the PM to confirm `CONTENT_CHANGELOG.md` is complete |
+| `.claude/skills/gutenberg-limits/SKILL.md` | Ported from the design system's copy at commit `7cff249`. Kit differences: the description and intro cover rebuilding pages as well as adding them; cross-references point at kit files (`.claude/CLAUDE.md`, `class-naming.md`, `connections/`) instead of the design system's docs 18, 24 and 28 and its prohibition numbers; moving a page to the live site is done by a person; every existing page is snapshotted before it is overwritten, never waived; the page cache is checked with the core's public-page check; "stop and ask" names a table, numbered steps and a run of questions and answers; one extra TODO line for ACF field behaviour and one for REST bases |
+| `.claude/skills/existing-site-page/SKILL.md` | Not a copy: the kit's own version, written for the kit's operator and audit trail (claims, page records, `CONTENT_CHANGELOG.md`, report shape), connection-neutral through `.claude/connections/`, and with a "Rebuilding an existing page" section the design system's copy does not have. Sync the three-builder facts in both directions by hand |
 
 **The changelog differences do not go upstream.** The design system treats ZilvaEdge as one optional
 content source and deliberately never names `CONTENT_CHANGELOG.md`, because the changelog is part of
@@ -59,4 +61,7 @@ Ask for it with "new site for [client]".
 history (copy the files then `git init`, do not clone, or the client's repo inherits every other
 build's commits), then follow `START-HERE.md`. You will be filling the handover pack yourself; see
 the "Where things live" table there for what belongs in it. The kit is lean and Breakdance-focused:
-no Astro/Payload clutter, no old design stages, just what a build needs.
+no Astro/Payload clutter, no old design stages, just what a build needs. Other builders arrive as one
+file each in `.claude/builders/` and `.claude/connections/`, and only the chosen ones load, so a
+Breakdance client never reads them (`START-HERE.md`, "Three choices"). When copying by hand, Claude
+asks for the builder, the connection and the design source in the first chat.

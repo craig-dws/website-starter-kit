@@ -122,6 +122,9 @@ The decision above is target-neutral. Only the mechanism differs.
   the Post Loop Builder rather than hand-built repetition.
 - **Astro plus Payload:** global blocks are components; template parts live in the
   layout. Content that varies comes from Payload rather than from a forked component.
+- **An existing WordPress block theme:** global blocks are synced patterns; template parts
+  are the theme's template parts; a documented pattern can be a registered block pattern.
+  On an existing site these usually exist already, so the audit is mostly reading them.
 
 Do not let the mechanism drive the decision. If the right answer is a template part, it
 is a template part on both targets.

@@ -1,73 +1,51 @@
 # [CLIENT] Site Build
 
 ## Project overview
-Design-to-WordPress build for [CLIENT]. The design source is a Figma file
-([FIGMA FILE - the source design file. Build each page from a Copy link to selection for its
-frame, never by reading the whole file, which overflows on large multi-page files. Needed at
-build time, not to connect; Figma is reached via its MCP]). Build target is the
-Breakdance staging site at [STAGING_URL]. Production is
-[PRODUCTION_URL - recorded for migration and launch only, never touched; fill at migration].
+Website work for [CLIENT]. Staging is [STAGING_URL]. Production is [PRODUCTION_URL - recorded
+for migration and launch only, never touched; fill at migration].
 
-Build target: WordPress + Breakdance.
+## Builder, connection and design source
+Every rule that depends on how this site is built, how Claude reaches it, or where its design
+comes from lives in one of the three files below. Only the three chosen for this project load.
 
-Starting condition: [ blank staging | DWS starter template | existing site with content ].
-If a starter template or existing site, its current header, footer, home and demo content
-are template defaults to be replaced, not client work, so Stage 4 is a replacement job, not
-a blank canvas. This also underpins any snapshot waiver: a regenerable starter has nothing
-to restore.
+@builders/[BUILDER].md
+@connections/[CONNECTION].md
+@design-source/[DESIGN_SOURCE].md
 
-## Stack
-- WordPress on [HOST - where it runs, e.g. hosting provider or server; informational, fill
-  when known]
-- Breakdance (version [read from wp-admin > Plugins once connected, then pin it here]) as
-  the page builder
-- Figma as the design source of truth (reached via the Figma MCP, not a URL)
-- Claude Code with the Figma MCP and the WordPress MCP (see CONNECT.md)
+**Setup check, before any other work.** If any of those three lines still shows a word in
+square brackets, its rules have not loaded, and this chat does not know how the site is built
+or reached. Stop and ask the operator for the builder, the connection and the design source
+(the choices and the supported combinations are in `START-HERE.md`), fill the lines in, and
+ask them to open a fresh chat so the rules load. Then check the connection file's
+**Supports** line. If it does not name this builder, stop and ask before anything else: that
+combination has not been proven, and a guessed write path is how a layout gets destroyed.
 
-## Staging operating model
-- Agents touch the staging site only. Safety is by process, not the connector's env
-  guards, so it does not matter what environment the site reports.
-- At migration, move to the client domain and **remove the Agent Connector plugin and
-  the MCP connection** before it goes live. This is the step safety depends on.
-- Agent Connector settings: **Universal Abilities OFF, Log MCP events OFF**, everything
-  else left as shipped. Exact toggle table in CONNECT.md.
+## Capabilities
+The rules here name capabilities, never tools. The connection file says how each one is done
+on this site, and names the person who does it where the connection cannot.
 
-## Breakdance conventions
-- Auto Layout maps to Section and Div; column arrangements map to Columns.
-- Repeating content uses the Post Loop Builder.
-- Never write raw PHP layout files. Build through Breakdance elements only.
-- Never blind-import settings. Always export first, then differential merge.
-- Always run wp breakdance clear_cache after any DB-affecting operation.
-- Content lives in the _breakdance_data postmeta. Back it up before writes.
-- Pin the Breakdance version on staging. Re-test the write path after any update.
+| Capability | What it means |
+|------------|---------------|
+| Confirm the environment | Prove from the site's own answer which site Claude is connected to, before any write |
+| Read a page's layout | Get a page's stored structure, not only what it looks like |
+| Snapshot a page | Save a page's stored layout where it can be restored from, before it is overwritten |
+| Write a page's layout | Create a page, or change one |
+| Upload media | Add an image to the site's media library |
+| Clear the cache | Make the public site show what was just written |
+| Read the design tokens | Get the named colour, type and spacing values the site is built from |
+| Write the design tokens | Change those values. It restyles every page, so only on a new build from an approved design, and never as a side effect |
+
+**After every write, check that the public page shows it.** Open the page's public address,
+logged out, and look for a sentence from the new copy. If it is missing, load the same address
+with a throwaway query string on the end (`?check=1`), which most page caches do not serve
+from. Present there but not at the plain address means a stale cache: clear it the way the
+connection file says, then check again. Missing from both means the write did not land. Either
+way the page is not done.
 
 ## Token source of truth
-- Figma Local Variables are the source of truth for design tokens.
-- Breakdance global variables mirror the Figma tokens.
 - Reference variables, never hardcoded hex or off-scale spacing.
 
 ## Images and SVGs
-For every raster image the build runs one process in order: **pull from Figma, rename from the
-design, resize to display size, optimise for web, then upload and reference it.** SVGs are
-inlined, not uploaded. WebP Express converts format server-side but does not resize, so images
-must be sized down before upload, not left massive.
-
-- **Upload path.** The build cannot upload through MCP (the media abilities are in the locked
-  Universal pack). It uploads with `.claude/tools/optimize-and-upload.py`, which resizes,
-  compresses and posts to the WordPress media REST API (`/wp/v2/media`) with the Application
-  Password, scoped to media, no dangerous abilities. It reads the credentials from
-  ~/.claude.json automatically (where claude mcp add stored them), so there is nothing to set.
-  The build runs this script itself via Bash; the human never runs Python or commands.
-- **The build can upload but not DELETE media.** The tool only posts. Before uploading, check
-  for an existing attachment of the same name (breakdance-search-posts with
-  post_type: attachment), or WordPress silently suffixes the new one `-1` and leaves the old
-  one in place. Removing a stale attachment is a human action in wp-admin. The build extracts the assets it needs from the Figma
-  frame, **renames each to a descriptive, SEO-friendly, kebab-case filename** based on what it
-  shows and its role (for example `cataract-surgery-hero.jpg`, never the Figma layer name or a
-  hash), and proposes alt text. You upload those named files; the build references them **by the
-  uploaded file's URL** (the Breakdance beta MCP cannot bind media, proven), which still serves WebP
-  and keeps alt but lacks `srcset`; a human binds them in the builder afterwards for `srcset`. Never
-  use an external (Figma) URL; do not inline large data URIs.
 - **Crop to the box before uploading.** A photo is usually 4:3 landscape and the slot it goes in
   often is not, so the browser centre-crops it and nothing has chosen what to keep. Work out the box
   ratio from the design, compose the crop so the subject and any branding stay in frame, and save it
@@ -75,15 +53,6 @@ must be sized down before upload, not left massive.
   becomes two files. Never upscale to reach 2x. **Measure the crop loss on the rendered page rather
   than checking it by eye** (`.claude/reference/build-checklist.md`): on a past build the worst two
   cases, losing 37 and 35 per cent of the picture, were invisible to a visual review.
-- **Optimise before upload.** Images often export oversized (Figma exports at 2500px).
-  Resize each to roughly 2x its display width, cap contained/section images at ~1600px and
-  only full-width heroes at ~2500px, then compress (JPEG quality ~82). Pillow is available for
-  this. WebP Express converts format server-side but does not resize, so dimensions must be
-  right before upload.
-- **Name and alt-text from the design, not by asking.** Read the names, section labels and
-  content in the Figma frame to derive each filename and alt text (a surgeon's name, the
-  section it sits in); do not ask the human for what the design already says. Name by section
-  where it helps (for example practice-apart-*, surgeons-*).
 - **Alt text is accessibility, not just SEO, and there is a right strategy.** Content images
   (photos, meaningful graphics) get descriptive alt written from what the design shows.
   Decorative icons get empty alt or aria-hidden, they add no information. Set the media fields
@@ -94,14 +63,6 @@ must be sized down before upload, not left massive.
 - **Keep placeholder images as placeholders.** A dummy or grey-silhouette image is not renamed
   after a real person; give it a placeholder name and flag it so the human supplies the real
   asset later.
-- **SVGs (icons, logos): inline them, do not upload.** WordPress blocks SVG uploads by default
-  and you do not need it: the build pulls the SVG from Figma and places the markup directly in
-  the layout as a Breakdance SVG Icon element. That is best practice for icons and logos
-  anyway, crisp at any size, styleable with the colour tokens, no HTTP request. For a large
-  SVG illustration where inlining would bloat the page, rasterise it to WebP (WebP Express is
-  available) and treat it as a normal image, or add a Safe SVG plugin and upload it deliberately.
-- If a plugin exposes a media-only upload ability outside the Universal pack, that one can be
-  allowed so the build uploads safely. Check discover-abilities before assuming.
 
 ## Page copy: this repo owns it during the build
 
@@ -122,34 +83,19 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
   ZilvaEdge reads at launch to work out what changed and why. An unexplained change gets
   reported as needing attention later, so logging it now costs ten seconds and saves a
   conversation.
-- `content/_live/` is the export of what the site actually says, and it is evidence rather
-  than input. Breakdance keeps live copy in the database, so without it there is no git trace
-  of a heading changed in the Breakdance UI.
 
 ## Protected paths (do not edit)
-- wp-config.php, wp-settings.php
 - Anything under the production environment.
 - .env and any secret-bearing file.
 
 ## Dos
-- Scope every Figma read to one selected frame via its Copy-link-to-selection node id; the
-  whole file overflows. On an overflow or a truncated metadata read, ask for the frame's
-  selection link rather than retrying the same call.
 - Work one page at a time and return a staging preview URL.
-- Verify every built page against Figma with a screenshot diff.
-- Before a write that would lose real work, make sure a **recovery path** exists: a manual DB
-  snapshot, or existing coverage (a daily automatic backup, Breakdance revision history). A
-  manual export is not mandatory if adequate coverage is in place. On a fresh, disposable site
-  it can be waived (recorded). Caveat: Breakdance per-post revisions may not cover the global
-  design-system layer and direct MCP writes may not create a revision, so for global-settings
-  writes rely on the daily/full backup.
 
 ## Don'ts
-- Do not run wp breakdance total_reset.
-- Do not run wp breakdance import_settings blind.
 - Do not run destructive shell commands (rm -rf, sudo).
-- Do not commit secrets. The site connection and its Application Password live in your
-  local Claude config via claude mcp add, never in the repo. See CONNECT.md.
+- Never write to the live site. Staging, or a disposable copy of the site, only.
+- Do not commit secrets. The connection file says where this project's site credential
+  lives, and it is never in the repo.
 
 ## Build log
 - Keep an audit trail in build-log/. The build-log.sh hook auto-records
@@ -164,7 +110,6 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
   prose (CLI flags in code are fine). No emojis.
 
 ## Reference
-- Build runbooks and best practices are in docs/ (19 for the build runbook, 23 best practices).
 - The full agency system, its complete docs and the front-half creative skills live
   in the AI Web Design System repo, not here. Consult it for anything not covered by
   this project. This repo is one client build and stays lean by design.
@@ -175,15 +120,10 @@ commands. Explain each term below in plain words the first time it appears in a 
 
 | Term | Say this instead |
 |------|------------------|
-| MCP | the connection that lets Claude drive Figma or the WordPress site |
-| postmeta, `_breakdance_data` | where WordPress stores the page layout in the database |
-| node id, selection link | the link copied from a single Figma frame |
-| `srcset` | the setting that serves a smaller image to a phone, added by hand in the builder afterwards |
-| WebP, WebP Express | the compressed image format, converted on the server |
-| Application Password | the site login the upload script uses |
-| Universal Abilities | the locked group of risky site actions, kept switched off |
-| differential merge | comparing settings and applying only the changes, rather than overwriting everything |
+| builder | the tool the site's pages are built in |
+| connection | how Claude reaches the site to read and change it |
+| design tokens | the named colour, type and spacing values the design is built from |
 
-Every page report says which page it covers, which staging URL to look at, and what needs
-a human decision. Never ask the operator for something the Figma frame or `content/`
+Every page report says which page it covers, which address to look at, and what needs a
+human decision. Never ask the operator for something the design source or `content/`
 already says.

@@ -13,8 +13,9 @@ restarting Claude Code, authorising a claude.ai connector), **stop, give clear n
 and wait** rather than guessing.
 
 ## 0. Orient and check prerequisites
-- Read `CONNECT.md` and `.claude/settings.json`. **Note the exact MCP server name the permission rules
-  are keyed to** (grep the `deny` list for `breakdance-wordpress`); you must reuse it verbatim in step 1.
+- Read `CONNECT.md` and `.claude/settings.json`. **Note the MCP server name the two deny rules are keyed
+  to** (the `mcp__<name>__mcp-adapter-...` entries in the `deny` list). If they still read
+  `[MCP_SERVER_NAME]`, this is the first connection for this client and you fill them in at step 1.
 - Check tooling with Bash and report what is missing, with the fix:
   - `node --version` and `npx --version` (the WordPress and chrome-devtools MCPs run via npx).
   - `python --version` and `python -c "import PIL, requests"` (the image-upload tool needs Pillow +
@@ -30,6 +31,11 @@ This connects the site so Claude can build layouts.
   `shell-exec`, `php-eval`, `wp-cli` and the rest of the Universal Abilities pack are keyed to that
   name. **A different name silently disables every one of those guards.** Read it from `settings.json`,
   do not retype it from memory.
+- **First connection for this client** (the deny rules still read `[MCP_SERVER_NAME]`): choose the server
+  name now, **replace `[MCP_SERVER_NAME]` in both deny rules in `.claude/settings.json`** with it, record
+  it in `build-log/DECISIONS.md`, and show me the change. Do this **before** registering the server, so
+  the connection never exists without its guard. The name is not a secret; the password never goes in
+  that file.
 - **Prompt the human for the Application Password** (needs a wp-admin login, you cannot do this):
   1. Log in to the staging site's wp-admin (`WP_API_URL` in `settings.json`). If you have no login, ask
      the site owner for a **WordPress admin account on the staging site** (or a second app password on
@@ -46,9 +52,10 @@ This connects the site so Claude can build layouts.
   the server name is exact and cannot be fat-fingered (note the password appears in this session, which
   is on the user's own machine). If they prefer to keep the secret out of the chat, give them the command
   to run in **cmd.exe, not PowerShell** (PowerShell mangles the `--` terminator).
-- The site-side settings and the Universal-Abilities deny are already done: the Agent Connector toggles
-  are server-side (set once, already set) and the deny rules are in the cloned `settings.json`. Nothing
-  to redo; you confirm the deny is in effect after the restart in step 4.
+- The site-side settings are already done: the Agent Connector toggles are server-side (set once,
+  already set). The deny rules are in `settings.json`, filled in above if this was the first connection.
+  A rule in the file is not proof it works: you confirm the deny is in effect after the restart in step 4.
+  `discover-abilities` is a separate tool and stays available.
 
 ## 2. chrome-devtools MCP (no secret)
 For the Figma visual diffs and the QA auditors. Run it yourself:

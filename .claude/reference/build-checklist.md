@@ -92,6 +92,11 @@ change a standard there, this is the per-page tick-list.
   in `get-post-tree` that a multi-paragraph passage is a single element, since `html-to-page` otherwise
   splits `<p>` tags into separate elements; consolidate if it split (see limitations.md).
 - Structure is shallow and sensibly grouped, scannable by a person.
+- **The page is verified as editable the way the project's builder file says** (for example, on a
+  block theme: no invalid-content warning on any block in the editor, and every ACF field showing
+  its content). Rendering correctly is not evidence.
+- **The public page shows the new copy**, checked logged out after the last write, per
+  `.claude/CLAUDE.md`.
 
 ## Record
 - Page or component recorded in `build-log/`; database writes and uploads logged.

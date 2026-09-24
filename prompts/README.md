@@ -3,6 +3,11 @@
 You run a build by pasting one prompt into Claude Code, in the client folder. Start at `START-HERE.md`;
 this is the quick index of what each prompt is for and when to reach for it.
 
+**The three jobs, one line each:**
+- **A new build from a design:** `guided-build.md` (or `advanced-build.md`), then `new-page.md` per page.
+- **Adding a page to an existing site:** `existing-site-page.md`.
+- **Rebuilding existing pages on an existing site** (same addresses, new copy): `rebuild-existing-pages.md`.
+
 | Prompt | Use it when | What it does |
 |--------|-------------|--------------|
 | `guided-build.md` | First build, or you are new to this | Connects the site, then walks you through the whole build step by step, explaining as it goes and asking before anything risky. |
@@ -12,8 +17,10 @@ this is the quick index of what each prompt is for and when to reach for it.
 | `global-blocks.md` | Once, after the design system is approved and **before the first page or template** | Reads the design, `content/` and the sitemap together, finds every section that repeats across the site, and decides whether each is a template part, a global block, a documented pattern, or inline. Writes `build-log/GLOBAL-BLOCKS.md`, which every page and template prompt then reads. Running it after pages are built does not work. |
 | `new-page.md` | Internal-pages phase, once the design system is locked | Builds one internal page from its reference and content, reusing the type's components. One page per chat; run several in parallel. |
 | `blog.md` | Building a blog / resources / news section | Builds the single-post template and the archive listing once, as Breakdance Templates every post inherits. Templates, not one page per post. |
-| `connect-bridge.md` | Only before `existing-site-page.md`, and only on a local copy of a live site | Installs and connects the third-party bridge plugin that writes layouts on Elementor or Breakdance 2.x, and arms the safety guard at the same time. Never on a live site. Not needed for a normal Breakdance 3.0 build. |
-| `existing-site-page.md` | A page on a client site that is **already live**, built by someone else in Elementor or Breakdance 2.x | Builds the page on a throwaway local copy of that site, matched to the site's own patterns, and hands you the steps to put it live. Nothing in this kit's normal build path applies; a different builder, a different connection. Not for a site we are building. |
+| `connect-bridge.md` | Only before an existing-site job on Elementor or Breakdance 2.x, and only on a local copy of a live site | Installs and connects the third-party bridge plugin that writes layouts on Elementor or Breakdance 2.x, and arms the safety guard at the same time. Never on a live site, never on a block theme. Not needed for a normal Breakdance 3.0 build. |
+| `connect-rest.md` | Before an existing-site job on a **WordPress block theme** | Connects through WordPress's own REST API with an Application Password, stored outside git. No plugin installed. Verifies it reached the copy, not the live site. |
+| `existing-site-page.md` | A **new** page on a client site that is **already live**, built by someone else in Elementor, Breakdance 2.x or a block theme | Builds the page on a copy of that site, matched to the site's own patterns, and hands you the steps to put it live. Nothing in this kit's normal build path applies; a different builder, a different connection. Not for a site we are building. |
+| `rebuild-existing-pages.md` | **Existing** pages on a live site get **new copy**, keeping their addresses | Snapshots each page, rebuilds it inside its own structure, keeps every link and conversion button exactly, one page at a time on a copy, and hands you the steps to put it live. |
 | `source-images.md` | After pages are built | Works through the image placeholders: client gallery first, else stock or AI, optimise, upload, swap in. |
 | `seo-meta.md` | After pages are built | Gathers the per-page SEO title and meta drafts to paste into the SEO plugin, plus the favicon and site-wide config. |
 | `status.md` | Any time you want to know where the build is | Read-only snapshot: page-by-page progress, plus lists of images to update, things that need you, and what is not done yet. |
@@ -40,12 +47,12 @@ this is the quick index of what each prompt is for and when to reach for it.
 `plan-changes.md` runs whenever client feedback arrives, and `status.md` any time you want to see where
 the build stands.
 
-`connect-bridge.md` and `existing-site-page.md` sit outside that order entirely, and they are a pair:
-the first sets the connection up, the second does the job. Neither is part of building a site. They are
-for the job that arrives months later, when a client whose site we did not build in Breakdance 3.0 asks
-for one more page on it. **The dividing line: `new-page.md` adds a page to a site we are building, on the
+`connect-bridge.md`, `connect-rest.md`, `existing-site-page.md` and `rebuild-existing-pages.md` sit
+outside that order entirely. A connect prompt sets the connection up, the other two do the job. None is
+part of building a site. They are for the job that arrives from a client whose site we did not build in
+Breakdance 3.0. **The dividing line: `new-page.md` adds a page to a site we are building, on the
 Breakdance 3.0 connection. `existing-site-page.md` adds a page to a site that is already live, in
-Elementor or Breakdance 2.x, where that connection does not exist and the work happens on a throwaway
-local copy first.**
+Elementor, Breakdance 2.x or a block theme, and the work happens on a copy first.
+`rebuild-existing-pages.md` gives pages that already exist new copy, in place.**
 
 See `.claude/reference/git-workflow.md` for when to commit and how two machines stay in sync.

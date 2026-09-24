@@ -3,9 +3,11 @@
 Copy this file to `pages/<page-slug>.md` for each page built. One record per page.
 
 ## Source
-- **Figma frame:** [frame name / node link]
+- **Figma frame:** [frame name / node link, or "none: patterned from <sibling page>" on an existing site]
 - **Slug / URL:** [/path]
 - **Build target:** [A / B]
+- **Builder / connection:** [e.g. breakdance / breakdance-native-mcp, block-theme / wordpress-rest]
+- **Snapshot before overwrite:** [snapshot file, on any page that existed before this work; "n/a, new page" otherwise]
 
 ## Build
 - **Built on:** [YYYY-MM-DD] by [name / agent]
@@ -26,6 +28,11 @@ Copy this file to `pages/<page-slug>.md` for each page built. One record per pag
 - [ ] Full build checklist applied (`.claude/reference/build-checklist.md`)
 - [ ] No console errors on the rendered page
 - [ ] Cache cleared after the last DB write
+- [ ] Public page shows the new copy, checked logged out
+- [ ] Opens cleanly in the builder's editor, per the builder file (block theme: no invalid-content
+      warning, every ACF field renders). Checked by: [person / logged-in browser]
+- [ ] Rebuild only: slug, status and parent unchanged; every link kept or its removal noted;
+      every conversion button's address identical, query string included
 
 ## Composed image crops (judgement calls a rebuild would lose)
 Only where a source was cropped to fit its box. Record what was kept and why, so a later rebuild or

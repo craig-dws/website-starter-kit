@@ -8,8 +8,9 @@
 input="$(cat)"
 cmd="$(printf '%s' "$input" | grep -oE '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed -E 's/.*"command"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/')"
 
-# Only log meaningful build operations, not every shell command.
-printf '%s' "$cmd" | grep -qE 'wp[[:space:]]+(breakdance|post|option|db|litespeed-purge)|import_settings|clear_cache|deploy' || exit 0
+# Only log meaningful build operations, not every shell command. create-post.py is the
+# WordPress REST connection's write path (create, update, restore); its reads are not logged.
+printf '%s' "$cmd" | grep -qE 'wp[[:space:]]+(breakdance|post|option|db|litespeed-purge)|import_settings|clear_cache|deploy|create-post\.py.*--(update|restore|title)' || exit 0
 
 log="$CLAUDE_PROJECT_DIR/build-log/BUILD-LOG.md"
 [ -d "$CLAUDE_PROJECT_DIR/build-log" ] || exit 0

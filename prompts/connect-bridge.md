@@ -9,7 +9,9 @@ lets Claude write layouts on an **Elementor or Breakdance 2.x** site. It is the 
 
 **You almost certainly do not need this.** A normal build on a Breakdance 3.0 staging site uses the
 first-party connection and `prompts/connect-mcps.md`. This is only for adding a page to a site that is
-already live and was built by someone else, where that connection does not exist.
+already live and was built by someone else, where that connection does not exist. **Never on a
+WordPress block theme site**: that uses WordPress's own API, through `prompts/connect-rest.md`, with
+no plugin at all.
 
 ## Read this before anything else
 
@@ -94,9 +96,10 @@ Give me these as numbered wp-admin steps, one at a time, and wait after each.
 
 1. **Add the deny rule first, before connecting.** `.claude/reference/limitations.md` records that the
    dangerous ability pack cannot be switched off on this class of plugin, and that the mitigation is to
-   deny the execute-ability route in `.claude/settings.json`. **Check whether that deny actually exists
-   in this project. In the starter kit it does not**, so you are probably adding it rather than
-   confirming it. Add a deny entry keyed to the exact MCP server name you are about to use, tell me in
+   deny the execute-ability route in `.claude/settings.json`. The starter kit ships two deny rules
+   keyed to `[MCP_SERVER_NAME]`, written for the Agent Connector's tool names. **The bridge's dangerous
+   tool may have a different name**, so read its real tool names and add a rule for this bridge rather
+   than assuming the kit's two cover it. Add a deny entry keyed to the exact MCP server name you are about to use, tell me in
    one plain sentence what it blocks, and show me the change.
    *(Confirm the exact permission-pattern syntax works, by checking after the restart that the
    dangerous tool is genuinely absent. Do not assume a pattern is effective because it looks right.)*

@@ -10,12 +10,12 @@ attachment, exactly as a human does in wp-admin > Add Media. It does NOT use the
 dangerous file-write / shell / php-eval abilities and cannot run code or write
 arbitrary files on the server.
 
-Credentials: by default it reads the site URL, username and Application Password
-straight from your local Claude config (~/.claude.json), where `claude mcp add`
-already stored them for this project. So there is nothing to set up. If you prefer,
-set WP_SITE_URL (or WP_API_URL), WP_API_USERNAME and WP_API_PASSWORD in the
-environment and those override the config. The password is never read from or
-written to the repo.
+Credentials: read from wherever this project's connection file (.claude/connections/)
+says they live, through wp_credentials.py beside this script: the environment, then
+.claude/settings.local.json (the WordPress REST connection), then your local Claude
+config (~/.claude.json), where `claude mcp add` stored them for an MCP or bridge
+connection. So there is nothing to set up once the site is connected. The password is
+never read from or written to the repo.
 
 Usage:
   # optimise only (no creds needed), overwrite the file in place:
@@ -33,67 +33,8 @@ Notes:
   WebP Express converts to WebP on the server, so do not pre-convert; just size it right.
 """
 import argparse, io, os, sys
-from urllib.parse import urlparse
 
-
-def derive_base(api_url):
-    if not api_url:
-        return None
-    p = urlparse(api_url)
-    return f"{p.scheme}://{p.netloc}" if p.scheme and p.netloc else None
-
-
-def creds_from_claude_config():
-    """Read WP credentials from ~/.claude.json, where `claude mcp add` stored them.
-    Prefers the MCP server whose project path matches the current directory.
-    Returns (wp_api_url, username, password) or None."""
-    path = os.path.expanduser("~/.claude.json")
-    if not os.path.exists(path):
-        return None
-    import json
-    try:
-        data = json.load(open(path, encoding="utf-8"))
-    except Exception:
-        return None
-    candidates = []  # (project_path_or_None, env)
-    for _name, cfg in (data.get("mcpServers") or {}).items():
-        env = (cfg or {}).get("env") or {}
-        if env.get("WP_API_PASSWORD"):
-            candidates.append((None, env))
-    for proj, pcfg in (data.get("projects") or {}).items():
-        for _name, cfg in ((pcfg or {}).get("mcpServers") or {}).items():
-            env = (cfg or {}).get("env") or {}
-            if env.get("WP_API_PASSWORD"):
-                candidates.append((proj, env))
-    if not candidates:
-        return None
-    norm = lambda s: os.path.normcase(os.path.abspath(s)).replace("\\", "/")
-    cwd = norm(os.getcwd())
-
-    def score(proj):
-        if not proj:
-            return 0
-        p = norm(proj)
-        return 2 if p == cwd else (1 if cwd.startswith(p) else 0)
-
-    candidates.sort(key=lambda t: score(t[0]), reverse=True)
-    env = candidates[0][1]
-    return env.get("WP_API_URL"), env.get("WP_API_USERNAME"), env.get("WP_API_PASSWORD")
-
-
-def resolve_credentials():
-    base = os.environ.get("WP_SITE_URL") or derive_base(os.environ.get("WP_API_URL"))
-    user = os.environ.get("WP_API_USERNAME")
-    pw = os.environ.get("WP_API_PASSWORD")
-    if base and user and pw:
-        return base, user, pw
-    cfg = creds_from_claude_config()
-    if cfg:
-        c_api, c_user, c_pw = cfg
-        base = base or derive_base(c_api)
-        user = user or c_user
-        pw = pw or c_pw
-    return base, user, pw
+from wp_credentials import WHERE, resolve_credentials
 
 
 def optimize(path, max_width, quality):
@@ -138,8 +79,7 @@ def main():
         import requests
         base, user, pw = resolve_credentials()
         if not (base and user and pw):
-            sys.exit("no credentials found: run `claude mcp add` in this project, or set "
-                     "WP_SITE_URL / WP_API_USERNAME / WP_API_PASSWORD")
+            sys.exit(WHERE)
         fields = {}
         if a.alt:
             fields["alt_text"] = a.alt
@@ -179,8 +119,7 @@ def main():
     import requests
     base, user, pw = resolve_credentials()
     if not (base and user and pw):
-        sys.exit("no credentials found: run `claude mcp add` in this project so they are in "
-                 "~/.claude.json, or set WP_SITE_URL / WP_API_USERNAME / WP_API_PASSWORD")
+        sys.exit(WHERE)
 
     filename = os.path.splitext(os.path.basename(a.image))[0] + ext
     url = base + "/wp-json/wp/v2/media"

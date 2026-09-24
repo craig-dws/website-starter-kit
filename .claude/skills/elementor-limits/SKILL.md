@@ -153,7 +153,7 @@ Prefer the highest-ranked method that can do the job.
 ## Images on an existing Elementor site
 
 The agency image process does not change with the builder. The order is the same
-one in `.claude/CLAUDE.md` and `.claude/reference/build-standards.md`:
+one in `.claude/reference/build-standards.md` and the project's design source file:
 
 - **Where the page has a design**, pull the asset from the Figma frame, rename it
   to a descriptive kebab-case filename derived from the design, resize it to about
