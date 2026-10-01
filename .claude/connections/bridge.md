@@ -6,9 +6,9 @@ project in `build-log/DECISIONS.md`: Novamira is the named fallback for Breakdan
 alternative. Nothing here depends on which.
 
 **Supports:** Elementor. Breakdance 2.x, and Breakdance 3.0 only if its native MCP fails the write
-test. **Not a block theme**: WordPress core already writes block theme layout through its own API,
-and a bridge would add full PHP execution reach for nothing (AI Web Design System decision,
-16 September 2026).
+test. **Not a block theme or WPBakery**: WordPress core already writes their layout through its own
+API, and a bridge would add full PHP execution reach for nothing (AI Web Design System decisions,
+16 September and 1 October 2026).
 
 **Where it runs:** only on a disposable local copy of the site, normally in LocalWP. **The bridge
 is never installed on the live site**: not to read from it, not for one small change, not

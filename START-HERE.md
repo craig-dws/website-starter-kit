@@ -11,7 +11,7 @@ client. It covers two phases:
 - **Build** (Phase 2), in Claude Code on the Breakdance staging site.
 
 It also handles pages on a client site that is **already built and live**, in Breakdance 2.x,
-Elementor or a WordPress block theme, with no design file at all.
+Elementor, WPBakery or a WordPress block theme, with no design file at all.
 
 ## Three choices, made once per client
 
@@ -23,7 +23,7 @@ them in the first chat.
 
 | Choice | Options |
 |---|---|
-| Builder (`.claude/builders/`) | `breakdance`, `elementor`, `block-theme` |
+| Builder (`.claude/builders/`) | `breakdance`, `elementor`, `block-theme`, `wpbakery` |
 | Connection (`.claude/connections/`) | `breakdance-native-mcp`, `bridge`, `wordpress-rest` |
 | Design source (`.claude/design-source/`) | `figma` (a design file or design pack), `existing-site` (the site is the design) |
 
@@ -35,9 +35,10 @@ them in the first chat.
 | `breakdance` (2.x, or 3.0 if the native MCP fails the write test) | `bridge` | Unverified, no real run yet | A page on an existing site, on a local copy |
 | `elementor` | `bridge` | Unverified, no real run yet | A page on an existing site, on a local copy |
 | `block-theme` | `wordpress-rest` | Storage and endpoints verified on a live site; writes not yet proven on a client | A page added or rebuilt on an existing site, on staging |
+| `wpbakery` | `wordpress-rest` | Storage and element usage read from a live site; writes, and the Design Options rebuild, not yet proven | A page added, rebuilt or edited on an existing site, on staging |
 
-Anything not in this table is **not supported**: Claude stops and asks. A block theme never uses the
-bridge, and the REST API does not write Breakdance or Elementor layouts. The design source is
+Anything not in this table is **not supported**: Claude stops and asks. A block theme or WPBakery site
+never uses the bridge, and the REST API does not write Breakdance or Elementor layouts. The design source is
 independent of both, but `figma` is proven on Breakdance only, and `existing-site` is the normal
 choice for every job on a site that is already live.
 
@@ -87,9 +88,9 @@ Every prompt:
 - **New machine or joining.** `prompts/connect-mcps.md`. Connects the MCPs, prompting you for the manual bits.
 - **New page.** `prompts/new-page.md`. One internal page from its reference and content. Run several in parallel.
 - **Blog.** `prompts/blog.md`. The single-post template and archive, as Breakdance Templates, not one page per post.
-- **Connect the bridge.** `prompts/connect-bridge.md`. Only before the prompt below, and only against a local copy of a live Elementor or Breakdance 2.x site. Not part of a normal build, and never on a block theme.
-- **Connect through the WordPress REST API.** `prompts/connect-rest.md`. The block theme connection: no plugin, just an Application Password, on a staging or local copy.
-- **Page on an already-live site.** `prompts/existing-site-page.md`. A different job from the rest of this list: a page on a client site that is already live and was built in Elementor, Breakdance 2.x or a block theme. Built on a copy of that site, matched to its own patterns, and promoted by a person. Not for a site we are building.
+- **Connect the bridge.** `prompts/connect-bridge.md`. Only before the prompt below, and only against a local copy of a live Elementor or Breakdance 2.x site. Not part of a normal build, and never on a block theme or WPBakery site.
+- **Connect through the WordPress REST API.** `prompts/connect-rest.md`. The block theme and WPBakery connection: no plugin, just an Application Password, on a staging or local copy.
+- **Page on an already-live site.** `prompts/existing-site-page.md`. A different job from the rest of this list: a page on a client site that is already live and was built in Elementor, Breakdance 2.x, WPBakery or a block theme. Built on a copy of that site, matched to its own patterns, and promoted by a person. Not for a site we are building.
 - **Rebuild pages on an already-live site.** `prompts/rebuild-existing-pages.md`. Existing pages keep their addresses and get new copy: snapshot first, buttons and links kept exactly, one page at a time.
 - **Source images.** `prompts/source-images.md`. Fill the image placeholders (a post-build pass).
 - **SEO meta.** `prompts/seo-meta.md`. The per-page title and meta drafts to paste into the SEO plugin.

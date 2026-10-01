@@ -1,6 +1,6 @@
 ---
 name: existing-site-page
-description: Add a page to, or rebuild existing pages on, a client website that is already built and live, matching what the site already does rather than building from a design. Use when the job is on an existing Elementor site, an existing Breakdance 2.x site, or an existing WordPress block theme (Gutenberg, full site editing) site. Covers working on a copy that is never the live site, connecting through the project's chosen connection, taking a read-only inventory of the site's own patterns, building by patterning an existing page, rebuilding a page in place without losing its address, buttons or links, and handing the result to a person to put live. The inventory step is a hard stop and is the point of the procedure.
+description: Add a page to, or rebuild existing pages on, a client website that is already built and live, matching what the site already does rather than building from a design. Use when the job is on an existing Elementor site, an existing Breakdance 2.x site, an existing WordPress block theme (Gutenberg, full site editing) site, or an existing WPBakery site. Covers working on a copy that is never the live site, connecting through the project's chosen connection, taking a read-only inventory of the site's own patterns, building by patterning an existing page, rebuilding a page in place without losing its address, buttons or links, and handing the result to a person to put live. The inventory step is a hard stop and is the point of the procedure.
 ---
 
 # Add or rebuild a page on an existing site
@@ -10,19 +10,24 @@ establish and no tokens to sync, because **the site already has them and the pag
 The measure of success is that a visitor, and the client in the editor, cannot tell which page was
 added or rebuilt later.
 
-This procedure covers three builders:
+This procedure covers four builders:
 
 - **Elementor.** Read `elementor-limits` alongside this.
 - **Breakdance 2.x**, which has no native connection. Read `breakdance-limits`, where the ranked
   write methods and the absence of a sanctioned layout API apply just as they do on 3.0. On a
   Breakdance 3.0 site running the Agent Connector, use the normal build path in
   `prompts/new-page.md` instead: it is first-party, better proven and does not need any of this.
-- **A WordPress block theme.** Read `gutenberg-limits`. This is the safest of the three: the layout
+- **A WordPress block theme.** Read `gutenberg-limits`. This is the safest of the four: the layout
   is readable block markup and WordPress's own API writes it, with no third-party plugin.
+- **WPBakery**, usually bundled with an older commercial theme. Read `wpbakery-limits`. Nearly as
+  safe: the layout is shortcodes, readable plain text in the page's own content, and WordPress's own
+  API writes it. What it lacks is any check on what is written, and its Design Options styling may
+  need a person's Update click to rebuild.
 
 **Identify which one before anything else**, from the rendered source of any page. `elementor-`
 classes mean Elementor. `breakdance` or `bde-` classes mean Breakdance. `wp-block-` classes with
-`wp-block-template-part` wrappers mean a block theme. It has to agree with the builder file loaded
+`wp-block-template-part` wrappers mean a block theme. `vc_row` and `wpb_` classes, with a "Powered by
+WPBakery Page Builder" generator tag, mean WPBakery. It has to agree with the builder file loaded
 into this project. If it does not, stop and say so: the wrong builder file means every rule loaded
 into this chat is wrong.
 
@@ -43,9 +48,9 @@ builder, stop and ask.
   connected to a disposable local copy of the site. It is reverse-engineering an undocumented
   internal format, which is managed risk rather than removed risk. This procedure calls it "the
   bridge" rather than naming a vendor, so it stays swappable.
-- **A block theme** uses **the WordPress REST API** (`connections/wordpress-rest.md`): the site's own
-  built-in interface, with an Application Password. No plugin is installed. **Never install the
-  bridge on a block theme site.** It would add full PHP execution reach for nothing the site's own
+- **A block theme or WPBakery** uses **the WordPress REST API** (`connections/wordpress-rest.md`): the
+  site's own built-in interface, with an Application Password. No plugin is installed. **Never install
+  the bridge on a block theme or WPBakery site.** It would add full PHP execution reach for nothing the site's own
   API does not already do.
 
 Say this plainly to yourself before starting, because getting it wrong wastes a session: **the
@@ -74,7 +79,8 @@ live, and it is the shortcut most likely to be reached for when a transfer turns
 Two capabilities work the same on every path, because they go through WordPress rather than the
 builder: `.claude/tools/optimize-and-upload.py` for media, and `.claude/tools/create-post.py` for
 posts. Both use the WordPress REST interface with an Application Password and are builder-neutral.
-On a block theme, `create-post.py` is also the layout path, because the post body is the layout.
+On a block theme or WPBakery, `create-post.py` is also the layout path, because the post body is the
+layout.
 
 ## The design source, when there is no design
 
@@ -135,7 +141,7 @@ substitute for released content.
   using LocalWP, All-in-One WP Migration, or the host's own pull. A settings-only export is **not**
   enough: it carries the tokens and none of the page patterns that the inventory needs, and none of
   the version context.
-- **Block theme:** a staging copy of the site is enough, and it works over HTTPS with no
+- **Block theme or WPBakery:** a staging copy of the site is enough, and it works over HTTPS with no
   configuration change. A local copy works too.
 - **Match the versions.** The copy runs the same builder or theme version and the same plugins as the
   live site. Version skew is the most common reason a finished page will not move cleanly at the end.
@@ -169,18 +175,28 @@ words:
 
 - The **builder and its version**, and whether the Pro tier is active. On a block theme: the
   WordPress version, the theme and child theme versions, and every block-providing plugin version.
+  On WPBakery: the WordPress and WPBakery versions, whether WPBakery is bundled with the theme, the
+  theme and child theme, every plugin that adds WPBakery elements, and whether the theme and each
+  add-on are still sold and maintained.
 - The **structure generation** in use. On Elementor, classic section-and-column or container. On
   Breakdance 2.x, how Sections, Divs and Columns are actually used on this site. On a block theme,
   which core layout blocks carry the structure, and which blocks are theme, plugin or ACF blocks
-  rather than core.
+  rather than core. On WPBakery, which elements carry the structure, and which are WPBakery's own,
+  the theme's or an add-on's.
 - The **reusable units that already exist**: saved Templates, Global Widgets, Global Blocks, or on a
   block theme the template parts and synced patterns.
 - The **token layer**, meaning the Elementor Kit's global colours and fonts, the Breakdance Global
-  Settings, or on a block theme the `theme.json` presets. **Read them. Do not change them.**
+  Settings, or on a block theme the `theme.json` presets. WPBakery has none to speak of: read the
+  Design Options and classes the sibling pages use instead. **Read them. Do not change them.**
 - **On a block theme, the attribute schema of every ACF block the page needs**, read from an existing
   instance's raw markup. ACF field data is JSON inside the block comment and is drawn by a PHP
   template, so it cannot be inferred from the rendered page. This needs the login, and it is the
   most commonly missed step.
+- **On WPBakery, the raw shortcodes of every page on the site**, not only the reference page. They
+  are the whole vocabulary: every element the site uses, in this version's exact syntax and this
+  site's encoding. **Never write WPBakery from memory**; that has already produced wrong-version
+  output on a real job. Also list any retired elements the site uses, which are never copied into
+  new work.
 - The **class naming the site already uses**, so the new page's classes look like they belong.
 - The **breakpoints the site itself uses**.
 - **One or two representative pages** of the type being added, read structurally in full, as the
@@ -194,7 +210,9 @@ site has no equivalent for. That second list is the thing the operator has to ma
 - **Duplicate the closest existing page and adapt it.** Do not compose from bare elements. This is
   the constrained-patch-on-a-known-good-structure method, and it is far safer than a build from
   scratch. On a block theme that means taking the sibling's raw block markup and changing only the
-  copy and the attributes that must change.
+  copy and the attributes that must change. On WPBakery a person duplicates the sibling in wp-admin
+  first, so the new page keeps WPBakery's page settings and Design Options styling, then its
+  shortcodes are updated with only the copy changed.
 - Reuse the site's existing classes, components and spacing, and reference its existing tokens
   rather than introducing values.
 - **Do not change global settings or tokens.** Restyling a global colour changes every page on the
@@ -224,7 +242,7 @@ something that is not true here.
   library. That is a workaround for one proven Breakdance 3.0 beta defect and **the reason for it does
   not exist here.** Where the builder and the connection can bind an image to its attachment
   properly, do that, because it gives responsive sizing for free. On a block theme the image block
-  binds by attachment id as a matter of course. On the bridge it is **unverified, so confirm it on the
+  binds by attachment id as a matter of course, and so does a WPBakery image element. On the bridge it is **unverified, so confirm it on the
   first image** rather than assuming either way.
 
 ### 5. Images
@@ -257,6 +275,11 @@ only applies here.
   field shows its content on the rendered page, because a wrong field name most likely renders
   empty with no warning. Opening the editor needs a login: until a person or a logged-in browser has
   done it, the page is "built, not verified".
+- **On WPBakery nothing checks a shortcode when it is saved.** Confirm the rendered page shows no
+  visible `[vc_` text, the page opens in the WPBakery backend editor as elements rather than raw
+  text, and its `vc_custom_` Design Options rules are in the rendered page head with spacing that
+  matches its siblings. If the styling is missing, a person opens the page in the WPBakery editor and
+  clicks Update. The editor needs a login, so the same "built, not verified" rule applies.
 - **Check the public page shows the new copy**, per `.claude/CLAUDE.md`.
 - Check it at each of the site's own breakpoints.
 - Compare it against its sibling pages and say honestly where it differs.
@@ -273,6 +296,11 @@ The build prepares the move. **The build does not touch the live site.**
   project uses whatever route is recorded in `build-log/DECISIONS.md`. Flag any images that will not
   resolve on the live site, and every theme, plugin or ACF block the page depends on, which must be
   active there at the same version.
+- **WPBakery:** the page's raw shortcodes are the whole of the layout, and they are portable plain
+  text. A person duplicates the reference page on the live site, pastes the shortcodes into the
+  duplicate's content *(confirm the editor route on the site)*, saves, then opens it in the WPBakery
+  editor and clicks Update so the Design Options styling is rebuilt there. Remap every image ID to
+  the live site's, and flag every theme or add-on element the page needs active there.
 - **Breakdance 2.x:** there is no equally clean single-page export. Use Breakdance's own template or
   Global Block export where that fits. Copying the one new page's `_breakdance_data` postmeta across
   is the fallback, and it is the last-resort method in the `breakdance-limits` ranking, so it is
@@ -370,16 +398,19 @@ An existing-site page is logged like any other page in this kit.
 - The builder and version, and pin the copy to match.
 - The connection for this project, and one verified "confirm the environment" call before any write.
 - Whether the client's licence covers the Pro features any existing page relies on, for example
-  Elementor Pro widgets, Breakdance Pro settings export, or a commercial block theme's licence.
+  Elementor Pro widgets, Breakdance Pro settings export, a commercial block theme's licence, or
+  whether a bundled WPBakery can still be updated.
 - The route that actually works for moving a page to the live site on this builder version.
 - Whether media references survive the move, and what has to be repointed.
 - On a block theme, which caching plugin is active and whether it purges by itself after an API
   write.
+- On WPBakery, whether a save through the API rebuilds the Design Options styling, settled on the
+  first page and recorded in `build-log/DECISIONS.md`.
 
 ## See also
 
 - `prompts/existing-site-page.md` and `prompts/rebuild-existing-pages.md`, the paste-in jobs that run
   this
-- the `elementor-limits`, `breakdance-limits` and `gutenberg-limits` skills
+- the `elementor-limits`, `breakdance-limits`, `gutenberg-limits` and `wpbakery-limits` skills
 - `prompts/new-page.md`, the different job: a new page on a site this kit built
 - `.claude/reference/build-standards.md` and `.claude/reference/image-placeholder.md`

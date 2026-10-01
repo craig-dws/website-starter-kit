@@ -94,7 +94,8 @@ change a standard there, this is the per-page tick-list.
 - Structure is shallow and sensibly grouped, scannable by a person.
 - **The page is verified as editable the way the project's builder file says** (for example, on a
   block theme: no invalid-content warning on any block in the editor, and every ACF field showing
-  its content). Rendering correctly is not evidence.
+  its content; on WPBakery: the page opens in its editor as elements, with no visible `[vc_` text and
+  its Design Options styling present). Rendering correctly is not evidence.
 - **The public page shows the new copy**, checked logged out after the last write, per
   `.claude/CLAUDE.md`.
 

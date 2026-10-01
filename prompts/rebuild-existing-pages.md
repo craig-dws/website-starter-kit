@@ -19,8 +19,8 @@ Four things have to be true, and all four are yours to do, not Claude's.
    site as the design source (see `START-HERE.md`).
 2. **A staging or local copy of the site, not the live site**, running the same versions as live.
 3. **The connection to that copy**, set up with the prompt the connection file names
-   (`prompts/connect-rest.md` on a block theme, `prompts/connect-bridge.md` on Elementor or
-   Breakdance 2.x).
+   (`prompts/connect-rest.md` on a block theme or WPBakery, `prompts/connect-bridge.md` on Elementor
+   or Breakdance 2.x).
 4. **The approved copy for every page in `content/`**, and the list of pages with their addresses
    (normally `page-structure.md` or `design/sitemap.md`). A page with no approved copy is skipped,
    not written.
@@ -79,7 +79,8 @@ what I am looking at and why.
 Take the inventory the `existing-site-page` skill describes, once, for the whole set of pages: the
 versions, the blocks or elements the site uses and which tier each belongs to, the reusable parts,
 the tokens (read, never changed), and on a block theme the settings of every ACF block these pages
-use, read from an existing instance's raw markup.
+use, read from an existing instance's raw markup. On WPBakery, read the raw shortcodes of every page
+on the site, because they are the whole vocabulary: never write WPBakery from memory.
 
 Then, **for every page on the list**, read and record in its page record:
 
@@ -110,8 +111,10 @@ For each page, in order:
    Any difference you did not intend: **restore the snapshot and tell me.**
 5. **Check the public page shows the new copy**, as `.claude/CLAUDE.md` describes.
 6. **Verify it is still editable**, the way the builder file says. On a block theme that means no
-   validation warning on any block in the editor and every ACF field showing its content. The editor
-   needs a login: if you cannot open it, tell me exactly which page to open and what to look for.
+   validation warning on any block in the editor and every ACF field showing its content. On
+   WPBakery it means no visible `[vc_` text, the page opening in the WPBakery editor as elements, and
+   its Design Options styling present; if the styling is missing, I click Update in the WPBakery
+   editor. The editor needs a login: if you cannot open it, tell me exactly which page to open and what to look for.
 7. **Record it** in `build-log/pages/<slug>.md`: the snapshot file, the link comparison, the buttons
    checked, and whether the editor check was done and by whom.
 

@@ -5,7 +5,8 @@ internal-pages phase, once the design system is locked and the shared chrome (he
 built. For the first build or setup, use the guided or advanced prompt instead.
 
 **This prompt is for a page on a site we are building, on the Breakdance 3.0 connection.** For a page
-on a client site that is **already live** and was built in Elementor, Breakdance 2.x or a block theme,
+on a client site that is **already live** and was built in Elementor, Breakdance 2.x, WPBakery or a
+block theme,
 use `existing-site-page.md` instead: different builder, no native connection, and the work happens on
 a copy of that site first. For existing pages getting new copy, use `rebuild-existing-pages.md`.
 

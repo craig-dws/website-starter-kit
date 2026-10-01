@@ -6,7 +6,7 @@ Copy this file to `pages/<page-slug>.md` for each page built. One record per pag
 - **Figma frame:** [frame name / node link, or "none: patterned from <sibling page>" on an existing site]
 - **Slug / URL:** [/path]
 - **Build target:** [A / B]
-- **Builder / connection:** [e.g. breakdance / breakdance-native-mcp, block-theme / wordpress-rest]
+- **Builder / connection:** [e.g. breakdance / breakdance-native-mcp, block-theme / wordpress-rest, wpbakery / wordpress-rest]
 - **Snapshot before overwrite:** [snapshot file, on any page that existed before this work; "n/a, new page" otherwise]
 
 ## Build
@@ -30,7 +30,8 @@ Copy this file to `pages/<page-slug>.md` for each page built. One record per pag
 - [ ] Cache cleared after the last DB write
 - [ ] Public page shows the new copy, checked logged out
 - [ ] Opens cleanly in the builder's editor, per the builder file (block theme: no invalid-content
-      warning, every ACF field renders). Checked by: [person / logged-in browser]
+      warning, every ACF field renders; WPBakery: opens as elements, no visible `[vc_` text, Design
+      Options styling present). Checked by: [person / logged-in browser]
 - [ ] Rebuild only: slug, status and parent unchanged; every link kept or its removal noted;
       every conversion button's address identical, query string included
 

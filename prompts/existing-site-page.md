@@ -1,7 +1,8 @@
 # Add a page to an existing site
 
 Paste this into Claude Code (in the client folder) to add **one page to a client website that is
-already built and live**, in Elementor, in Breakdance 2.x or as a WordPress block theme. The page is
+already built and live**, in Elementor, in Breakdance 2.x, in WPBakery or as a WordPress block theme.
+The page is
 built on a copy of the site that is not the live site, matched to what the site already does, and
 handed to you to put live yourself.
 
@@ -23,7 +24,8 @@ Four things have to be true, and all four are yours to do, not Claude's.
    The design phase, the sitemap and the token work are all skipped, because the site already has
    them. Do not run this job in a folder belonging to a different client.
 2. **A copy of the site that is not the live site.** On Elementor or Breakdance 2.x, a throwaway
-   local copy of the whole site, normally in LocalWP. On a block theme, a staging copy is enough. The
+   local copy of the whole site, normally in LocalWP. On a block theme or WPBakery, a staging copy is
+   enough. The
    whole site, not a settings export: Claude needs the site's existing pages to copy the pattern
    from, and the same versions.
    **Note what making the copy costs.** If the host has no one-click pull, taking a copy usually
@@ -32,7 +34,8 @@ Four things have to be true, and all four are yours to do, not Claude's.
    something to slide into on the way to the real job.
 3. **The connection set up to that copy and nothing else.** On Elementor or Breakdance 2.x, the bridge
    plugin, through `prompts/connect-bridge.md`. **The bridge is never installed on the live site.** On
-   a block theme, no plugin at all: `prompts/connect-rest.md` connects through WordPress's own API.
+   a block theme or WPBakery, no plugin at all: `prompts/connect-rest.md` connects through WordPress's
+   own API.
 4. **The approved copy for the new page in `content/`.** If it is not there, request it from
    ZilvaEdge first. Claude will refuse to build the page without it, which is deliberate.
 
@@ -49,7 +52,8 @@ not apply here; the WordPress, hosting firewall, Figma, browser and session sect
 you read and write on this job is in the project's connection file. If you find yourself reaching
 for a Breakdance 3.0 tool, you have the wrong prompt open.
 
-**The bridge plugin never goes on the live site**, and it never goes on a block theme site at all.
+**The bridge plugin never goes on the live site**, and it never goes on a block theme or WPBakery site
+at all.
 
 I am a project manager, not a developer. I never run commands and I never touch code. Anything that
 needs a command, you run. Anything that needs a person, describe it as clicks in wp-admin or in
@@ -89,16 +93,24 @@ here gets changed, least of all the global settings.
 Read the site and enumerate:
 
 - The **builder and its version**, and whether the Pro tier is active. On a block theme: the
-  WordPress version, the theme and child theme, and every block-providing plugin, with versions.
+  WordPress version, the theme and child theme, and every block-providing plugin, with versions. On
+  WPBakery: the WordPress and WPBakery versions, the theme and child theme, every plugin that adds
+  WPBakery elements, and whether the theme and each add-on are still sold and maintained.
 - The **structure generation** the site uses. On Elementor, classic section-and-column or container.
   On Breakdance, how Sections, Divs and Columns are actually used on this site. On a block theme,
-  which core blocks carry the layout, and which blocks are theme, plugin or ACF blocks.
+  which core blocks carry the layout, and which blocks are theme, plugin or ACF blocks. On WPBakery,
+  which elements carry the layout, and which are WPBakery's own, the theme's or an add-on's.
 - The **reusable units that already exist**: saved Templates, Global Widgets, Global Blocks, or on a
   block theme the template parts and synced patterns.
 - The **token layer**: the Elementor Kit's global colours and fonts, the Breakdance Global Settings,
   or on a block theme the `theme.json` presets. Read them. Do not change them.
 - **On a block theme, the settings of every ACF block this page needs**, read from an existing
   instance's raw markup, never guessed from the rendered page.
+- **On WPBakery, the raw shortcodes of every page on the site.** They are the whole vocabulary. **Do
+  not write WPBakery from memory**: an AI's memory mixes many versions and knows nothing of the
+  theme's elements, and that has already produced wrong-version output on a real job. An element or
+  setting that is on no page does not exist here. List any retired elements, such as the old
+  accordion, and never copy one into the new page.
 - The **class naming the site already uses**, so the new page looks like it belongs.
 - The **breakpoints the site itself uses**.
 - **The reference page, read structurally in full**, section by section, as the pattern to follow.
@@ -118,7 +130,9 @@ read them before you can use them.
 
 - **Duplicate the closest existing page and adapt it.** Do not compose the page from bare headings,
   text, images and buttons when a matching page already exists. On a block theme, start from the
-  reference page's raw block markup and change only what this page's copy needs.
+  reference page's raw block markup and change only what this page's copy needs. On WPBakery, ask me
+  to duplicate the reference page in wp-admin first, then replace the duplicate's shortcodes, keeping
+  its structure and Design Options and changing only what this page's copy needs.
 - Reuse the site's existing classes, components and spacing, and reference its existing tokens.
   Use its breakpoints, not invented ones.
 - **If the page needs something with no existing equivalent, stop and ask me.** Do not improvise a
@@ -154,6 +168,11 @@ read them before you can use them.
   any block, and every ACF field showing its content on the rendered page. The editor needs a login;
   if you cannot open it, tell me exactly what to open and what to look for, and report the page as
   built, not verified.
+- **On WPBakery**, nothing checks a shortcode when it is saved. Confirm no visible `[vc_` text on the
+  rendered page, that the page opens in the WPBakery backend editor as elements, and that its
+  `vc_custom_` Design Options rules are in the rendered page head with spacing matching its siblings.
+  If the styling is missing, tell me to open the page in the WPBakery editor and click Update. Never
+  write the styling by hand.
 - **Check the public page shows the new copy**, as `.claude/CLAUDE.md` describes.
 - Check it at each of the site's own breakpoints.
 - Compare it against its sibling pages and tell me honestly where it differs.
@@ -168,6 +187,10 @@ read them before you can use them.
   creating the page on the live site and pasting that into the editor's code view. Flag any images
   that will not resolve there, and every theme, plugin or ACF block the page needs to be active
   there at the same version.
+- **WPBakery:** save the page's raw shortcodes to a file and tell me where it is. The move is me
+  duplicating the reference page on the live site, pasting the shortcodes into it, saving, then
+  clicking Update in the WPBakery editor so its styling rebuilds. List every image ID that must be
+  swapped for the live site's, and every theme or add-on element the page needs active there.
 - **Breakdance 2.x:** there is no equally clean single-page export. Work out the export route that
   actually exists on this version rather than assuming one, and tell me what you found. Say plainly
   if the only route left is copying the page's stored layout data across, because that is the
