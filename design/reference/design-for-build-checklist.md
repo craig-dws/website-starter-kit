@@ -36,13 +36,13 @@ real brand decision rather than a mechanical default. That is judgement the buil
   *(Eastwood: 8 variables, 2 empty, ~26 colours actually in use, one mis-named — so all tokens had
   to be re-derived from the frame.)*
 - **No near-duplicate colours for the same role** (e.g. two slightly different blues for the same
-  eyebrow-on-dark). Pick one, name it.
+  caption-on-dark). Pick one, name it.
 - Include the "boring" tokens too: **container width, gutter, section padding, card gap, radii,
   icon-tile size.** *(Eastwood used 1440 / 40 / 100 / 27 — put these in variables, not just pixels.)*
 
 ## A style guide, and what a complete one contains
 - **Supply a style guide frame.** It is the single most useful thing after the tokens themselves,
-  because it states each value's **role** ("eyebrow text for dark background"), which a page
+  because it states each value's **role** ("caption text for dark background"), which a page
   drawing never does. Without one, every token is inferred from pixels.
   *(Eastwood's arrived after the home page was built. It certified the type scale, eight colours
   and both button gradients, all of which matched, and it settled two questions that had been open
