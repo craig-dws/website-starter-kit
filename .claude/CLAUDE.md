@@ -96,10 +96,10 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
 - Never write to the live site. Staging, or a disposable copy of the site, only.
 - Do not commit secrets. The connection file says where this project's site credential
   lives, and it is never in the repo.
-- No eyebrow labels. Build no small label above a heading, even where the frame draws one;
-  keep the accent rule if there is one, without words, and note the omission in the build log.
-  Nothing above the H1. The only words on a page are the approved content in `content/`.
-  (ZilvaEdge rule, 2026-10-19.)
+- Do not invent eyebrow labels. A small label above a section heading is built only where the
+  page file in `content/` carries an `**Eyebrow.**` line for that section, with those words.
+  Never above the H1. If the frame draws one the content does not have, leave it out and note
+  it in the build log. (ZilvaEdge rule, 2026-10-19.)
 
 ## Build log
 - Keep an audit trail in build-log/. The build-log.sh hook auto-records
