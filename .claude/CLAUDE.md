@@ -96,6 +96,9 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
 - Never write to the live site. Staging, or a disposable copy of the site, only.
 - Do not commit secrets. The connection file says where this project's site credential
   lives, and it is never in the repo.
+- No eyebrow labels: no small uppercase label above a heading, even where the design frame
+  draws one. The only words on a page are the approved content in `content/`. If the frame
+  has them, leave them out and note it in the build log. (ZilvaEdge rule, 2026-10-19.)
 
 ## Build log
 - Keep an audit trail in build-log/. The build-log.sh hook auto-records
