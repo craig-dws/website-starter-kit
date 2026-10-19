@@ -19,9 +19,7 @@ Replace `x-` below with the site's own `css_prefix`.
 | `.x-h3` | [30 / 36] | [26 / 34] | [24 / 32] | Sub-section and note headings |
 | `.x-h4` | [24 / 28] | [24 / 28] | [22 / 28] | Card and callout headings |
 | `.x-h5` | [20 / 28] | [20 / 28] | [20 / 28] | Card titles, FAQ questions, names |
-
-There is no eyebrow style. A page carries no small uppercase label above a heading; the only words on
-the page are the approved content (ZilvaEdge rule, 2026-10-19).
+| `.x-eyebrow` | [14 / 17] | [14 / 17] | [14 / 17] | Label above a heading, only where the content file supplies one |
 
 Sizes are `size / line-height` in px. Every value is a token (`--x-type-size-h2`,
 `--x-type-size-h2-md`, `--x-type-size-h2-sm` and so on), never a literal.
