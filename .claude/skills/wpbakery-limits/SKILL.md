@@ -114,19 +114,110 @@ The page does **not** load that styling from the shortcode. WPBakery collects it
 `_wpb_shortcodes_custom_css` postmeta and prints it in the page head, and a person clicking Update in
 the WPBakery editor rebuilds it.
 
-**Whether a save through the REST API rebuilds it is not confirmed.** If it does not, a page written
-through the connection renders with the right structure and the wrong spacing: easy to miss on a
-quick look.
+**A save through the REST API does not rebuild it.** Proven on WPBakery 8.7.1 (SUFWB, 14 October
+2026): after the home page was written through the connection, its head still printed the old page's
+`vc_custom_` rules and none of the 16 new ones. A page written through the connection renders with
+the right structure and the wrong spacing, which is easy to miss on a quick look.
+
+Three refinements, all from the same build:
+
+- **An empty page is the exception.** A page with no stored styling (a hub that never had a layout)
+  printed all its Design Options straight after the API write, because WPBakery builds them from the
+  layout when nothing is stored. A person's Update is still needed for the page CSS and script.
+- **Changing only an `el_class` needs no Update.** Adding a class to a row's "Extra class name"
+  through the connection left every Design Options rule printing.
+- **Never leave the editor open across a write.** Update saves the whole page as the editor loaded
+  it. On SUFWB an editor tab opened before a write saved the older layout back, undoing six card
+  buttons. Reload the editor first; after every person's Update, compare the stored layout with the
+  layout file.
 
 So, on every site, on the first page:
 
 1. Write the page through the connection.
 2. Check its `vc_custom_` rules appear in the rendered page head.
-3. If they do not, **a person opens the page in the WPBakery backend editor and clicks Update**, which
-   rebuilds them, and every later page gets the same step. Record which it was in
+3. If they do not, **a person reloads the page in the WPBakery backend editor and clicks Update**,
+   which rebuilds them, and every later page gets the same step. Record which it was in
    `build-log/DECISIONS.md`.
 
 Never hand-write `_wpb_shortcodes_custom_css` as a substitute.
+
+## What the API cannot reach, and how to work around it
+
+None of these is exposed through the REST API (only `footnotes` is in a page's `meta`). Each is a
+person's paste or click, so the build hands over a file and then checks the result is printing.
+
+| Setting | Where a person sets it | Scope |
+|---------|------------------------|-------|
+| Page Custom CSS | The page's WPBakery settings, Custom CSS | That page only |
+| Page Custom JS | The page's WPBakery settings, Custom JS (footer box) | That page only |
+| Additional CSS | Appearance, Customise, Additional CSS | Every page |
+| Template | Page Attributes | That page |
+| Theme title band | The theme's own page settings box | That page |
+
+- **Keep every paste as a versioned file in the repo**, such as `build-log/layouts/page-custom-css.css`
+  with a version line at the top. After the paste, read the public page and confirm the block prints
+  **once** and no older version is left. On SUFWB a paste was reported done on two pages that still
+  printed the previous version.
+- **Prefer one class-scoped block in Additional CSS over per-page pastes** once the same rule is
+  needed on more than a few pages. Scope it to opt-in classes the build adds (`page-banner`,
+  `wg-split-top`, `wg-cards-wrap`), so pages the build does not touch are not restyled. A new page
+  then just gets the class, with no paste at all. This is a recorded exception to "no site-wide CSS",
+  justified by the scoping, so record each block in `build-log/DECISIONS.md`.
+- **Paste Additional CSS before the page writes that depend on it**, or the pages show half-styled in
+  between.
+- **The template and the title band are separate settings.** On SUFWB, switching a page to the
+  full-width WPBakery template left the theme's title band in place, printing a second h1. On every
+  page not duplicated from a built page, check the body class and the h1 count after the write.
+
+## Cascade traps, measured on a real site
+
+- **WPBakery prints a page's Design Options after its Custom CSS.** A Custom CSS rule that targets a
+  `vc_custom_` class with that class alone loses, even with `!important`. Use a more specific
+  selector, such as `article section.content .vc_column-inner.vc_custom_...`.
+- **When testing a rule by injecting it into the page, inject it where the real one will print.**
+  Page Custom CSS goes first in the head; Additional CSS goes last. A test that injects in the wrong
+  place passes rules that fail for real.
+- **Break media queries at 991.98px and 767.98px**, not 991px and 767px. At exactly 991 and 767 the
+  browser fell between the theme's rules and the build's, and neither applied.
+- **`.wpb_wrapper` is `height:100%`**, so it fills its column. A vertical-centring check that measures
+  the wrappers always passes; measure the text itself. On SUFWB that hid offsets of up to 72px.
+- **A column with a border or background gets 35px top padding** from WPBakery's own stylesheet
+  (`.vc_col-has-fill > .vc_column-inner`), so text beside a 1px divider starts lower than its
+  neighbour.
+- **The theme may force content link colours with `!important`**, beating a plain link rule. Match its
+  wrapper and its `!important` to override it.
+- **The theme's own brand colour may fail contrast as text.** Check every text colour on the site
+  against WCAG AA before the first page, and decide once, using only colours already on the site,
+  which may carry words and which only rules, panels and icons.
+
+## Element traps
+
+- **The current accordion is `[vc_tta_accordion]` with `[vc_tta_section]`**, and every section needs a
+  new, unique `tab_id` in the form the editor writes (13 digits, a hyphen, then a short random code).
+  If no page on the site uses it, a person adds one in the editor to a throwaway draft, the build reads
+  its shortcode as the pattern, and the draft is deleted. Never write it from memory.
+- **The WPBakery accordion changes the address bar on every click.** Its script writes `#<tab_id>` into
+  the address and adds a browser history entry, so Back steps through FAQ questions. There is no
+  setting to turn it off. The fix used on SUFWB is a small script in the page's Custom JS that empties
+  the accordion's `changeLocationHash` function after load. Every page with an FAQ gets it.
+- **A list that opens a text column** picks up the theme's top margin and pushes the column down. Give
+  it `style="margin-top: 0;"`.
+- **The theme's small button may print its label at 11px.** Check button label sizes on the first page.
+- **Gravity Forms buttons and anchors.** The form's Submit button takes the theme accent, which may
+  fail contrast; restyle it in the page CSS. A link to a form needs `scroll-margin-top` on the form so
+  it lands below a fixed header.
+
+## Duplicated pages carry more than the layout
+
+A new page made with a duplicate page plugin (Yoast Duplicate Post on SUFWB) copies the reference
+page's layout and settings, which is the point. It also:
+
+- **leaves the slug empty and keeps the reference page's parent.** Set both through the connection;
+- **copies the reference page's SEO title and meta description** (Rank Math, Yoast). Until the SEO
+  pass the new page is an exact duplicate of its reference page to a search engine. List it in the
+  page record and make sure the SEO pass replaces it before launch;
+- **copies the banner photo**, which is often why that reference page was chosen. Check a banner
+  photo's crop at 1280, 1024 and 768 before choosing it, because deeper banners cut faces.
 
 **Cloned pages share Design Options class names.** On a site built by duplicating a template page,
 many pages carry identical `vc_custom_` classes. That is normal and harmless, because each page holds
@@ -200,7 +291,12 @@ the write path**, the connection in `.claude/connections/wordpress-rest.md`, thr
   have markup stripped from the content on save.
 - Inherited sites often have a security plugin that blocks the REST API for logged-out visitors, and
   some also switch off Application Passwords. **Check this when connecting**, before planning around
-  the API.
+  the API. The connection file lists what SUFWB had (Wordfence, Admin and Site Enhancements, and a
+  theme shortcode that broke rendered reads).
+- **Keep each page's layout as a file** (`build-log/layouts/<slug>-<id>.txt`) and send that file.
+  Never build a layout to send from `--read` output captured by the shell: on Windows it doubles
+  every line break, and WordPress stores them doubled. After any write, byte-compare the stored
+  layout with the file.
 
 **No third-party write plugin.** Never install the bridge on a WPBakery site. It would add full PHP
 execution reach for nothing the site's own API does not already do.
@@ -250,12 +346,21 @@ No agent writes to the live site.
 
 ## TODO (confirm on the real site, do not assume)
 
+What SUFWB (WPBakery 8.7.1, October 2026) settled is noted against each. One site is evidence, not
+proof for the next, so still confirm on the first page.
+
 - The WPBakery version, and whether it is bundled with the theme or separately licensed.
 - Every element in use, from the raw shortcodes of every page, split into WPBakery, theme and add-on
   tiers.
 - Whether a REST API save rebuilds `_wpb_shortcodes_custom_css` on this version, or a person's Update
-  click is needed per page.
+  click is needed per page. *SUFWB: it does not; Update needed, except on a page with no stored
+  styling.*
 - Whether a page created through the API, rather than duplicated, opens in the WPBakery editor.
+  *SUFWB: not tested; every new page was a person's duplicate. Layouts written through the API into
+  existing empty pages opened in the editor as elements.*
+- Whether page Custom CSS, page Custom JS and Additional CSS can be written through the API. *SUFWB:
+  none of them; a person pastes each.*
+- Whether the theme's title band is a separate setting from the page template. *SUFWB: yes.*
 - Whether the backend editor exposes the element registry to a logged-in browser, if the registry is
   ever needed.
 - Whether a security plugin blocks the REST API or Application Passwords.

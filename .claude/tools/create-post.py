@@ -70,9 +70,16 @@ def api(base, rest_base, item=None):
     return f"{url}/{item}" if item not in (None, "") else url
 
 
+# Only the stored fields, never content.rendered: asking for the rendered body makes WordPress run
+# the page's shortcodes, and one that echoes instead of returning (a theme's blog grid, for one)
+# prints HTML in front of the JSON. Asking for less also keeps the reply small.
+FIELDS = "id,slug,status,link,modified,title.raw,content.raw"
+
+
 def fetch_edit(requests, base, auth, rest_base, item):
     """The stored post, including raw block markup. Needs authentication."""
-    r = requests.get(api(base, rest_base, item), auth=auth, params={"context": "edit"}, timeout=60)
+    r = requests.get(api(base, rest_base, item), auth=auth,
+                     params={"context": "edit", "_fields": FIELDS}, timeout=60)
     if r.status_code != 200:
         sys.exit(f"read failed {r.status_code}: {r.text[:300]}")
     return r.json()
@@ -139,7 +146,8 @@ def main():
     auth = (user, pw)
 
     if a.whoami:
-        site = requests.get(f"{base}/wp-json/", timeout=60)
+        # Sent with the login: some sites restrict the whole REST API to logged-in users.
+        site = requests.get(f"{base}/wp-json/", auth=auth, timeout=60)
         if site.status_code != 200:
             sys.exit(f"site index failed {site.status_code}: {site.text[:300]}")
         s = site.json()
@@ -170,7 +178,8 @@ def main():
         before = snapshot(requests, base, auth, snap["rest_base"], snap["id"])
         print(f"current state saved first: {before}")
         r = requests.post(api(base, snap["rest_base"], snap["id"]), auth=auth,
-                          json={"title": snap["title"], "content": snap["content"]}, timeout=120)
+                          params={"_fields": FIELDS}, json={"title": snap["title"],
+                          "content": snap["content"]}, timeout=120)
         if r.status_code not in (200, 201):
             sys.exit(f"restore failed {r.status_code}: {r.text[:400]}")
         j = r.json()
@@ -208,7 +217,8 @@ def main():
     elif not a.title:
         sys.exit("a new post needs at least --title")
 
-    r = requests.post(api(base, a.rest_base, a.update or None), auth=auth, json=fields, timeout=120)
+    r = requests.post(api(base, a.rest_base, a.update or None), auth=auth,
+                      params={"_fields": FIELDS}, json=fields, timeout=120)
     if r.status_code not in (200, 201):
         sys.exit(f"{'update' if a.update else 'create'} failed {r.status_code}: {r.text[:400]}")
     j = r.json()

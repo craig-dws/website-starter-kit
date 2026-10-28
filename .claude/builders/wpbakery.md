@@ -34,7 +34,29 @@ usually only updates through its theme, so an abandoned theme strands it.
   connection, and nothing else.
 - Each element's spacing, borders and backgrounds (Design Options) are stored on the shortcode, but
   the page loads them from a stylesheet WPBakery rebuilds when the page is saved in its editor.
-  **Whether a save through the connection rebuilds it is unproven** *(confirm on the first page)*.
+  **A save through the connection does not rebuild it** (proven on WPBakery 8.7.1, SUFWB, October
+  2026; confirm on the first page of each site). A page that already had styling keeps printing the
+  old styling until a person clicks Update. An empty page with no stored styling is the exception:
+  WPBakery builds it from the layout as the page renders.
+- **Never leave the WPBakery editor open across a write through the connection.** Clicking Update
+  saves the whole page as the editor loaded it, so a tab opened before the write puts the old layout
+  back. The person reloads the editor before pasting CSS or clicking Update, and after every person's
+  Update the stored layout is compared with the layout file.
+
+## The person's steps on every page
+The connection cannot reach these, so each page is "written, waiting on the developer" until a
+person has done them, and the page record lists which apply:
+
+1. **Reload the page in the WPBakery backend editor** (never an editor tab opened earlier).
+2. **Paste the page Custom CSS** (page settings, Custom CSS), over any older version of the block.
+3. **Paste the page Custom JS** when the page has a WPBakery accordion (see `wpbakery-limits`).
+4. **Click Update**, then purge the page cache.
+5. **Template and title band.** On a page not duplicated from a built page, set the full-width
+   WPBakery template in Page Attributes and switch the theme's title band off in its page settings.
+   They are separate settings, and the title band prints a second h1.
+
+Site-wide CSS (Appearance, Customise, Additional CSS) is also a person's paste. Paste it **before**
+any page write that depends on it.
 - Older sites hold retired elements, such as the old accordion (`[vc_accordion]`, rendered with
   `wpb_accordion` classes). They still display. **Never copy a retired element into a new page.**
 - **Never write PHP template files to produce layout**, and never change WPBakery's settings or the
@@ -64,6 +86,10 @@ verified only when all four are true:
 Opening the editor needs a login. Until a person, or a logged-in browser, has done step 2, the page
 is "built, not verified", and the report says so.
 
+**Measure, do not eyeball.** "Verified" also means measured live, logged out, at 1280, 991, 768,
+767, 380 and 320px: spacing, alignment and no sideways scroll. On SUFWB most of the fixes came from
+measurements a screenshot would have passed.
+
 ## Protected paths (do not edit)
 - wp-config.php, wp-settings.php
 - The theme's own files and the theme's companion functions plugin. Changing them is a deliberate,
@@ -84,3 +110,6 @@ is "built, not verified", and the report says so.
 | Design Options | the spacing, border and background settings on each element |
 | backend editor | WPBakery's editing screen in wp-admin, where the page shows as blocks of elements |
 | retired element | an old WPBakery element that still displays but is no longer offered for new pages |
+| page Custom CSS | the styling box in one page's WPBakery settings, which affects only that page |
+| Additional CSS | the site-wide styling box under Appearance, Customise, which affects every page |
+| title band | the theme's band across the top of a page, carrying the page name as a heading |

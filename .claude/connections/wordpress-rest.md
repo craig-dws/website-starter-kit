@@ -20,9 +20,36 @@ not yet been proven on a client site, so the first write on each site is a throw
 checked in the editor and then deleted by a person.
 
 On WPBakery: the storage model and the site's element usage were read from a live WPBakery 8.7.1
-site's 37 public pages on 1 October 2026 (AI Web Design System, docs/24 Section J). **Writing is
-unproven**, and so is whether a save through this API rebuilds WPBakery's Design Options styling.
-The first page settles both (`wpbakery-limits`).
+site's 37 public pages on 1 October 2026 (AI Web Design System, docs/24 Section J). **Writing was
+then proven on a client build** (SUFWB, WPBakery 8.7.1, 27 pages, 13 to 21 October 2026). A save
+through this API does **not** rebuild a page's stored Design Options styling, so a person still
+clicks Update in the WPBakery editor on each page; the detail and the exceptions are in
+`wpbakery-limits`. Still make the throwaway test page on each new site, because a different version
+or plugin set can differ.
+
+## Inherited sites block this API more often than not
+
+Check each of these when connecting, before planning around the API. All three were met on one
+site (SUFWB, October 2026).
+
+- **A security plugin switches off Application Passwords.** Wordfence has a setting, "Disable
+  WordPress application passwords". Untick it **on staging only**, and add re-ticking it to
+  `build-log/CLEANUP.md` for the end of the job.
+- **A plugin restricts the whole REST API to logged-in users.** Admin and Site Enhancements (ASE)
+  does this. Every call must then send the login, including `--whoami`, which the tool now does.
+- **A shortcode that echoes breaks every read.** Asking the API for a page's *rendered* body makes
+  WordPress run its shortcodes, and a theme element that prints instead of returning (a blog grid,
+  for one) puts HTML in front of the JSON. The tool asks only for the stored fields (`_fields`), which
+  avoids it. Never add `content.rendered` back to a request.
+
+Also worth a look: **plugins updating themselves on staging.** On SUFWB three plugin versions changed
+between two reads a day apart. Ask a person to check automatic updates are off on staging, so it
+stays matched to the live site.
+
+**Staging copies rewrite addresses inside page content.** The search and replace that made the
+staging copy also rewrote email addresses and image addresses stored in layouts and widgets (for
+example `info@<client>-dev.dwsstaging.net.au`). Record every one in `build-log/CLEANUP.md` as found,
+so the move to the live site puts them back.
 
 ## How each capability is done
 
@@ -32,7 +59,7 @@ it.
 | Capability | On this connection |
 |------------|--------------------|
 | Confirm the environment | `--whoami`: prints the site name and address the site itself reports, and the user the password belongs to. Show it. Write nothing until the operator confirms it is staging |
-| Read a page's layout | `--read <id> --rest-base <base>`: prints the raw block markup, or on WPBakery the raw shortcodes. This needs the password; a public page gives only the finished HTML, with the block settings stripped out or the shortcodes already expanded, which is not enough to learn the site's syntax |
+| Read a page's layout | `--read <id> --rest-base <base>`: prints the raw block markup, or on WPBakery the raw shortcodes. This needs the password; a public page gives only the finished HTML, with the block settings stripped out or the shortcodes already expanded, which is not enough to learn the site's syntax. **Never build a layout to send from `--read` output captured by the shell.** On Windows the capture turns each stored line break into two, and WordPress stores them doubled (SUFWB, 16 October 2026, 16 pages, repaired from the snapshots). Build it from the layout file or from a snapshot's JSON |
 | Snapshot a page | `--snapshot <id> --rest-base <base>`: saves the raw markup, title, slug, status and address to `build-log/snapshots/`. `--update` takes one itself before every overwrite, and `--restore <file>` puts a snapshot back |
 | Write a page's layout | `--update <id> --rest-base <base> --content-file <file>` replaces the page's block markup or shortcodes. The slug, status and title are left exactly as they are unless passed. Without `--update` it creates a new page as a draft. On WPBakery a new page is instead a person's duplicate of its reference page, then updated, so it keeps WPBakery's page settings |
 | Upload media | `.claude/tools/optimize-and-upload.py`, with the same credential |
