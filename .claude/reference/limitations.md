@@ -13,11 +13,13 @@ will be fixed. **Pin the version in the builder file (`.claude/builders/breakdan
 gets its entry struck through with the version it was fixed in, not deleted, so the trail survives.
 
 **Class names in the examples are unprefixed** (`.hero__cta`, `--space-sm`) for readability. A real
-build prefixes them with the site's own `css_prefix`.
+build prefixes them as `.claude/reference/class-naming.md` says (`sw-`, `gb-`, `wg-`, `pg-`,
+`sc-`), never with the site's own `css_prefix`, which Breakdance makes from the site title.
 
 ## Breakdance native MCP (beta)
 
-- **Cannot bind an image to the media library.** *(beta)* `from: media_library` with the only
+- **Fixed in 3.0.1 (proven 2026-11-06 on Ende Urology):** `from: media_library` with `media: {"id": <attachment id>}` renders the library image with `srcset`, sizes, width, height and `alt` (`alt: "decorative"` gives `alt=""`). Bind library images this way; the entry below is kept for the trail. **But keep width and height:** switching an html-to-page image to `media_library` and clearing its `settings.advanced.attributes` rendered no `width` or `height` (found 2026-11-06, Prostate Cancer). Keep or restore the two attributes from the `<img>` markup, and check the rendered tag.
+- ~~**Cannot bind an image to the media library.**~~ *(beta, fixed in 3.0.1)* `from: media_library` with the only
   permitted shape `{id, url, alt}` renders the grey "no image" placeholder; the hydrated shape the
   renderer needs is rejected by the schema. **→** Reference images by the uploaded file's URL (WebP
   is served, alt kept, no native `srcset`); a human binds them in the builder for `srcset`.
@@ -37,6 +39,7 @@ build prefixes them with the site's own `css_prefix`.
   attribute from those alone. **→** With `edit-post`, also set `content.image.alt: "custom"` and
   `content.image.custom_alt` to the same text. Always confirm in the rendered DOM; the stored
   properties look right either way.
+- *(3.0.1: `html-to-page` now carries `width` and `height` from the `<img>` markup, and keeps `alt=""`, proven 2026-11-06. It still sets `loading=lazy` on every image; turn it off above the fold with `content.image.lazy_load: false`.)*
 - **Width and height are not emitted on URL-sourced images**, because Breakdance cannot read the
   file's dimensions. *(beta)* **→** Add them as custom attributes under
   `settings.advanced.attributes` so the image reserves its space and does not shift the layout.
@@ -133,6 +136,7 @@ build prefixes them with the site's own `css_prefix`.
   `FSvgIcon`, `FRichText`, ...). *(beta)* There is **no `FContainer`**, and an empty `<div>` comes back
   as an `FText` that cannot take children. **→** Fetch the `F*` schema (not the plain element name)
   when editing; insert a real element rather than relying on an empty `<div>`.
+- **`html-to-page` turns an `<iframe>` into a Fundamental HTML Code element (`FHtmlCode`) and keeps its markup word for word,** classes and attributes included (proven 2026-11-06 on Ende Urology, Breakdance 3.0.1, two YouTube embeds). This is a capability: a third-party embed keeps its exact address. The class sits on the iframe inside the element's own div, so style the iframe by that class. **Also seen:** a `<div>` holding only text comes back as ONE Fundamental Text, so writing each body block as a placeholder and filling it with edit-post (tag `div`, the `<p>` tags in the text) avoids the split-and-consolidate step below.
 - **`html-to-page` cannot build an HTML table. Every table tag becomes a plain Container.** *(beta,
   proven 2026-08-18 on the Pricing build)* A real `<table>` with `<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>`
   returned one warning per tag, all reading "Unsupported tag `<x>` rendered as a Container", so both
@@ -165,6 +169,7 @@ build prefixes them with the site's own `css_prefix`.
   defaults the question renders in the global heading font at a ratio-derived size (22.5px weight
   400), not the designed size. **→** Set `design.typography.title` and `.content` with
   `custom.customTypography`; `title_tag` there also gives the question a real heading level.
+- **`justify-content: flex-end` is stored as the builder's "end", which is not the same thing in a reversed row.** *(proven 2026-11-09 on Ende Urology, Breakdance 3.0.1, the FAQ question row)* `insert-stylesheet` stored `flex-direction: row-reverse; justify-content: flex-end` as `flex_align.primary_axis: "end"`, and the browser reads `end` by writing direction, so single-line questions were pushed right instead of packing left. **Fix:** keep the row forwards and reorder the child with `order: -1`, which stores and renders correctly. The FAQ element writes its icon after the title, so this is how to put the icon on the left.
 - **The Frequently Asked Questions element exposes no focus-state property.** *(2026-08-18)* Its
   questions render as real `<button>`s with `aria-expanded`/`aria-controls`, but the focus ring is
   the browser default. **→** Same contained exception as the header's MenuBuilder: add one

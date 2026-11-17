@@ -16,6 +16,10 @@ tokens into Breakdance, which is a different job.
 
 ## Steps
 
+0. Read `.claude/reference/earlier-builds.md` section "Token sync" first: the backup before the
+   first write, the licence key in the export, the starter's leftovers, Modern Normalize, and the
+   class prefixes.
+
 1. Read the current design tokens. **Check `design-pack/tokens/` first**: where the
    design pack exists, `tokens.json` is the source and no Figma access is needed,
    which is the normal case for a developer without a Figma dev seat. The pack is a

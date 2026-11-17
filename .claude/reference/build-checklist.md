@@ -87,6 +87,10 @@ change a standard there, this is the per-page tick-list.
 - **Descriptive, consistent CSS class names** (element names cannot be set over MCP, see
   limitations.md; classes plus Breakdance's content preview carry navigability). Human element names
   are an optional structural-only manual pass.
+- **Every class the build wrote carries its scope prefix** per `class-naming.md`: `sw-`, `gb-`,
+  `wg-`, `pg-` or `sc-`, state classes `is-` or `has-` and always qualified, never the site's
+  `css_prefix`. A `pg-` or `sc-` class is used on no other page. Checked by listing the page's
+  classes in the browser, not by eye.
 - **Each body block is ONE element** holding all its paragraphs, not one per paragraph: one Fundamental
   Text (`tag=div`) with the `<p>` tags inside and the site's prose/body class (the proven method). Verify
   in `get-post-tree` that a multi-paragraph passage is a single element, since `html-to-page` otherwise
@@ -95,7 +99,9 @@ change a standard there, this is the per-page tick-list.
 - **The page is verified as editable the way the project's builder file says** (for example, on a
   block theme: no invalid-content warning on any block in the editor, and every ACF field showing
   its content; on WPBakery: the page opens in its editor as elements, with no visible `[vc_` text and
-  its Design Options styling present). Rendering correctly is not evidence.
+  its Design Options styling present). Rendering correctly is not evidence. **That check is a
+  person's**: Claude's browser is logged out of WordPress, so the developer opens the page in their
+  own logged-in browser, confirms it opens with no error, and saves nothing.
 - **The public page shows the new copy**, checked logged out after the last write, per
   `.claude/CLAUDE.md`.
 

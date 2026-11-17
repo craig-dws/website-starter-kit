@@ -8,7 +8,9 @@ tags.**
 Set [YYYY-MM-DD] from [the Figma frame / the design-system proposal]. Record any operator-approved
 departure from the design here, with the date and the reason.
 
-Replace `x-` below with the site's own `css_prefix`.
+Replace `x-` below with `sw-`. The heading scale is sitewide, so it takes the agency prefix from
+`.claude/reference/class-naming.md`, **never the site's `css_prefix`**, which Breakdance makes from
+the site title and changes when the title does (found on Ende Urology, November 2026).
 
 ## The scale
 

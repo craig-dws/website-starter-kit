@@ -13,6 +13,8 @@ restarting Claude Code, authorising a claude.ai connector), **stop, give clear n
 and wait** rather than guessing.
 
 ## 0. Orient and check prerequisites
+- Read `.claude/reference/earlier-builds.md` section "Connecting a machine": drive letter
+  spellings, a slow first start, and what to record about the staging starter.
 - Read `CONNECT.md` and `.claude/settings.json`. **Note the MCP server name the two deny rules are keyed
   to** (the `mcp__<name>__mcp-adapter-...` entries in the `deny` list). If they still read
   `[MCP_SERVER_NAME]`, this is the first connection for this client and you fill them in at step 1.

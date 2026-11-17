@@ -90,6 +90,13 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
 
 ## Dos
 - Work one page at a time and return a staging preview URL.
+- **Name every class per `.claude/reference/class-naming.md`.** The prefix states how far a change
+  reaches (`sw-` sitewide, `gb-` global block, `wg-` widget, `pg-` one page, `sc-` one section),
+  and it comes from `build-log/GLOBAL-BLOCKS.md`, not taste. Never the site's `css_prefix`, and
+  never a client prefix. A class needed further than its prefix says is renamed everywhere.
+- **Read `.claude/reference/earlier-builds.md` before connecting, the foundation work and each
+  page,** for what earlier builds on the same stack learnt. Add anything new a later build would
+  hit to it, and to the starter kit.
 
 ## Don'ts
 - Do not run destructive shell commands (rm -rf, sudo).

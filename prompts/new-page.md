@@ -18,8 +18,8 @@ human-approved gates.
 
 ## Start
 0. **Pull the latest** (`git pull`) so you have other sessions' and the other machine's work.
-1. Read `.claude/CLAUDE.md`, `design/sitemap.md`, `build-standards.md`, `build-checklist.md` and
-   `limitations.md`, and check `build-log/ACTIVE.md` for other active sessions.
+1. Read `.claude/CLAUDE.md`, `design/sitemap.md`, `build-standards.md`, `build-checklist.md`,
+   `limitations.md` and `earlier-builds.md` sections "Building pages" and "Finishing a page", and check `build-log/ACTIVE.md` for other active sessions.
 2. Get these from me for the page (ask for any I have not given):
    - **Which page** and its **type** (condition / treatment / surgeon / content / other).
    - The **reference to match**, in this order. **Check `design-pack/` first:** if

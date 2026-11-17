@@ -18,7 +18,8 @@ repo and to nothing else.
 ## Start
 
 1. **Pull the latest** (`git pull`).
-2. Read `.claude/CLAUDE.md`, the sitemap, and the `global-blocks-audit` skill.
+2. Read `.claude/CLAUDE.md`, the sitemap, the `global-blocks-audit` skill and
+   `.claude/reference/earlier-builds.md` section "Global parts".
 3. Confirm the design system is approved. If it is not, stop and tell me, because the register
    will name tokens and components that may still change.
 4. Claim the work in `build-log/ACTIVE.md`.
