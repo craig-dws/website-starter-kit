@@ -119,7 +119,11 @@ The decision above is target-neutral. Only the mechanism differs.
 
 - **WordPress plus Breakdance:** global blocks are Breakdance Global Blocks; template
   parts live in the relevant Breakdance Template. Repeating content inside a block uses
-  the Post Loop Builder rather than hand-built repetition.
+  the Post Loop Builder rather than hand-built repetition. **A Breakdance Global Block whose
+  words differ per page is unproven over the connection** (November 2026): prove it on the
+  first such row, in the global parts chat, before the register relies on it. If it cannot be
+  done, the row becomes a pattern, or the varying words come from the page's own fields
+  through dynamic data, and the register says which.
 - **Astro plus Payload:** global blocks are components; template parts live in the
   layout. Content that varies comes from Payload rather than from a forked component.
 - **An existing WordPress block theme:** global blocks are synced patterns; template parts

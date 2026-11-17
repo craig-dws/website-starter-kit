@@ -16,6 +16,10 @@ claim board below.
 - **Shared repo files:** `settings.json`, `.claude/CLAUDE.md`, `build-log/BUILD-LOG.md`,
   `GATES.md`, `DECISIONS.md`. Two sessions editing the same file race. Partition, or one owns it.
 - **The shared chrome** (header, footer) while either still needs global-style writes.
+- **A new global block.** When a page chat finds a section that repeats and is not in
+  `build-log/GLOBAL-BLOCKS.md`, it claims the block in `build-log/ACTIVE.md`, adds the row, builds
+  the block on its own and pushes before any page uses it. Another developer who finds the same
+  section pulls and inserts it, so two lookalike blocks never exist.
 
 ## The claim protocol (how a session checks if another is running)
 Use `build-log/ACTIVE.md` as a cooperative claim board:

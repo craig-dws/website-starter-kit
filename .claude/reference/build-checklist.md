@@ -105,6 +105,12 @@ change a standard there, this is the per-page tick-list.
 - **The public page shows the new copy**, checked logged out after the last write, per
   `.claude/CLAUDE.md`.
 
+## Global blocks
+- **Every section the register lists as a global block is the inserted block**, read from the page's
+  element tree, never a rebuilt or copied lookalike. A template part is not repeated on the page.
+- **No repeated section was built inline.** A section that also appears on another page and is not
+  in the register means the register is updated first and the section becomes a block.
+
 ## Record
 - Page or component recorded in `build-log/`; database writes and uploads logged.
 - **Deferred passes recorded, not failed** (`deferred-passes.md`): placeholder images, internal links

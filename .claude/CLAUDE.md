@@ -94,6 +94,12 @@ refreshed at launch when the PM runs ZilvaEdge's content reconciliation.
   reaches (`sw-` sitewide, `gb-` global block, `wg-` widget, `pg-` one page, `sc-` one section),
   and it comes from `build-log/GLOBAL-BLOCKS.md`, not taste. Never the site's `css_prefix`, and
   never a client prefix. A class needed further than its prefix says is renamed everywhere.
+- **A section that repeats is a global block, built once and inserted everywhere** (Craig,
+  17 November 2026). `build-log/GLOBAL-BLOCKS.md` says what each repeated section is: a global
+  block is inserted, never rebuilt or copied; a template part is inherited; a pattern (same layout,
+  different words on each page) reuses the shared classes. A section that repeats and is not in
+  the register is added to it, built as its own block and pushed before any page uses it, never
+  built inline on the page that found it.
 - **Read `.claude/reference/earlier-builds.md` before connecting, the foundation work and each
   page,** for what earlier builds on the same stack learnt. Add anything new a later build would
   hit to it, and to the starter kit.
