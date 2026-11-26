@@ -30,7 +30,7 @@ job, and to correct here.
 |------------|--------------------|
 | Confirm the environment | One read-only call through the bridge, showing the address the site reports. It must be a `.local` or `localhost` address. A public domain is the live site: stop |
 | Read a page's layout | The bridge's read of the builder's stored layout *(confirm the ability on the installed plugin)* |
-| Snapshot a page | The copy is disposable and regenerable, so a snapshot of it can be waived, recorded. On the live site a person takes a full backup before anything is moved there, never waived |
+| Snapshot a page | The copy is disposable and regenerable, so a snapshot of it can be waived, recorded. On the live site a person takes a full backup before anything is moved there, never waived, unless the site is on our own server, whose nightly automatic backup counts (`existing-site-page`, snapshot rules) |
 | Write a page's layout | The bridge, on the copy only, as a constrained patch of a known-good page, ranked by the builder's limits skill *(confirm)* |
 | Upload media | `.claude/tools/optimize-and-upload.py` over the WordPress media REST API, reading the credential from the local Claude config. Media on the copy does not travel with a page; say which images the live site will need |
 | Clear the cache | A person, in wp-admin on the copy: the builder's own cache or CSS regeneration, then any page cache |

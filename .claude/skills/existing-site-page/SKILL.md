@@ -366,6 +366,12 @@ environments with very different stakes.
 - **On the live client site:** never waivable, no exceptions, and it is a full backup rather than
   builder revisions. This is a site with real traffic and real content, and it is the operator who
   takes the backup before anything is moved there.
+- **Unless the site is on our own server, which is backed up automatically every night** (Craig,
+  26 November 2026). Then last night's backup is the full backup: do not ask a person to take
+  another one and do not list it as a step. It holds nothing changed since last night, so before a
+  change that is hard to redo by hand (a template, a menu, a form, a shared block), record in the
+  build log what it was before. A site counts as ours only when the project's `.claude/CLAUDE.md`
+  or the operator says so, never from an IP address: many of our sites sit behind Cloudflare.
 
 ## The audit trail
 

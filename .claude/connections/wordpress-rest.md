@@ -27,6 +27,13 @@ clicks Update in the WPBakery editor on each page; the detail and the exceptions
 `wpbakery-limits`. Still make the throwaway test page on each new site, because a different version
 or plugin set can differ.
 
+## Backups on the live site
+
+A site on our own server is backed up automatically every night, and that backup is the live
+site's restore point: never ask a person for another before a write. It holds nothing changed since
+last night, so keep the per-page snapshots below for every overwrite as usual. A site counts as ours
+only when the project's `.claude/CLAUDE.md` or the operator says so. (Craig, 26 November 2026.)
+
 ## Inherited sites block this API more often than not
 
 Check each of these when connecting, before planning around the API. All three were met on one
