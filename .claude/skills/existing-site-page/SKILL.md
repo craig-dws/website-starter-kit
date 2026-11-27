@@ -24,6 +24,10 @@ This procedure covers four builders:
   API writes it. What it lacks is any check on what is written, and its Design Options styling may
   need a person's Update click to rebuild.
 
+**A paid landing page also follows `.claude/reference/landing-page-layout.md`**: banner, form, cards,
+call-to-action rows, lists and FAQs, from Craig's reviews of 27 November 2026. Read it before building
+or restyling one.
+
 **Identify which one before anything else**, from the rendered source of any page. `elementor-`
 classes mean Elementor. `breakdance` or `bde-` classes mean Breakdance. `wp-block-` classes with
 `wp-block-template-part` wrappers mean a block theme. `vc_row` and `wpb_` classes, with a "Powered by
