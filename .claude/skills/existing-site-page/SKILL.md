@@ -24,7 +24,7 @@ This procedure covers four builders:
   API writes it. What it lacks is any check on what is written, and its Design Options styling may
   need a person's Update click to rebuild.
 
-**A paid landing page also follows `.claude/reference/landing-page-layout.md`**: banner, form, cards,
+**A paid landing page also follows `.claude/reference/landing-page-layout.md`.** It covers the banner, form, cards,
 call-to-action rows, lists and FAQs, from Craig's reviews of 27 November 2026. Read it before building
 or restyling one.
 
